@@ -96,4 +96,18 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGFILEMANAGER_SUPPORT_FORUM', 'Support Forum');
 \define('_AM_WGFILEMANAGER_DONATION_AMOUNT', 'Donation Amount');
 \define('_AM_WGFILEMANAGER_MAINTAINEDBY', ' is maintained by ');
+// ---------------- Admin Permissions ----------------
+// Permissions
+\define('_AM_WGFILEMANAGER_PERMISSIONS_GLOBAL', 'Permissions global');
+\define('_AM_WGFILEMANAGER_PERMISSIONS_GLOBAL_DESC', 'Permissions global to check type of.');
+\define('_AM_WGFILEMANAGER_PERMISSIONS_GLOBAL_4', 'Permissions global to approve');
+\define('_AM_WGFILEMANAGER_PERMISSIONS_GLOBAL_8', 'Permissions global to submit');
+\define('_AM_WGFILEMANAGER_PERMISSIONS_GLOBAL_16', 'Permissions global to view');
+\define('_AM_WGFILEMANAGER_PERMISSIONS_APPROVE', 'Permissions to approve');
+\define('_AM_WGFILEMANAGER_PERMISSIONS_APPROVE_DESC', 'Permissions to approve');
+\define('_AM_WGFILEMANAGER_PERMISSIONS_SUBMIT', 'Permissions to submit');
+\define('_AM_WGFILEMANAGER_PERMISSIONS_SUBMIT_DESC', 'Permissions to submit');
+\define('_AM_WGFILEMANAGER_PERMISSIONS_VIEW', 'Permissions to view');
+\define('_AM_WGFILEMANAGER_PERMISSIONS_VIEW_DESC', 'Permissions to view');
+\define('_AM_WGFILEMANAGER_NO_PERMISSIONS_SET', 'No permission set');
 // ---------------- End ----------------
