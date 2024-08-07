@@ -1,0 +1,24 @@
+-
+    id: '1'
+    directory_id: '0'
+    name: my_csv_file.csv
+    description: ''
+    mimetype: text/plain
+    mtime: '1721767421'
+    ctime: '1721767421'
+    ip: 127.0.0.1
+    status: '0'
+    date_created: '1721767421'
+    submitter: '1'
+-
+    id: '2'
+    directory_id: '0'
+    name: my_excel_file.xlsx
+    description: 'my excel file with useless information'
+    mimetype: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+    mtime: '1721767450'
+    ctime: '1721767450'
+    ip: 127.0.0.1
+    status: '0'
+    date_created: '1721767451'
+    submitter: '1'
