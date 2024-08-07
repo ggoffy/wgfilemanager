@@ -1,0 +1,2 @@
+# wgfilemanager
+Filemanager for XOOPS
