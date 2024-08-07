@@ -78,16 +78,16 @@ $modversion = [
 // ------------------- Templates ------------------- //
 $modversion['templates'] = [
     // Admin templates
-    ['file' => 'wgfilemanager_admin_about.tpl', 'description' => '', 'mimetype' => 'admin'],
-    ['file' => 'wgfilemanager_admin_header.tpl', 'description' => '', 'mimetype' => 'admin'],
-    ['file' => 'wgfilemanager_admin_index.tpl', 'description' => '', 'mimetype' => 'admin'],
-    ['file' => 'wgfilemanager_admin_directory.tpl', 'description' => '', 'mimetype' => 'admin'],
-    ['file' => 'wgfilemanager_admin_file.tpl', 'description' => '', 'mimetype' => 'admin'],
+    ['file' => 'wgfilemanager_admin_about.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgfilemanager_admin_header.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgfilemanager_admin_index.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgfilemanager_admin_directory.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgfilemanager_admin_file.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgfilemanager_admin_mimetype.tpl', 'description' => '', 'type' => 'admin'],
-    ['file' => 'wgfilemanager_admin_broken.tpl', 'description' => '', 'mimetype' => 'admin'],
-    ['file' => 'wgfilemanager_admin_permissions.tpl', 'description' => '', 'mimetype' => 'admin'],
-    ['file' => 'wgfilemanager_admin_clone.tpl', 'description' => '', 'mimetype' => 'admin'],
-    ['file' => 'wgfilemanager_admin_footer.tpl', 'description' => '', 'mimetype' => 'admin'],
+    ['file' => 'wgfilemanager_admin_broken.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgfilemanager_admin_permissions.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgfilemanager_admin_clone.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgfilemanager_admin_footer.tpl', 'description' => '', 'type' => 'admin'],
     // User templates
     ['file' => 'wgfilemanager_header.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index.tpl', 'description' => ''],
