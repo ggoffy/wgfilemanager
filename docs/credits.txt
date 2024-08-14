@@ -1,0 +1,9 @@
+Read Me First
+=============
+
+Originally created by Goffy (German Xoops).
+
+Fileicons:
+- mimetypes-link-icons-master: https://github.com/eagerterrier/MimeTypes-Link-Icons
+- free-file-icons-master: https://github.com/redbooth/free-file-icons http://teambox.com
+- free-icon-vectors-master: https://github.com/dmhendricks/file-icon-vectors

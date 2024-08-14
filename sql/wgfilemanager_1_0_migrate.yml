@@ -1,0 +1,62 @@
+wgfilemanager_directory:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: id
+            attributes: ' INT(8)          UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: parent_id
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: description
+            attributes: ' TEXT            NOT NULL  '
+        -
+            name: fullpath
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: date_created
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: id
+            unique: true
+wgfilemanager_file:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: id
+            attributes: ' INT(8)          UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: directory_id
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: description
+            attributes: ' TEXT            NOT NULL  '
+        -
+            name: type
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: ip
+            attributes: ' VARCHAR(45)     NOT NULL DEFAULT '''''''' '
+        -
+            name: status
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: date_created
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: id
+            unique: true
