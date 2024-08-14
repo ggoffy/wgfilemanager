@@ -124,11 +124,17 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         return $crDirectory;
     }
 
+    /**
+     * Get full path of given parent directory
+     *
+     * @param int $parent_id
+     * @return string
+     */
     public function getFullPath($parent_id) {
 
         $path = '';
         if ($parent_id > 0) {
-            $path = $this->getFullPathArray($parent_id);
+            $path = $this->getFullPathRecursive($parent_id);
         }
         if ('' === $path) {
             return '';
@@ -139,42 +145,66 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         return \implode(DS, \array_filter($pathArray));
     }
 
-    public function getFullPathArray($parent_id) {
+    /**
+     * Get full path of given parent directory
+     *
+     * @param int $parent_id
+     * @return string
+     */
+    public function getFullPathRecursive($parent_id) {
         $path = '';
         if ($parent_id > 1) {
             $directoryObj = $this->get($parent_id);
             $path .= mb_strtolower($directoryObj->getVar('name'));
             if ($directoryObj->getVar('parent_id') > 1) {
-                $path .= DS . $this->getFullPathArray($directoryObj->getVar('parent_id'));
+                $path .= DS . $this->getFullPathRecursive($directoryObj->getVar('parent_id'));
             }
         }
         return $path;
     }
-    
-/*    public function saveDirectory ($dirId) {
-    }*/
 
+    /**
+     * Check whether given path is a directory
+     *
+     * @param string $path
+     * @return boolean
+     */
     public function existDirectory ($path) {
 
         return \is_dir(\WGFILEMANAGER_REPO_PATH . $path);
 
     }
 
+    /**
+     * Create directory from given path
+     *
+     * @param string $path
+     * @return boolean
+     */
     public function createDirectory($path) {
 
-        FilesManagement::createFolder(\WGFILEMANAGER_REPO_PATH . $path);
-
-        return true;
+        if (FilesManagement::createFolder(\WGFILEMANAGER_REPO_PATH . $path)) {
+            return true;
+        } else {
+            throw new \Exception('New filename already exists.');
+        }
     }
 
+    /**
+     * Rename directory
+     *
+     * @param string $oldDirname
+     * @param string $newDirname
+     * @return boolean
+     */
     public function renameDirectory($oldDirname, $newDirname)
     {
         $oldFilePath = \WGFILEMANAGER_REPO_PATH . $oldDirname;
         $newFilePath = \WGFILEMANAGER_REPO_PATH . $newDirname;
 
-        if (file_exists($oldFilePath)) {
-            if (!file_exists($newFilePath)) {
-                return rename($oldFilePath, $newFilePath);
+        if (\file_exists($oldFilePath)) {
+            if (!\file_exists($newFilePath)) {
+                return \rename($oldFilePath, $newFilePath);
             } else {
                 throw new \Exception('New filename already exists.');
             }
@@ -183,6 +213,12 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         }
     }
 
+    /**
+     * Delete directory from given path
+     *
+     * @param string $path
+     * @return boolean
+     */
     public function deleteDirectory($path)
     {
         $fullPath = \WGFILEMANAGER_REPO_PATH . $path;
@@ -195,6 +231,12 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
 
     }
 
+    /**
+     * Check whether given directory is used as parent
+     *
+     * @param int $dirId
+     * @return integer
+     */
     public function dirIsParent ($dirId) {
         $crCountDirectory = new \CriteriaCompo();
         $crCountDirectory->add(new \Criteria('parent_id', $dirId));
@@ -203,6 +245,12 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
 
     }
 
+    /**
+     * Count subdirectories from given directory
+     *
+     * @param int $dirId
+     * @return integer
+     */
     public function countSubDirs($dirId) {
 
         $crSubDir = new \CriteriaCompo();
@@ -212,6 +260,12 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
 
     }
 
+    /**
+     * Count files in given directory
+     *
+     * @param string $fullpath
+     * @return integer
+     */
     public function countFiles($fullpath) {
         $file_new = [];
         $path = \WGFILEMANAGER_REPO_PATH . $fullpath;
@@ -228,6 +282,12 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         return count($file_new);
     }
 
+    /**
+     * Delete data from all subdirectories from given directory
+     *
+     * @param int $dirId
+     * @return boolean
+     */
     public function deleteSubDirData($dirId) {
 
         $crSubDir = new \CriteriaCompo();
@@ -249,6 +309,13 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
 
     }
 
+    /**
+     * Move directory
+     *
+     * @param string $pathSource
+     * @param string $pathDest
+     * @return boolean
+     */
     public function moveDirectory($pathSource, $pathDest) {
 
         if(!FilesManagement::rcopy(\WGFILEMANAGER_REPO_PATH . $pathSource, \WGFILEMANAGER_REPO_PATH . $pathDest)){
@@ -264,6 +331,9 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
     /**
      * Returns an array directories
      *
+     * @param int $dirId
+     * @param int $dirCurrent
+     * @param int $levelCurrent
      * @return array
      */
     public function getDirList($dirId, $dirCurrent, $levelCurrent = 0) {
@@ -311,6 +381,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
     /**
      * Returns an array directories for form select
      *
+     * @param int $dirId
      * @return array
      */
     public function getDirListFormSelect($dirId) {
@@ -342,6 +413,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
     /**
      * Returns an array directories for breadcrumbs
      *
+     * @param int $dirId
      * @return array
      */
     public function getDirListBreadcrumb($dirId) {
