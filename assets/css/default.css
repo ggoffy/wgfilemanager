@@ -1,0 +1,45 @@
+.wgf-filepanel {}
+.wgf-filepanel-left {}
+.wgf-filepanel-right {}
+.wgf-filepanel-right-header {
+    padding:10px;
+    'border-bottom: 1px solid #cccccc;
+}
+.wgf-nofile {
+    margin:20px;
+}
+.wgf-fileinfo {
+    margin-left:20px;
+    font-size: 75%;
+}
+.wgf-folderaction a img {
+    height:22px;
+}
+.wgf-card {
+    margin:5px;
+}
+a.space-before {
+    margin-left:20px;
+}
+.wgf-preview-0 {
+    max-width:30px;
+}
+.wgf-preview-1 {
+    max-width:100px;
+}
+.wgf-dirlist-default-level1 {
+    padding-left:30px;
+}
+.wgf-dirlist i {
+    margin-right:5px;
+}
+.wgf-card {
+    width: 14rem;
+}
+.wgf-error {
+    width:100%;
+    padding:20px;
+    color:#ff0000;
+    border: 1px solid #ff0000;
+    margin:20px 0;
+}
