@@ -153,14 +153,14 @@ switch ($op) {
         $styleType = Request::getString('style');
         xoops_setcookie($cookieStyle, $styleType, time() + 60 * 60 * 24 * 30);
 
-        \redirect_header('index.php?op=list' . $params, 0 , '');
+        \redirect_header('index.php?op=list' . $params, 0);
         break;
     case 'preview':
         // set cookies and reload
         $styleType = Request::getInt('style');
         xoops_setcookie($cookiePreview, $styleType, time() + 60 * 60 * 24 * 30);
 
-        \redirect_header('index.php?op=list' . $params, 0 , '');
+        \redirect_header('index.php?op=list' . $params, 0);
         break;
 }
 

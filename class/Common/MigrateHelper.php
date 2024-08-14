@@ -49,7 +49,6 @@ class MigrateHelper
     /**
      * Create a yaml file based on a sql file
      *
-     * @param null
      * @return bool
      */
     public function createSchemaFromSqlfile(): bool
@@ -100,7 +99,7 @@ class MigrateHelper
                 $tables[$tableName]['columns'] = [];
                 $tables[$tableName]['keys'] = [];
             } else {
-                if (false == $skip) {
+                if (!$skip) {
                     if (')' === \mb_strtoupper(\substr($line, 0, 1))) {
                         // end of table definition
                         // get options
@@ -137,7 +136,7 @@ class MigrateHelper
         $level3 = \str_repeat(' ', 12);
 
         foreach ($tables as $tkey => $table) {
-            $schema[] = "{$tkey}:\n";
+            $schema[] = "$tkey:\n";
             foreach ($table as $lkey => $line) {
                 if ('keys' == $lkey) {
                     $schema[] = $level1 . "keys:\n";
@@ -164,7 +163,7 @@ class MigrateHelper
 
         // create new file and write schema array into this file
         $myfile = \fopen($this->fileYaml, "w");
-        if (false == $myfile || \is_null($myfile)) {
+        if (!$myfile || \is_null($myfile)) {
             \xoops_error('Error: Unable to open sql file!');
             return false;
         }

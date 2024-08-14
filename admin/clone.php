@@ -111,7 +111,7 @@ function cloneFileFolder($path): void
         if ($handle) {
             while (false !== ($file = \readdir($handle))) {
                 if (0 !== \mb_strpos($file, '.')) {
-                    cloneFileFolder("{$path}/{$file}");
+                    cloneFileFolder("$path/$file");
                 }
             }
             \closedir($handle);

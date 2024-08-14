@@ -161,7 +161,6 @@ switch ($op) {
         $form = $fileObj->getForm();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
-        break;
     case 'new':
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_FILE_ADD];

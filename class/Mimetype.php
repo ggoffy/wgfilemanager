@@ -48,7 +48,6 @@ class Mimetype extends \XoopsObject
     /**
      * Constructor
      *
-     * @param null
      */
     public function __construct()
     {
@@ -66,7 +65,6 @@ class Mimetype extends \XoopsObject
     /**
      * @static function &getInstance
      *
-     * @param null
      */
     public static function getInstance()
     {
@@ -78,12 +76,11 @@ class Mimetype extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return integer
      */
     public function getNewInsertedIdMimetype()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**
@@ -93,11 +90,11 @@ class Mimetype extends \XoopsObject
      */
     public function getFormMimetype($action = false)
     {
-        $helper = \XoopsModules\Wgfilemanager\Helper::getInstance();
+        //$helper = \XoopsModules\Wgfilemanager\Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
-        $isAdmin = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid()) : false;
+        //$isAdmin = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid()) : false;
         // Title
         $title = $this->isNew() ? \_AM_WGFILEMANAGER_MIMETYPE_ADD : \_AM_WGFILEMANAGER_MIMETYPE_EDIT;
         // Get Theme Form

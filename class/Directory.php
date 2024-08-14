@@ -46,7 +46,6 @@ class Directory extends \XoopsObject
     /**
      * Constructor
      *
-     * @param null
      */
     public function __construct()
     {
@@ -63,7 +62,6 @@ class Directory extends \XoopsObject
     /**
      * @static function &getInstance
      *
-     * @param null
      */
     public static function getInstance()
     {
@@ -75,12 +73,11 @@ class Directory extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return integer
      */
     public function getNewInsertedId()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**
@@ -94,7 +91,7 @@ class Directory extends \XoopsObject
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
-        $isAdmin = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid()) : false;
+        $isAdmin = \is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
         // Title
         $title = $this->isNew() ? \_MA_WGFILEMANAGER_DIRECTORY_ADD : \_MA_WGFILEMANAGER_DIRECTORY_EDIT;
         // handler

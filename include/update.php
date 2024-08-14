@@ -85,11 +85,11 @@ function xoops_module_update_wgfilemanager($module, $prev_version = null)
  */
 function wgfilemanager_check_db($module)
 {
-    $ret = true;
     //insert here code for database check
 
     /*
     // Example: update table (add new field)
+    $ret = true;
     $table   = $GLOBALS['xoopsDB']->prefix('wgfilemanager_images');
     $field   = 'img_exif';
     $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
@@ -122,6 +122,7 @@ function wgfilemanager_check_db($module)
             $ret = false;
         }
     }
-    */
     return $ret;
+    */
+    return true;
 }

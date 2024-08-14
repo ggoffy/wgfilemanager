@@ -182,8 +182,6 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
         break;
-        $mimetypeHandler->loadDefaultMimetypeSet();
-        break;
 }
 
 require __DIR__ . '/footer.php';

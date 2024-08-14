@@ -36,7 +36,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * Constructor
      *
-     * @param null
      */
     public function __construct()
     {
@@ -46,7 +45,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function permGlobalApprove
      * returns right for global approve
      *
-     * @param null
      * @return bool
      */
     public function getPermGlobalApprove()
@@ -77,7 +75,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function permGlobalSubmit
      * returns right for global submit
      *
-     * @param null
      * @return bool
      */
     public function getPermGlobalSubmit()
@@ -111,7 +108,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function permGlobalView
      * returns right for global view
      *
-     * @param null
      * @return bool
      */
     public function getPermGlobalView()
@@ -148,7 +144,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function getPermSubmit
      * returns right for submitting files
      *
-     * @param null
      * @return bool
      */
     public function getPermSubmit()
@@ -162,7 +157,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function getPermDownload
      * returns right for downloading files
      *
-     * @param null
      * @return bool
      */
     public function getPermDownload()
@@ -176,7 +170,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function getPermUpload
      * returns right for uploading files
      *
-     * @param null
      * @return bool
      */
     public function getPermUpload()

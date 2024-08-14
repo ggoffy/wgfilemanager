@@ -66,10 +66,10 @@ function wgfilemanager_search($queryarray, $andor, $limit, $offset, $userid)
     }
     $crSearch = new \CriteriaCompo();
     if (isset($crKeywords)) {
-        $crSearch->add($crKeywords, 'AND');
+        $crSearch->add($crKeywords);
     }
     if (isset($crUser)) {
-        $crSearch->add($crUser, 'AND');
+        $crSearch->add($crUser);
     }
     $crSearch->setStart($offset);
     $crSearch->setLimit($limit);
