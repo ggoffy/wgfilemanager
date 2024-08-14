@@ -80,7 +80,7 @@ switch ($op) {
             $directoryObj->setVar('submitter', $uidCurrent);
             // Insert Data
             if ($directoryHandler->insert($directoryObj)) {
-                \redirect_header('directory.php?op=list&amp;createbasic=1', 0, '');
+                \redirect_header('directory.php?op=list&amp;createbasic=1', 0);
             } else {
 
             }
@@ -116,7 +116,6 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             \redirect_header('directory.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        //$directoryHandler->saveDirectory($dirId);
         if ($dirId > 0) {
             $directoryObj = $directoryHandler->get($dirId);
         } else {
@@ -144,6 +143,7 @@ switch ($op) {
             }
             $dirFullPath = $dirBasePath . \mb_strtolower($dirName);
         }
+        $dirFullPathOld = '';
         if ($moveDir) {
             $dirBasePathOld = DS;
             if ($dirParentIdOld > 0) {

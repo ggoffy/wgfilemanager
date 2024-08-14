@@ -58,7 +58,7 @@ class MimetypeHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null fields
+     * @param null $fields fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null)
@@ -69,7 +69,6 @@ class MimetypeHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -132,7 +131,7 @@ class MimetypeHandler extends \XoopsPersistableObjectHandler
      */
     public function getMimetypeArray()
     {
-        $isAdmin = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid()) : false;
+        $isAdmin = \is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
 
         $crMimetype = new \CriteriaCompo();
         if ($isAdmin) {

@@ -56,7 +56,7 @@ class FileHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null fields
+     * @param null $fields fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null)
@@ -67,7 +67,6 @@ class FileHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -196,6 +195,8 @@ class FileHandler extends \XoopsPersistableObjectHandler
      * Returns an array of files in directory
      *
      * @return bool
+     * @throws \Exception
+     * @throws \Exception
      */
     public function renameFile($oldFilename, $newFilename) {
 
@@ -218,6 +219,8 @@ class FileHandler extends \XoopsPersistableObjectHandler
      * Returns an array of files icons
      *
      * @return array
+     * @throws \Exception
+     * @throws \Exception
      */
     public function getFileIconCollection($iconSet) {
 
@@ -225,54 +228,59 @@ class FileHandler extends \XoopsPersistableObjectHandler
         
         //get all allowed mime types
         $helper  = \XoopsModules\Wgfilemanager\Helper::getInstance();
-        $mimetypeHandler = $helper->getHandler('Mimetype');
+        $mimetypeHandler   = $helper->getHandler('Mimetype');
         $allowedExtensions = $mimetypeHandler->getExtensionArray();
+
+        $folderPath   = '';
+        $folderUrl    = '';
+        $fileTrailing = '';
+        $fileDefault  = '';
+        $fileIcons['type'] = '';
 
         switch ($iconSet) {
             case 'classic':
-                $folderPath = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\classic' . DS;
-                $folderUrl  = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\classic' . DS;
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\classic' . DS;
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\classic' . DS;
                 $fileTrailing = '.svg';
-                $fileDefault = 'default.svg';
+                $fileDefault  = 'default.svg';
                 $fileIcons['type'] = 'svg';
                 break;
             case 'high-contrast':
-                $folderPath = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\high-contrast' . DS;
-                $folderUrl  = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\high-contrast' . DS;
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\high-contrast' . DS;
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\high-contrast' . DS;
                 $fileTrailing = '.svg';
-                $fileDefault = 'default.svg';
+                $fileDefault  = 'default.svg';
                 $fileIcons['type'] = 'svg';
                 break;
             case 'square-o':
-                $folderPath = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\square-o' . DS;
-                $folderUrl  = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\square-o' . DS;
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\square-o' . DS;
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\square-o' . DS;
                 $fileTrailing = '.svg';
-                $fileDefault = 'default.svg';
+                $fileDefault  = 'default.svg';
                 $fileIcons['type'] = 'svg';
                 break;
             case 'vivid':
-                $folderPath = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\vivid' . DS;
-                $folderUrl  = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\vivid' . DS;
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\file-icon-vectors-master\dist\icons\vivid' . DS;
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\file-icon-vectors-master\dist\icons\vivid' . DS;
                 $fileTrailing = '.svg';
-                $fileDefault = 'default.svg';
+                $fileDefault  = 'default.svg';
                 $fileIcons['type'] = 'svg';
                 break;
             case 'teambox':
-                $folderPath = \WGFILEMANAGER_ICONS_PATH . '\fileicons\free-file-icons-master\512px' . DS;
-                $folderUrl  = \WGFILEMANAGER_ICONS_URL . '\fileicons\free-file-icons-master\512px' . DS;
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\free-file-icons-master\512px' . DS;
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\free-file-icons-master\512px' . DS;
                 $fileTrailing = '.png';
-                $fileDefault = '_blank.png';
+                $fileDefault  = '_blank.png';
                 $fileIcons['type'] = 'png';
                 break;
             case 'eagerterrier':
-                $folderPath = \WGFILEMANAGER_ICONS_PATH . '\fileicons\mimetypes-link-icons-master\images' . DS;
-                $folderUrl  = \WGFILEMANAGER_ICONS_URL . '\fileicons\mimetypes-link-icons-master\images' . DS;
+                $folderPath   = \WGFILEMANAGER_ICONS_PATH . '\fileicons\mimetypes-link-icons-master\images' . DS;
+                $folderUrl    = \WGFILEMANAGER_ICONS_URL . '\fileicons\mimetypes-link-icons-master\images' . DS;
                 $fileTrailing = '-icon-128x128.png';
-                $fileDefault = 'default-128x128.png';
+                $fileDefault  = 'default-128x128.png';
                 $fileIcons['type'] = 'png';
                 break;
             case 'none':
-
                 break;
             case '':
             default:

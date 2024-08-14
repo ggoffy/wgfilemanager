@@ -26,8 +26,7 @@ namespace XoopsModules\Wgfilemanager;
 
 use Xmf\Request;
 use XoopsModules\Wgfilemanager;
-use XoopsModules\Wgfilemanager\Common\FilesManagement;;
-
+use XoopsModules\Wgfilemanager\Common\FilesManagement;
 
 
 /**
@@ -59,7 +58,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null fields
+     * @param null $fields fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null)
@@ -70,7 +69,6 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -128,6 +126,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
 
     public function getFullPath($parent_id) {
 
+        $path = '';
         if ($parent_id > 0) {
             $path = $this->getFullPathArray($parent_id);
         }

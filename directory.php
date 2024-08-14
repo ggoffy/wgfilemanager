@@ -111,6 +111,7 @@ switch ($op) {
             }
             $dirFullPath = $dirBasePath . \mb_strtolower($dirName);
         }
+        $dirFullPathOld = '';
         if ($moveDir) {
             $dirBasePathOld = DS;
             if ($dirParentIdOld > 1) {
@@ -278,10 +279,13 @@ switch ($op) {
         }
         break;
     case 'order':
-        $aorder    = Request::getArray('menuItem');
-        $i         = 0;
-        $moveDir   = false;
-        $moveDirId = 0;
+        $aorder         = Request::getArray('menuItem');
+        $i              = 0;
+        $moveDir        = false;
+        $moveDirId      = 0;
+        $dirExists      = false;
+        $dirFullPath    = '';
+        $dirFullPathOld = '';
         //  first check folders
         foreach (\array_keys($aorder) as $key) {
             $dirParentId    = (int)$aorder[$key];
@@ -315,7 +319,6 @@ switch ($op) {
             echo json_encode(['status'=>'error','message'=>\_MA_WGFILEMANAGER_DIRECTORY_ERROR_EXISTS_JS]);
             die;
         } else {
-            $i         = 0;
             // if no troubles save data and move folder if necessary
             foreach (\array_keys($aorder) as $key) {
                 $dirParentId  = (int)$aorder[$key];

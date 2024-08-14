@@ -46,7 +46,6 @@ class File extends \XoopsObject
     /**
      * Constructor
      *
-     * @param null
      */
     public function __construct()
     {
@@ -67,7 +66,6 @@ class File extends \XoopsObject
     /**
      * @static function &getInstance
      *
-     * @param null
      */
     public static function getInstance()
     {
@@ -79,12 +77,11 @@ class File extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return integer
      */
     public function getNewInsertedId()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**
@@ -99,11 +96,11 @@ class File extends \XoopsObject
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
-        $isAdmin = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid()) : false;
+        $isAdmin = \is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
         // Permissions for uploader
         $grouppermHandler = \xoops_getHandler('groupperm');
         $groups = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : \XOOPS_GROUP_ANONYMOUS;
-        $permissionUpload = $grouppermHandler->checkRight('upload_groups', 32, $groups, $GLOBALS['xoopsModule']->getVar('mid')) ? true : false;
+        $permissionUpload = $grouppermHandler->checkRight('upload_groups', 32, $groups, $GLOBALS['xoopsModule']->getVar('mid'));
         // Title
         $title = $this->isNew() ? \_MA_WGFILEMANAGER_FILE_ADD : \_MA_WGFILEMANAGER_FILE_EDIT;
         /*if ($this->isNew()) {
@@ -135,9 +132,7 @@ class File extends \XoopsObject
             if ($permissionUpload) {
                 $fileUploadTray = new \XoopsFormElementTray(\_MA_WGFILEMANAGER_FILE_NAME, '<br>');
                 $fileDirectory = '/uploads/wgfilemanager/files/file';
-                if (!$this->isNew()) {
-                    $fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_MA_WGFILEMANAGER_FILE_NAME_UPLOADS, ".{$fileDirectory}/"), $fileName));
-                }
+                $fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_MA_WGFILEMANAGER_FILE_NAME_UPLOADS, ".$fileDirectory/"), $fileName));
                 $maxsize = $helper->getConfig('maxsize_file');
                 $fileUploadTray->addElement(new \XoopsFormFile('', 'name', $maxsize));
                 $fileUploadTray->addElement(new \XoopsFormLabel(\_MA_WGFILEMANAGER_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' ' . \_MA_WGFILEMANAGER_FORM_UPLOAD_SIZE_MB));

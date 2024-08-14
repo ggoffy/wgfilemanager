@@ -332,6 +332,7 @@ require_once __DIR__ . '/include/xoops_version.inc.php';
 $iniPostMaxSize       = wgfilemanagerReturnBytes(\ini_get('post_max_size'));
 $iniUploadMaxFileSize = wgfilemanagerReturnBytes(\ini_get('upload_max_filesize'));
 $maxSize              = min($iniPostMaxSize, $iniUploadMaxFileSize);
+$increment = 1;
 if ($maxSize > 10000 * 1048576) {
     $increment = 500;
 }
