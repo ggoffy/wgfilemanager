@@ -1,0 +1,14 @@
+.DS_Store
+node_modules
+*.bak
+*.log
+package-lock.json
+composer.lock
+dev/
+
+# Future Families
+dist/icons/flat/
+
+# Source Files
+src/icons/
+src/font/
