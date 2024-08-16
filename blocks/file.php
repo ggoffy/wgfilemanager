@@ -34,12 +34,14 @@ require_once \XOOPS_ROOT_PATH . '/modules/wgfilemanager/include/common.php';
  */
 function b_wgfilemanager_file_show($options)
 {
+    $helper           = Helper::getInstance();
+    $fileHandler      = $helper->getHandler('File');
+    $directoryHandler = $helper->getHandler('Directory');
+
     $block       = [];
     $typeBlock   = $options[0];
     $limit       = $options[1];
     //$lenghtTitle = $options[2];
-    $helper      = Helper::getInstance();
-    $fileHandler = $helper->getHandler('File');
     $crFile = new \CriteriaCompo();
     \array_shift($options);
     \array_shift($options);
@@ -49,30 +51,16 @@ function b_wgfilemanager_file_show($options)
         case 'last':
         default:
             // For the block: file last
-            $crFile->setSort('');
+            $crFile->setSort('date_created');
             $crFile->setOrder('DESC');
             break;
         case 'new':
             // For the block: file new
             // new since last week: 7 * 24 * 60 * 60 = 604800
-            $crFile->add(new \Criteria('', \time() - 604800, '>='));
-            $crFile->add(new \Criteria('', \time(), '<='));
+            $crFile->add(new \Criteria('date_created', \time() - 604800, '>='));
+            $crFile->add(new \Criteria('date_created', \time(), '<='));
             $crFile->setSort('');
             $crFile->setOrder('ASC');
-            break;
-        case 'hits':
-            // For the block: file hits
-            $crFile->setSort('file_hits');
-            $crFile->setOrder('DESC');
-            break;
-        case 'top':
-            // For the block: file top
-            $crFile->setSort('file_top');
-            $crFile->setOrder('ASC');
-            break;
-        case 'random':
-            // For the block: file random
-            $crFile->setSort('RAND()');
             break;
     }
 
@@ -93,9 +81,12 @@ function b_wgfilemanager_file_show($options)
              *     $block[$i]['title'] =  $myTitle;
              */
             $block[$i]['id'] = $fileAll[$i]->getVar('id');
-            $block[$i]['directory_id'] = $fileAll[$i]->getVar('directory_id');
+            $block[$i]['dir_name'] = \_MB_WGFILEMANAGER_DIRECTORY_HOME;
+            $directoryObj = $directoryHandler->get($fileAll[$i]->getVar('directory_id'));
+            if (\is_object($directoryObj) && '' !== $directoryObj->getVar('name')) {
+                $block[$i]['dir_name'] = $directoryObj->getVar('name');
+            }
             $block[$i]['name'] = $fileAll[$i]->getVar('name');
-            $block[$i]['description'] = \strip_tags($fileAll[$i]->getVar('description'));
         }
     }
 

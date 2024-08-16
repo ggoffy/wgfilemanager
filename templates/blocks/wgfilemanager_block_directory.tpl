@@ -9,9 +9,8 @@
     <tbody>
         <{foreach item=directory from=$block}>
         <tr class='<{cycle values="odd, even"}>'>
-            <td class='center'><{$directory.id|default:false}></td>
             <td class='center'><{$directory.name|default:false}></td>
-            <td class='center'><a href='directory.php?op=show&amp;id=<{$directory.id|default:false}>' title='<{$smarty.const._MB_WGFILEMANAGER_DIRECTORY_GOTO}>'><{$smarty.const._MB_WGFILEMANAGER_DIRECTORY_GOTO}></a></td>
+            <td class='center'><a href='<{$wgfilemanager_url}>/index.php?op=list&amp;dir_id=<{$directory.id|default:false}>' title='<{$smarty.const._MB_WGFILEMANAGER_DIRECTORY_GOTO}>'><{$smarty.const._MB_WGFILEMANAGER_DIRECTORY_GOTO}></a></td>
         </tr>
         <{/foreach}>
     </tbody>

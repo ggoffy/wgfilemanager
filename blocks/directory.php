@@ -60,20 +60,6 @@ function b_wgfilemanager_directory_show($options)
             $crDirectory->setSort('date_created');
             $crDirectory->setOrder('ASC');
             break;
-        case 'hits':
-            // For the block: directory hits
-            $crDirectory->setSort('dir_hits');
-            $crDirectory->setOrder('DESC');
-            break;
-        case 'top':
-            // For the block: directory top
-            $crDirectory->setSort('dir_top');
-            $crDirectory->setOrder('ASC');
-            break;
-        case 'random':
-            // For the block: directory random
-            $crDirectory->setSort('RAND()');
-            break;
     }
 
     $crDirectory->setLimit($limit);
@@ -96,7 +82,7 @@ function b_wgfilemanager_directory_show($options)
             $block[$i]['name'] = \htmlspecialchars($directoryAll[$i]->getVar('name'), ENT_QUOTES | ENT_HTML5);
         }
     }
-
+    $GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
     return $block;
 
 }
