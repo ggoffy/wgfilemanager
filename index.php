@@ -82,7 +82,7 @@ switch ($op) {
     $GLOBALS['xoopsTpl']->assign('wgfindexpreview', (int)$cookieIndexPreview);
 
     // Breadcrumbs
-    if ($dirId > 0) {
+    if ($dirId > 1) {
         $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX, 'link' => 'index.php'];
         $dirArray = $directoryHandler->getDirListBreadcrumb($dirId);
         $dirListBreadcrumb = array_reverse($dirArray, true);
@@ -102,9 +102,10 @@ switch ($op) {
     $GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
 
     //get permissions
-    $GLOBALS['xoopsTpl']->assign('permEdit', $permissionsHandler->getPermSubmit());
-    $GLOBALS['xoopsTpl']->assign('permDownload', $permissionsHandler->getPermDownload());
-    $GLOBALS['xoopsTpl']->assign('permUpload', $permissionsHandler->getPermUpload());
+    $GLOBALS['xoopsTpl']->assign('permEditFile', $permissionsHandler->getPermSubmitDirectory($dirId));
+    $GLOBALS['xoopsTpl']->assign('permDownloadFileFromDir', $permissionsHandler->getPermDownloadFileFromDir($dirId));
+    $GLOBALS['xoopsTpl']->assign('permUploadFileToDir', $permissionsHandler->getPermUploadFileToDir($dirId));
+    $GLOBALS['xoopsTpl']->assign('permViewDirectory', $permissionsHandler->getPermViewDirectory($dirId));
 
     $dirList = $directoryHandler->getDirList(0, $dirId);
     $GLOBALS['xoopsTpl']->assign('dir_list', $dirList);

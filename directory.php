@@ -49,8 +49,11 @@ $keywords = [];
 // Breadcrumbs
 $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX, 'link' => 'index.php'];
 // Permissions
-$permEdit = $permissionsHandler->getPermGlobalSubmit();
+$permCreate   = $permissionsHandler->getPermSubmitDirectory($parentId);
+$permEdit     = $permissionsHandler->getPermSubmitDirectory($dirId);
+$GLOBALS['xoopsTpl']->assign('permCreate', $permCreate);
 $GLOBALS['xoopsTpl']->assign('permEdit', $permEdit);
+
 $GLOBALS['xoopsTpl']->assign('showItem', $dirId > 0);
 
 switch ($op) {
@@ -151,7 +154,7 @@ switch ($op) {
                 } else if (!$dirExists) {
                     $directoryHandler->createDirectory($dirFullPath);
                 }
-                if ('folder' === $helper->getConfig('permission_type')) {
+                if ('directory' === $helper->getConfig('permission_type')) {
                     $newDirId = $directoryObj->getNewInsertedId();
                     $permId = isset($_REQUEST['id']) ? $dirId : $newDirId;
                     $grouppermHandler = \xoops_getHandler('groupperm');

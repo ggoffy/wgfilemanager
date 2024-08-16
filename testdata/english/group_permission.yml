@@ -2,32 +2,32 @@
     gperm_groupid: '1'
     gperm_itemid: '4'
     gperm_modid: '5'
-    gperm_name: wgfilemanager_ac
+    gperm_name: wgfilemanager_global
 -
     gperm_groupid: '1'
     gperm_itemid: '8'
     gperm_modid: '5'
-    gperm_name: wgfilemanager_ac
+    gperm_name: wgfilemanager_global
 -
     gperm_groupid: '1'
     gperm_itemid: '16'
     gperm_modid: '5'
-    gperm_name: wgfilemanager_ac
+    gperm_name: wgfilemanager_global
 -
     gperm_groupid: '2'
     gperm_itemid: '8'
     gperm_modid: '5'
-    gperm_name: wgfilemanager_ac
+    gperm_name: wgfilemanager_global
 -
     gperm_groupid: '2'
     gperm_itemid: '16'
     gperm_modid: '5'
-    gperm_name: wgfilemanager_ac
+    gperm_name: wgfilemanager_global
 -
     gperm_groupid: '3'
     gperm_itemid: '16'
     gperm_modid: '5'
-    gperm_name: wgfilemanager_ac
+    gperm_name: wgfilemanager_global
 -
     gperm_groupid: '1'
     gperm_itemid: '1'

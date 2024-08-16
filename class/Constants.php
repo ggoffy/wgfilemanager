@@ -44,10 +44,16 @@ interface Constants
     public const STATUS_BROKEN    = 4;
 
     // Constants for permissions
-    public const PERM_GLOBAL_NONE    = 0;
-    public const PERM_GLOBAL_VIEW    = 1;
-    public const PERM_GLOBAL_SUBMIT  = 2;
-    public const PERM_GLOBAL_APPROVE = 3;
+    public const PERM_GLOBAL_VIEW            = 1;
+    public const PERM_GLOBAL_SUBMIT          = 2;
+    //public const PERM_GLOBAL_APPROVE       = 3;
+    public const PERM_GLOBAL_DOWNLOAD        = 4;
+    //public const PERM_GLOBAL_UPLOAD        = 5;
+    public const PERM_DIRECTORY_VIEW         = 6;
+    public const PERM_DIRECTORY_SUBMIT       = 7;
+    //public const PERM_DIRECTORY_APPROVE    = 8;
+    public const PERM_FILE_DOWNLOAD_FROM_DIR = 9;
+    public const PERM_FILE_UPLOAD_TO_DIR     = 10;
 
     // Constants for file name handling
     public const FILE_HANDLENAME_ORIGINAL = 1;

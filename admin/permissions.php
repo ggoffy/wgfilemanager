@@ -31,46 +31,62 @@ require __DIR__ . '/header.php';
 $templateMain = 'wgfilemanager_admin_permissions.tpl';
 $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('permissions.php'));
 
-$op         = Request::getCmd('op', 'global');
-$permFolder = 'folder' === $helper->getConfig('permission_type');
+$op      = Request::getCmd('op', 'global');
+$permDir = 'directory' === $helper->getConfig('permission_type');
 // Get Form
 require_once \XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 \xoops_load('XoopsFormLoader');
 $permTableForm = new \XoopsSimpleForm('', 'fselperm', 'permissions.php', 'post');
 $formSelect = new \XoopsFormSelect('', 'op', $op);
 $formSelect->setExtra('onchange="document.fselperm.submit()"');
-$formSelect->addOption('global', \_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL);
-if ($permFolder) {
-    $formSelect->addOption('approve_directory', \_MA_WGFILEMANAGER_PERMISSIONS_APPROVE . ' Directory');
-    $formSelect->addOption('submit_directory', \_MA_WGFILEMANAGER_PERMISSIONS_SUBMIT . ' Directory');
-    $formSelect->addOption('view_directory', \_MA_WGFILEMANAGER_PERMISSIONS_VIEW . ' Directory');
+$formSelect->addOption('global', \_MA_WGFILEMANAGER_PERM_GLOBAL);
+if ($permDir) {
+    //$formSelect->addOption('approve_directory', \_MA_WGFILEMANAGER_PERM_APPROVE . ' ' . _MA_WGFILEMANAGER_DIRECTORY);
+    $formSelect->addOption('submit_directory', \_MA_WGFILEMANAGER_PERM_DIR_SUBMIT);
+    $formSelect->addOption('view_directory', \_MA_WGFILEMANAGER_PERM_DIR_VIEW);
+    $formSelect->addOption('upload_directory', \_MA_WGFILEMANAGER_PERM_FILE_UPLOAD_TO_DIR);
+    $formSelect->addOption('download_directory', \_MA_WGFILEMANAGER_PERM_FILE_DOWNLOAD_FROM_DIR);
 }
 $permTableForm->addElement($formSelect);
 $permTableForm->display();
 switch ($op) {
     case 'global':
     default:
-        $formTitle = \_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL;
-        $permName = 'wgfilemanager_ac';
-        $permDesc = \_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL_DESC;
-        $globalPerms = ['4' => \_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL_4, '8' => \_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL_8, '16' => \_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL_16 ];
+        $formTitle = \_MA_WGFILEMANAGER_PERM_GLOBAL;
+        $permName = 'wgfilemanager_global';
+        $permDesc = \_MA_WGFILEMANAGER_PERM_GLOBAL_DESC;
+        $globalPerms = [Constants::PERM_GLOBAL_SUBMIT => \_MA_WGFILEMANAGER_PERM_GLOBAL_SUBMIT,
+                        Constants::PERM_GLOBAL_VIEW => \_MA_WGFILEMANAGER_PERM_GLOBAL_VIEW,
+                        Constants::PERM_GLOBAL_DOWNLOAD => \_MA_WGFILEMANAGER_PERM_GLOBAL_DOWNLOAD];
         break;
-    case 'approve_directory':
-        $formTitle = \_MA_WGFILEMANAGER_PERMISSIONS_APPROVE;
+    /*case 'approve_directory':
+        $formTitle = \_MA_WGFILEMANAGER_PERM_APPROVE;
         $permName = 'wgfilemanager_approve_directory';
-        $permDesc = \_MA_WGFILEMANAGER_PERMISSIONS_APPROVE_DESC . ' Directory';
+        $permDesc = \_MA_WGFILEMANAGER_PERM_APPROVE_DESC . ' ' . _MA_WGFILEMANAGER_DIRECTORY;
         $handler = $helper->getHandler('directory');
-        break;
+        break;*/
     case 'submit_directory':
-        $formTitle = \_MA_WGFILEMANAGER_PERMISSIONS_SUBMIT;
+        $formTitle = \_MA_WGFILEMANAGER_PERM_DIR_SUBMIT;
         $permName = 'wgfilemanager_submit_directory';
-        $permDesc = \_MA_WGFILEMANAGER_PERMISSIONS_SUBMIT_DESC . ' Directory';
+        $permDesc = \_MA_WGFILEMANAGER_PERM_DIR_SUBMIT_DESC;
         $handler = $helper->getHandler('directory');
         break;
     case 'view_directory':
-        $formTitle = \_MA_WGFILEMANAGER_PERMISSIONS_VIEW;
+        $formTitle = \_MA_WGFILEMANAGER_PERM_DIR_VIEW;
         $permName = 'wgfilemanager_view_directory';
-        $permDesc = \_MA_WGFILEMANAGER_PERMISSIONS_VIEW_DESC . ' Directory';
+        $permDesc = \_MA_WGFILEMANAGER_PERM_DIR_VIEW_DESC;
+        $handler = $helper->getHandler('directory');
+        break;
+    case 'upload_directory':
+        $formTitle = \_MA_WGFILEMANAGER_PERM_FILE_UPLOAD_TO_DIR;
+        $permName = 'wgfilemanager_upload_directory';
+        $permDesc = \_MA_WGFILEMANAGER_PERM_FILE_UPLOAD_TO_DIR_DESC;
+        $handler = $helper->getHandler('directory');
+        break;
+    case 'download_directory':
+        $formTitle = \_MA_WGFILEMANAGER_PERM_FILE_DOWNLOAD_FROM_DIR;
+        $permName = 'wgfilemanager_download_directory';
+        $permDesc = \_MA_WGFILEMANAGER_PERM_FILE_DOWNLOAD_FROM_DIR_DESC;
         $handler = $helper->getHandler('directory');
         break;
 }
@@ -84,7 +100,7 @@ if ($op === 'global') {
     $GLOBALS['xoopsTpl']->assign('form', $permform->render());
     $permFound = true;
 }
-if ('approve_directory' === $op || 'submit_directory' === $op || 'view_directory' === $op) {
+if ('approve_directory' === $op || 'submit_directory' === $op || 'view_directory' === $op || 'upload_directory' === $op || 'download_directory' === $op) {
     $directoryCount = $directoryHandler->getCountDirectory();
     if ($directoryCount > 0) {
         $directoryAll = $directoryHandler->getAllDirectory(0, 'name');

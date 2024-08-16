@@ -325,7 +325,7 @@ $modversion['config'][] = [
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'default'     => 'global',
-    'options'     => ['_MI_WGFILEMANAGER_INDEX_PERMISSION_TYPE_GLOBAL' => 'global', '_MI_WGFILEMANAGER_INDEX_PERMISSION_TYPE_FOLDER' => 'folder'],
+    'options'     => ['_MI_WGFILEMANAGER_INDEX_PERMISSION_TYPE_GLOBAL' => 'global', '_MI_WGFILEMANAGER_INDEX_PERMISSION_TYPE_DIR' => 'directory'],
 ];
 // create increment steps for file size
 require_once __DIR__ . '/include/xoops_version.inc.php';

@@ -32,7 +32,7 @@ $op     = Request::getString('op', 'list');
 $fileId = Request::getInt('file_id');
 
 // check permissions
-$permDownload = $permissionsHandler->getPermDownload();
+$permDownload = $permissionsHandler->getPermDownloadFile();
 if (!$permDownload) {
     \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_NO_PERM_DOWNLOAD);
 }

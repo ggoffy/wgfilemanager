@@ -161,35 +161,53 @@ class Directory extends \XoopsObject
         $dirSubmitter = $this->isNew() ? $uidCurrent : $this->getVar('submitter');
         $form->addElement(new \XoopsFormSelectUser(\_MA_WGFILEMANAGER_DIRECTORY_SUBMITTER, 'submitter', false, $dirSubmitter));
         // Permissions
-        if ('folder' === $helper->getConfig('permission_type')) {
+        if ('directory' === $helper->getConfig('permission_type')) {
             $memberHandler = \xoops_getHandler('member');
             $groupList = $memberHandler->getGroupList();
             $grouppermHandler = \xoops_getHandler('groupperm');
             $fullList[] = \array_keys($groupList);
             if ($this->isNew()) {
-                $groupsCanApproveCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERMISSIONS_APPROVE, 'groups_approve_directory[]', $fullList);
-                $groupsCanSubmitCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERMISSIONS_SUBMIT, 'groups_submit_directory[]', $fullList);
-                $groupsCanViewCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERMISSIONS_VIEW, 'groups_view_directory[]', $fullList);
+                //$groupsCanApproveCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERM_DIR_APPROVE, 'groups_approve_directory[]', $fullList);
+                $groupsCanSubmitDirCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERM_DIR_SUBMIT, 'groups_submit_directory[]', $fullList);
+                $groupsCanViewDirCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERM_DIR_VIEW, 'groups_view_directory[]', $fullList);
+                $groupsCanDownloadCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERM_FILE_DOWNLOAD_FROM_DIR, 'groups_download_directory[]', $fullList);
+                $groupsCanUploadCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERM_FILE_UPLOAD_TO_DIR, 'groups_upload_directory[]', $fullList);
             } else {
-                $groupsIdsApprove = $grouppermHandler->getGroupIds('wgfilemanager_approve_directory', $this->getVar('id'), $GLOBALS['xoopsModule']->getVar('mid'));
-                $groupsIdsApprove[] = \array_values($groupsIdsApprove);
-                $groupsCanApproveCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERMISSIONS_APPROVE, 'groups_approve_directory[]', $groupsIdsApprove);
+                //$groupsIdsApprove = $grouppermHandler->getGroupIds('wgfilemanager_approve_directory', $this->getVar('id'), $GLOBALS['xoopsModule']->getVar('mid'));
+                //$groupsIdsApprove[] = \array_values($groupsIdsApprove);
+                //$groupsCanApproveCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERM_APPROVE, 'groups_approve_directory[]', $groupsIdsApprove);
                 $groupsIdsSubmit = $grouppermHandler->getGroupIds('wgfilemanager_submit_directory', $this->getVar('id'), $GLOBALS['xoopsModule']->getVar('mid'));
                 $groupsIdsSubmit[] = \array_values($groupsIdsSubmit);
-                $groupsCanSubmitCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERMISSIONS_SUBMIT, 'groups_submit_directory[]', $groupsIdsSubmit);
+                $groupsCanSubmitDirCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERM_DIR_SUBMIT, 'groups_submit_directory[]', $groupsIdsSubmit);
                 $groupsIdsView = $grouppermHandler->getGroupIds('wgfilemanager_view_directory', $this->getVar('id'), $GLOBALS['xoopsModule']->getVar('mid'));
                 $groupsIdsView[] = \array_values($groupsIdsView);
-                $groupsCanViewCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERMISSIONS_VIEW, 'groups_view_directory[]', $groupsIdsView);
+                $groupsCanViewDirCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERM_DIR_VIEW, 'groups_view_directory[]', $groupsIdsView);
+                $groupsIdsDownload = $grouppermHandler->getGroupIds('wgfilemanager_download_directory', $this->getVar('id'), $GLOBALS['xoopsModule']->getVar('mid'));
+                $groupsIdsDownload[] = \array_values($groupsIdsDownload);
+                $groupsCanDownloadCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERM_FILE_DOWNLOAD_FROM_DIR, 'groups_download_directory[]', $groupsIdsDownload);
+                $groupsIdsUpload = $grouppermHandler->getGroupIds('wgfilemanager_upload_directory', $this->getVar('id'), $GLOBALS['xoopsModule']->getVar('mid'));
+                $groupsIdsUpload[] = \array_values($groupsIdsUpload);
+                $groupsCanUploadCheckbox = new \XoopsFormCheckBox(\_MA_WGFILEMANAGER_PERM_FILE_UPLOAD_TO_DIR, 'groups_upload_directory[]', $groupsIdsUpload);
             }
             // To Approve
-            $groupsCanApproveCheckbox->addOptionArray($groupList);
-            $form->addElement($groupsCanApproveCheckbox);
+            //$groupsCanApproveCheckbox->addOptionArray($groupList);
+            //$form->addElement($groupsCanApproveCheckbox);
             // To Submit
-            $groupsCanSubmitCheckbox->addOptionArray($groupList);
-            $form->addElement($groupsCanSubmitCheckbox);
+            $groupsCanSubmitDirCheckbox->addOptionArray($groupList);
+            $groupsCanSubmitDirCheckbox->setDescription(\_MA_WGFILEMANAGER_PERM_DIR_SUBMIT_DESC);
+            $form->addElement($groupsCanSubmitDirCheckbox);
             // To View
-            $groupsCanViewCheckbox->addOptionArray($groupList);
-            $form->addElement($groupsCanViewCheckbox);
+            $groupsCanViewDirCheckbox->addOptionArray($groupList);
+            $groupsCanViewDirCheckbox->setDescription(\_MA_WGFILEMANAGER_PERM_DIR_VIEW_DESC);
+            $form->addElement($groupsCanViewDirCheckbox);
+            // To download
+            $groupsCanDownloadCheckbox->addOptionArray($groupList);
+            $groupsCanDownloadCheckbox->setDescription(\_MA_WGFILEMANAGER_PERM_FILE_DOWNLOAD_FROM_DIR_DESC);
+            $form->addElement($groupsCanDownloadCheckbox);
+            // To upload
+            $groupsCanUploadCheckbox->addOptionArray($groupList);
+            $groupsCanUploadCheckbox->setDescription(\_MA_WGFILEMANAGER_PERM_FILE_UPLOAD_TO_DIR_DESC);
+            $form->addElement($groupsCanUploadCheckbox);
         }
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));

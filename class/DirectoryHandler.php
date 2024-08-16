@@ -235,7 +235,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
      * Check whether given directory is used as parent
      *
      * @param int $dirId
-     * @return integer
+     * @return boolean
      */
     public function dirIsParent ($dirId) {
         $crCountDirectory = new \CriteriaCompo();

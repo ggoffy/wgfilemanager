@@ -129,19 +129,28 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_INVALID_PARAM', 'Invalid parameter');
 // ---------------- Admin Permissions ----------------
 // Permissions
-\define('_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL', 'Permissions global');
-\define('_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL_DESC', 'Permissions global to check type of.');
-\define('_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL_4', 'Permissions global to approve');
-\define('_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL_8', 'Permissions global to submit');
-\define('_MA_WGFILEMANAGER_PERMISSIONS_GLOBAL_16', 'Permissions global to view');
-\define('_MA_WGFILEMANAGER_PERMISSIONS_APPROVE', 'Permissions to approve');
-\define('_MA_WGFILEMANAGER_PERMISSIONS_APPROVE_DESC', 'Permissions to approve');
-\define('_MA_WGFILEMANAGER_PERMISSIONS_SUBMIT', 'Permissions to submit');
-\define('_MA_WGFILEMANAGER_PERMISSIONS_SUBMIT_DESC', 'Permissions to submit');
-\define('_MA_WGFILEMANAGER_PERMISSIONS_VIEW', 'Permissions to view');
-\define('_MA_WGFILEMANAGER_PERMISSIONS_VIEW_DESC', 'Permissions to view');
+\define('_MA_WGFILEMANAGER_PERM_GLOBAL', 'Permissions global');
+\define('_MA_WGFILEMANAGER_PERM_GLOBAL_DESC', 'Permissions global to check type of.');
+//\define('_MA_WGFILEMANAGER_PERM_GLOBAL_APPROVE', 'Permissions global to approve');
+\define('_MA_WGFILEMANAGER_PERM_GLOBAL_SUBMIT', 'Permissions global to submit/upload');
+\define('_MA_WGFILEMANAGER_PERM_GLOBAL_VIEW', 'Permissions global to view');
+\define('_MA_WGFILEMANAGER_PERM_GLOBAL_DOWNLOAD', 'Permissions global to download');
+//\define('_MA_WGFILEMANAGER_PERM_APPROVE', 'Permissions to approve');
+//\define('_MA_WGFILEMANAGER_PERM_APPROVE_DESC', 'Permissions to approve');
+//\define('_MA_WGFILEMANAGER_PERM_SUBMIT', 'Permissions to submit');
+//\define('_MA_WGFILEMANAGER_PERM_SUBMIT_DESC', 'Permissions to submit');
+\define('_MA_WGFILEMANAGER_PERM_DIR_SUBMIT', 'Permission directory submit');
+\define('_MA_WGFILEMANAGER_PERM_DIR_SUBMIT_DESC', 'Permission to:<br>- edit this directory<br>- create subdirectories<br>- edit/delete files');
+\define('_MA_WGFILEMANAGER_PERM_DIR_VIEW', 'Permission directory view');
+\define('_MA_WGFILEMANAGER_PERM_DIR_VIEW_DESC', 'Permission to view directory with all files');
+\define('_MA_WGFILEMANAGER_PERM_FILE_UPLOAD_TO_DIR', 'Permission directory upload');
+\define('_MA_WGFILEMANAGER_PERM_FILE_UPLOAD_TO_DIR_DESC', 'Permission to upload files to this directory');
+\define('_MA_WGFILEMANAGER_PERM_FILE_DOWNLOAD_FROM_DIR', 'Permission directory download');
+\define('_MA_WGFILEMANAGER_PERM_FILE_DOWNLOAD_FROM_DIR_DESC', 'Permission to download files from this directory');
+//\define('_MA_WGFILEMANAGER_PERM_VIEW', 'Permission to view');
+//\define('_MA_WGFILEMANAGER_PERM_VIEW_DESC', 'Permission to view');
 \define('_MA_WGFILEMANAGER_NO_PERMISSIONS_SET', 'No permission set');
-
+\define('_MA_WGFILEMANAGER_NO_PERM_DIRECTORY_VIEW', 'No permission to view directory');
 \define('_MA_WGFILEMANAGER_NO_PERM_DOWNLOAD', 'No permission to download');
 // Admin link
 \define('_MA_WGFILEMANAGER_ADMIN', 'Admin');
