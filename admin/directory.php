@@ -134,21 +134,21 @@ switch ($op) {
             $renameDir = $dirName !== $dirNameOld;
         }
         // get full path
-        $dirBasePath = DS;
+        $dirBasePath = '/';
         $dirFullPath = $dirBasePath;
         if ($dirParentId > 0) {
             $path = $directoryHandler->getFullPath($dirParentId);
             if ('' !== $path) {
-                $dirBasePath .= $path . DS;
+                $dirBasePath .= $path . '/';
             }
             $dirFullPath = $dirBasePath . \mb_strtolower($dirName);
         }
         $dirFullPathOld = '';
         if ($moveDir) {
-            $dirBasePathOld = DS;
+            $dirBasePathOld = '/';
             if ($dirParentIdOld > 0) {
                 $dirBasePathOld .= $directoryHandler->getFullPath($dirParentIdOld);
-                $dirBasePathOld .= DS;
+                $dirBasePathOld .= '/';
             }
             $dirFullPathOld = $dirBasePathOld . \mb_strtolower($dirNameOld);
         }

@@ -62,6 +62,7 @@ interface Constants
     // Constants for mime type category
     public const MIMETYPE_CAT_NONE  = 0;
     public const MIMETYPE_CAT_IMAGE = 1;
+    public const MIMETYPE_CAT_PDF   = 2;
 
     // Constants for cookies
     public const COOKIE_STYLE_DEFAULT = 'DEFAULT';

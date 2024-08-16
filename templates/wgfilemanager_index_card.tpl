@@ -6,8 +6,12 @@
                 <!-- Start new link loop -->
                 <{foreach item=file from=$file_list|default:false name=file}>
                     <div class="card wgf-card">
-                        <{if $wgfindexpreview|default:false && $file.real_url|default:false}>
-                            <img class="card-img-top center wgf-preview-<{$file.category|default:0}>" src="<{$file.real_url}>" alt="<{$file.name}>">
+                        <{if $wgfindexpreview|default:false}>
+                            <{if $file.image|default:false}>
+                                <img class="card-img-top center wgf-preview-<{$file.category|default:0}>" src="<{$file.image_url}>" alt="<{$file.name}>">
+                            <{else}>
+                                <img class="card-img-top center wgf-preview-<{$file.category|default:0}>" src="<{$file.icon_url}>" alt="<{$file.name}>">
+                            <{/if}>
                         <{/if}>
                         <div class="card-body">
                             <span class="wgf-filename"><{$file.name}></span>
@@ -23,15 +27,7 @@
                             </p>
                         </div>
                         <div class="card-footer center wgf-fileaction">
-                            <div class="btn-group btn-group-sm" role="group" aria-label="group_view">
-                                <{if $permDownloadFileFromDir|default:false}>
-                                    <a class="btn btn-sm btn-outline-primary" href='download.php?op=download&amp;file_id=<{$file.id|default:0}>' title='<{$smarty.const._MA_WGFILEMANAGER_FILE_DOWNLOAD}>'><img src="<{$wgfilemanager_icon_bi_url}>download.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_DOWNLOAD}>" ></a>
-                                <{/if}>
-                                <{if $permEditFile|default:false}>
-                                    <a class="btn btn-sm btn-outline-primary" href='file.php?op=edit&amp;id=<{$file.id|default:false}><{$params|default:''}>' title='<{$smarty.const._EDIT}>'><img src="<{$wgfilemanager_icon_bi_url}>pencil-square.svg" alt="<{$smarty.const._EDIT}>" ></a>
-                                    <a class="btn btn-sm btn-outline-primary" href='file.php?op=delete&amp;id=<{$file.id|default:false}><{$params|default:''}>' title='<{$smarty.const._DELETE}>'><img src="<{$wgfilemanager_icon_bi_url}>trash.svg" alt="<{$smarty.const._DELETE}>" ></a>
-                                <{/if}>
-                            </div>
+                            <{include file='db:wgfilemanager_index_fileactions.tpl' }>
                         </div>
                     </div>
                 <{/foreach}>

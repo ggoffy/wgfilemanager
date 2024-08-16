@@ -1,10 +1,10 @@
 -
     id: '1'
     parent_id: '0'
-    name: Basic
+    name: 'Basic directory'
     description: ''
-    fullpath: \
-    date_created: '1719760126'
+    fullpath: /
+    date_created: '1719730809'
     submitter: '1'
     weight: '1'
 -
@@ -12,7 +12,7 @@
     parent_id: '1'
     name: Information
     description: ''
-    fullpath: \information
+    fullpath: /information
     date_created: '1719760126'
     submitter: '1'
     weight: '2'
@@ -21,7 +21,7 @@
     parent_id: '1'
     name: Images
     description: ''
-    fullpath: \images
+    fullpath: /images
     date_created: '1719759651'
     submitter: '1'
     weight: '3'
@@ -30,7 +30,7 @@
     parent_id: '3'
     name: buildings
     description: ''
-    fullpath: \images\buildings
+    fullpath: /images/buildings
     date_created: '1719759666'
     submitter: '1'
     weight: '4'
@@ -39,7 +39,7 @@
     parent_id: '3'
     name: nature
     description: ''
-    fullpath: \images\nature
+    fullpath: /images/nature
     date_created: '1719759680'
     submitter: '1'
     weight: '5'
@@ -48,7 +48,7 @@
     parent_id: '1'
     name: misc
     description: ''
-    fullpath: \misc
+    fullpath: /misc
     date_created: '1719780183'
     submitter: '1'
     weight: '7'
@@ -57,7 +57,7 @@
     parent_id: '5'
     name: Ocean
     description: ''
-    fullpath: \images\nature\ocean
+    fullpath: /images/nature/ocean
     date_created: '1719759693'
     submitter: '1'
     weight: '6'

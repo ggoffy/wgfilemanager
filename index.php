@@ -38,7 +38,12 @@ require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoTheme']->addStylesheet($style, null);
 $GLOBALS['xoTheme']->addStylesheet(\WGFILEMANAGER_URL . '/assets/css/default.css');
 // Paths
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGFILEMANAGER_URL.'/index.php');
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgfilemanager_icon_bi_url', \WGFILEMANAGER_ICONS_URL . '/bootstrap/');
+$GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
+$GLOBALS['xoopsTpl']->assign('wgfilemanager_upload_url', \WGFILEMANAGER_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('wgfilemanager_upload_url', \WGFILEMANAGER_UPLOAD_URL);
 //preferences
 $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
 $GLOBALS['xoopsTpl']->assign('panel_type', $helper->getConfig('panel_type'));
@@ -97,16 +102,13 @@ switch ($op) {
         $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX];
     }
 
-    // Paths
-    $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-    $GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
-
     //get permissions
     $GLOBALS['xoopsTpl']->assign('permEditFile', $permissionsHandler->getPermSubmitDirectory($dirId));
     $GLOBALS['xoopsTpl']->assign('permDownloadFileFromDir', $permissionsHandler->getPermDownloadFileFromDir($dirId));
     $GLOBALS['xoopsTpl']->assign('permUploadFileToDir', $permissionsHandler->getPermUploadFileToDir($dirId));
     $GLOBALS['xoopsTpl']->assign('permViewDirectory', $permissionsHandler->getPermViewDirectory($dirId));
-
+    $GLOBALS['xoopsTpl']->assign('showBtnDetails', true);
+    //get directory list
     $dirList = $directoryHandler->getDirList(0, $dirId);
     $GLOBALS['xoopsTpl']->assign('dir_list', $dirList);
     $GLOBALS['xoopsTpl']->assign('dirId', $dirId);
@@ -128,16 +130,28 @@ switch ($op) {
         $fileAll = $fileHandler->getAll($crFile);
         foreach (\array_keys($fileAll) as $i) {
             $file = $fileAll[$i]->getValuesFile();
-            $ext = substr(strrchr($file['name'], '.'), 1);
+            $ext  = substr(strrchr($file['name'], '.'), 1);
             $fileCategory = isset($fileIcons['files'][$ext]) ? (int)$fileIcons['files'][$ext]['category'] : 0;
-            $file['category'] = $fileCategory;
-            if (Constants::MIMETYPE_CAT_IMAGE === $fileCategory) {
-                $realUrl = $file['real_url'];
-            } else {
-                $realUrl = isset($fileIcons['files'][$ext]) ? $fileIcons['files'][$ext]['src'] : $fileIcons['default'];
+            $file['category']  = $fileCategory;
+            $file['icon_url']  = '';
+            $file['image']     = false;
+            $file['image_url'] = '';
+            $file['pdf']       = false;
+            $file['pdf_url']   = '';
+            switch ($fileCategory) {
+                case 0:
+                    $file['icon_url'] = isset($fileIcons['files'][$ext]) ? $fileIcons['files'][$ext]['src'] : $fileIcons['default'];
+                    break;
+                case Constants::MIMETYPE_CAT_IMAGE:
+                    $file['image'] = true;
+                    $file['image_url'] = $file['real_url'];
+                    break;
+                case Constants::MIMETYPE_CAT_PDF:
+                    $file['pdf'] = true;
+                    $file['pdf_url'] = $file['real_url'];
+                    break;
             }
-            $file['real_url'] = $realUrl;
-            $fileList[$i]     = $file;
+            $fileList[$i]        = $file;
         }
     }
     $GLOBALS['xoopsTpl']->assign('file_list', $fileList);
@@ -169,7 +183,4 @@ switch ($op) {
 wgfilemanagerMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));
 unset($keywords);
 
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGFILEMANAGER_URL.'/index.php');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgfilemanager_upload_url', \WGFILEMANAGER_UPLOAD_URL);
 require __DIR__ . '/footer.php';
