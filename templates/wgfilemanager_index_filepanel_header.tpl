@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-6 col-xs-6 col-sm-6 wgf-folderaction right">
-                <{if $permUpload|default:false}>
+                <{if $permUploadFileToDir|default:false}>
                     <a class="btn btn-outline-primary" href='file.php?op=new&amp;dir_id=<{$dirId|default:0}>' title='<{$smarty.const._MA_WGFILEMANAGER_FILE_UPLOAD}>'><img src="<{$wgfilemanager_icon_bi_url}>upload.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_UPLOAD}>" ></a>
                 <{/if}>
             </div>

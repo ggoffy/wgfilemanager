@@ -187,7 +187,7 @@ switch ($op) {
                 $permId = isset($_REQUEST['id']) ? $dirId : $newDirId;
                 $grouppermHandler = \xoops_getHandler('groupperm');
                 $mid = $GLOBALS['xoopsModule']->getVar('mid');
-                if ('folder' === $helper->getConfig('permission_type')) {
+                if ('directory' === $helper->getConfig('permission_type')) {
                     // Permission to view_directory
                     $grouppermHandler->deleteByModule($mid, 'wgfilemanager_view_directory', $permId);
                     if (isset($_POST['groups_view_directory'])) {

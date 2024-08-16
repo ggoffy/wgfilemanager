@@ -25,6 +25,7 @@ namespace XoopsModules\Wgfilemanager;
  */
 
 use XoopsModules\Wgfilemanager;
+use XoopsModule;
 
 \defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -41,35 +42,66 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     {
     }
 
+
+    /******************************************
+     * Global permissions
+    /*******************************************/
+
+
+    /**
+     * @private function getPermGlobal
+     * returns right for given perm
+     * @param $constantPerm
+     * @return bool
+     */
+    private function getPermGlobal($constantPerm)
+    {
+        global $xoopsUser;
+
+        $moduleDirName = \basename(\dirname(__DIR__));
+        $mid = XoopsModule::getByDirname($moduleDirName)->mid();
+        $currentuid = 0;
+        if (isset($xoopsUser) && \is_object($xoopsUser)) {
+            if ($xoopsUser->isAdmin($mid)) {
+                return true;
+            }
+            $currentuid = $xoopsUser->uid();
+        }
+        $grouppermHandler = \xoops_getHandler('groupperm');
+
+        $memberHandler = \xoops_getHandler('member');
+        if (0 === $currentuid) {
+            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
+        } else {
+            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);
+        }
+        switch ($constantPerm) {
+            //case Constants::PERM_GLOBAL_APPROVE:
+            case Constants::PERM_GLOBAL_SUBMIT:
+            case Constants::PERM_GLOBAL_VIEW:
+            case Constants::PERM_GLOBAL_DOWNLOAD:
+            //case Constants::PERM_GLOBAL_UPLOAD:
+                $permName = 'wgfilemanager_global';
+                break;
+            case 0:
+            default:
+                $permName = '';
+                break;
+        }
+        return $grouppermHandler->checkRight($permName, $constantPerm, $my_group_ids, $mid);
+
+    }
+
     /**
      * @public function permGlobalApprove
      * returns right for global approve
      *
      * @return bool
      */
-    public function getPermGlobalApprove()
+    /*public function getPermGlobalApprove()
     {
-        global $xoopsUser, $xoopsModule;
-        $currentuid = 0;
-        if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            }
-            $currentuid = $xoopsUser->uid();
-        }
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
-        $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
-            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-        } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);
-        }
-        if ($grouppermHandler->checkRight('wgfilemanager_ac', 4, $my_group_ids, $mid)) {
-            return true;
-        }
-        return false;
-    }
+        return $this->getPermGlobal(Constants::PERM_GLOBAL_APPROVE);
+    }*/
 
     /**
      * @public function permGlobalSubmit
@@ -79,29 +111,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermGlobalSubmit()
     {
-        global $xoopsUser, $xoopsModule;
-        $currentuid = 0;
-        if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            }
-            $currentuid = $xoopsUser->uid();
-        }
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
-        $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
-            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-        } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);
-        }
-        if ($this->getPermGlobalApprove()) {
-            return true;
-        }
-        if ($grouppermHandler->checkRight('wgfilemanager_ac', 8, $my_group_ids, $mid)) {
-            return true;
-        }
-        return false;
+        return $this->getPermGlobal(Constants::PERM_GLOBAL_SUBMIT);
     }
 
     /**
@@ -112,70 +122,161 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermGlobalView()
     {
-        global $xoopsUser, $xoopsModule;
+        return $this->getPermGlobal(Constants::PERM_GLOBAL_VIEW);
+    }
+
+    /**
+     * @public function getPermGlobalDownload
+     * returns right for global download
+     *
+     * @return bool
+     */
+    public function getPermGlobalDownload()
+    {
+        return $this->getPermGlobal(Constants::PERM_GLOBAL_DOWNLOAD);
+    }
+
+
+
+    /******************************************
+     * Permissions for directories
+    /*******************************************/
+
+    /**
+     * @private function getPermGlobal
+     * returns right for given perm
+     * @param $constantPerm
+     * @return bool
+     */
+    private function getPermDirectory($constantPerm, $dirId)
+    {
+        global $xoopsUser;
+
+        $moduleDirName = \basename(\dirname(__DIR__));
+        $mid = XoopsModule::getByDirname($moduleDirName)->mid();
         $currentuid = 0;
         if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
+            if ($xoopsUser->isAdmin($mid)) {
                 return true;
             }
             $currentuid = $xoopsUser->uid();
         }
         $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
+
         $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
+        if (0 === $currentuid) {
             $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
         } else {
             $my_group_ids = $memberHandler->getGroupsByUser($currentuid);
         }
+        switch ($constantPerm) {
+            //case Constants::PERM_DIRECTORY_APPROVE:
+            case Constants::PERM_DIRECTORY_SUBMIT:
+                $permName = 'wgfilemanager_submit_directory';
+                break;
+            case Constants::PERM_DIRECTORY_VIEW:
+                $permName = 'wgfilemanager_view_directory';
+                break;
+            case Constants::PERM_DIRECTORY_DOWNLOAD:
+                $permName = 'wgfilemanager_download_directory';
+                break;
+            case Constants::PERM_DIRECTORY_UPLOAD:
+                $permName = 'wgfilemanager_upload_directory';
+                break;
+            case 0:
+            default:
+                $permName = '';
+                break;
+        }
+
+        return $grouppermHandler->checkRight($permName, $dirId, $my_group_ids, $mid);
+
+    }
+    /**
+     * @public function getPermApproveDirectory
+     * returns right for approve directory
+     *
+     * param int $dirId
+     * @return bool
+     */
+    /*public function getPermApproveDirectory($dirId)
+    {
+
         if ($this->getPermGlobalApprove()) {
             return true;
         }
+        return $this->getPermDirectory(Constants::PERM_DIRECTORY_APPROVE, $dirId);
+
+    }*/
+
+    /**
+     * @public function getPermSubmitDirectory
+     * returns right for creating/editing directory
+     *
+     * param int $dirId
+     * @return bool
+     */
+    public function getPermSubmitDirectory($dirId)
+    {
+
         if ($this->getPermGlobalSubmit()) {
             return true;
         }
-        if ($grouppermHandler->checkRight('wgfilemanager_ac', 16, $my_group_ids, $mid)) {
+        return $this->getPermDirectory(Constants::PERM_DIRECTORY_SUBMIT, $dirId);
+
+    }
+
+    /**
+     * @public function getPermViewDirectory
+     * returns right for view directory
+     *
+     * param int $dirId
+     * @return bool
+     */
+    public function getPermViewDirectory($dirId)
+    {
+
+        if ($this->getPermGlobalView()) {
             return true;
         }
-        return false;
-    }
-
-    /**
-     * @public function getPermSubmit
-     * returns right for submitting files
-     *
-     * @return bool
-     */
-    public function getPermSubmit()
-    {
-
-        return $this->getPermGlobalSubmit();
+        return $this->getPermDirectory(Constants::PERM_DIRECTORY_VIEW, $dirId);
 
     }
 
+    /******************************************
+     * Permissions for files
+    /*******************************************/
+    
     /**
-     * @public function getPermDownload
-     * returns right for downloading files
+     * @public function getPermDownloadDirectory
+     * returns right for downloading files from directory
      *
+     * param int $dirId
      * @return bool
      */
-    public function getPermDownload()
+    public function getPermDownloadFileFromDir($dirId)
     {
-
-        return $this->getPermGlobalSubmit();
+        if ($this->getPermGlobalDownload()) {
+            return true;
+        }
+        return $this->getPermDirectory(Constants::PERM_FILE_DOWNLOAD_FROM_DIR, $dirId);
 
     }
 
     /**
-     * @public function getPermUpload
-     * returns right for uploading files
+     * @public function getPermUploadDirectory
+     * returns right for uploading file to directory
      *
+     * param int $dirId
      * @return bool
      */
-    public function getPermUpload()
+    public function getPermUploadFileToDir($dirId)
     {
-
-        return $this->getPermGlobalSubmit();
+        if ($this->getPermGlobalSubmit()) {
+            return true;
+        }
+        return $this->getPermDirectory(Constants::PERM_FILE_UPLOAD_TO_DIR, $dirId);
 
     }
+
 }
