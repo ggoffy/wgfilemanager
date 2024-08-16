@@ -141,7 +141,7 @@ if ($currdirname == $moduleDirName) {
     ];
 }
 // ------------------- Default Blocks ------------------- //
-/*
+
 // Directory last
 $modversion['blocks'][] = [
     'file'        => 'directory.php',
@@ -161,36 +161,6 @@ $modversion['blocks'][] = [
     'edit_func'   => 'b_wgfilemanager_directory_edit',
     'template'    => 'wgfilemanager_block_directory.tpl',
     'options'     => 'new|5|25|0',
-];
-// Directory hits
-$modversion['blocks'][] = [
-    'file'        => 'directory.php',
-    'name'        => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_HITS,
-    'description' => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_HITS_DESC,
-    'show_func'   => 'b_wgfilemanager_directory_show',
-    'edit_func'   => 'b_wgfilemanager_directory_edit',
-    'template'    => 'wgfilemanager_block_directory.tpl',
-    'options'     => 'hits|5|25|0',
-];
-// Directory top
-$modversion['blocks'][] = [
-    'file'        => 'directory.php',
-    'name'        => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_TOP,
-    'description' => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_TOP_DESC,
-    'show_func'   => 'b_wgfilemanager_directory_show',
-    'edit_func'   => 'b_wgfilemanager_directory_edit',
-    'template'    => 'wgfilemanager_block_directory.tpl',
-    'options'     => 'top|5|25|0',
-];
-// Directory random
-$modversion['blocks'][] = [
-    'file'        => 'directory.php',
-    'name'        => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_RANDOM,
-    'description' => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_RANDOM_DESC,
-    'show_func'   => 'b_wgfilemanager_directory_show',
-    'edit_func'   => 'b_wgfilemanager_directory_edit',
-    'template'    => 'wgfilemanager_block_directory.tpl',
-    'options'     => 'random|5|25|0',
 ];
 // File last
 $modversion['blocks'][] = [
@@ -212,58 +182,6 @@ $modversion['blocks'][] = [
     'template'    => 'wgfilemanager_block_file.tpl',
     'options'     => 'new|5|25|0',
 ];
-// File hits
-$modversion['blocks'][] = [
-    'file'        => 'file.php',
-    'name'        => \_MI_WGFILEMANAGER_FILE_BLOCK_HITS,
-    'description' => \_MI_WGFILEMANAGER_FILE_BLOCK_HITS_DESC,
-    'show_func'   => 'b_wgfilemanager_file_show',
-    'edit_func'   => 'b_wgfilemanager_file_edit',
-    'template'    => 'wgfilemanager_block_file.tpl',
-    'options'     => 'hits|5|25|0',
-];
-// File top
-$modversion['blocks'][] = [
-    'file'        => 'file.php',
-    'name'        => \_MI_WGFILEMANAGER_FILE_BLOCK_TOP,
-    'description' => \_MI_WGFILEMANAGER_FILE_BLOCK_TOP_DESC,
-    'show_func'   => 'b_wgfilemanager_file_show',
-    'edit_func'   => 'b_wgfilemanager_file_edit',
-    'template'    => 'wgfilemanager_block_file.tpl',
-    'options'     => 'top|5|25|0',
-];
-// File random
-$modversion['blocks'][] = [
-    'file'        => 'file.php',
-    'name'        => \_MI_WGFILEMANAGER_FILE_BLOCK_RANDOM,
-    'description' => \_MI_WGFILEMANAGER_FILE_BLOCK_RANDOM_DESC,
-    'show_func'   => 'b_wgfilemanager_file_show',
-    'edit_func'   => 'b_wgfilemanager_file_edit',
-    'template'    => 'wgfilemanager_block_file.tpl',
-    'options'     => 'random|5|25|0',
-];
-// ------------------- Spotlight Blocks ------------------- //
-// Directory spotlight
-$modversion['blocks'][] = [
-    'file'        => 'directory_spotlight.php',
-    'name'        => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_SPOTLIGHT,
-    'description' => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_SPOTLIGHT_DESC,
-    'show_func'   => 'b_wgfilemanager_directory_spotlight_show',
-    'edit_func'   => 'b_wgfilemanager_directory_spotlight_edit',
-    'template'    => 'wgfilemanager_block_directory_spotlight.tpl',
-    'options'     => 'spotlight|5|25|0',
-];
-// File spotlight
-$modversion['blocks'][] = [
-    'file'        => 'file_spotlight.php',
-    'name'        => \_MI_WGFILEMANAGER_FILE_BLOCK_SPOTLIGHT,
-    'description' => \_MI_WGFILEMANAGER_FILE_BLOCK_SPOTLIGHT_DESC,
-    'show_func'   => 'b_wgfilemanager_file_spotlight_show',
-    'edit_func'   => 'b_wgfilemanager_file_spotlight_edit',
-    'template'    => 'wgfilemanager_block_file_spotlight.tpl',
-    'options'     => 'spotlight|5|25|0',
-];
-*/
 // ------------------- Config ------------------- //
 // Editor Admin
 \xoops_load('xoopseditorhandler');
