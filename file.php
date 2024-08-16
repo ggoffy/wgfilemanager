@@ -54,6 +54,59 @@ $GLOBALS['xoopsTpl']->assign('showItem', $fileId > 0);
 
 switch ($op) {
     case 'show':
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_FILE_DETAILS];
+        if ($fileId > 0) {
+            $fileObj = $fileHandler->get($fileId);
+            if (!\is_object($fileObj)) {
+                \redirect_header('file.php', 3, \_MA_WGFILEMANAGER_INVALID_PARAMS);
+            }
+        } else {
+            \redirect_header('file.php', 3, \_MA_WGFILEMANAGER_INVALID_PARAMS);
+        }
+        $GLOBALS['xoopsTpl']->assign('fileShow', true);
+        //get permissions
+        $GLOBALS['xoopsTpl']->assign('permEditFile', $permissionsHandler->getPermSubmitDirectory($dirId));
+        $GLOBALS['xoopsTpl']->assign('permDownloadFileFromDir', $permissionsHandler->getPermDownloadFileFromDir($dirId));
+        $GLOBALS['xoopsTpl']->assign('permUploadFileToDir', $permissionsHandler->getPermUploadFileToDir($dirId));
+        $GLOBALS['xoopsTpl']->assign('permViewDirectory', $permissionsHandler->getPermViewDirectory($dirId));
+
+        $GLOBALS['xoopsTpl']->assign('showBtnBack', true);
+
+
+        $iconSet = $helper->getConfig('iconset');
+        $fileIcons = [];
+        if ('none' !== $iconSet) {
+            $fileIcons = $fileHandler->getFileIconCollection($iconSet);
+        }
+        // Get File
+        $file = $fileObj->getValuesFile();
+        $ext = substr(strrchr($file['name'], '.'), 1);
+        $fileCategory = isset($fileIcons['files'][$ext]) ? (int)$fileIcons['files'][$ext]['category'] : 0;
+        $file['category'] = $fileCategory;
+        $file['image']    = false;
+        $file['pdf']      = false;
+        switch ($fileCategory) {
+            case 0:
+                $previewUrl = isset($fileIcons['files'][$ext]) ? $fileIcons['files'][$ext]['src'] : $fileIcons['default'];
+                break;
+            case Constants::MIMETYPE_CAT_IMAGE:
+                $file['image'] = true;
+                $previewUrl = $file['real_url'];
+                break;
+            case Constants::MIMETYPE_CAT_PDF:
+                $file['pdf'] = true;
+                $previewUrl = $file['real_url'];
+                break;
+        }
+        $file['preview_url'] = $previewUrl;
+        $GLOBALS['xoopsTpl']->assign('file', $file);
+        unset($fileList);
+        $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
+        $GLOBALS['xoopsTpl']->assign('panel_type', $helper->getConfig('panel_type'));
+        $GLOBALS['xoopsTpl']->assign('xoops_pagetitle', \strip_tags($GLOBALS['xoopsModule']->getVar('name')));
+
+        break;
     case 'list':
     default:
 
@@ -74,10 +127,10 @@ switch ($op) {
         $directoryIdOld = Request::getInt('directory_id_old');
         $fileObj->setVar('directory_id', $directoryId);
         // get full path of current directory
-        $dirBasePath = DS;
+        $dirBasePath = '/';
         if ($directoryId > 0) {
             $dirBasePath .= $directoryHandler->getFullPath($directoryId);
-            $dirBasePath .= DS;
+            $dirBasePath .= '/';
         }
         $repoPath = \WGFILEMANAGER_REPO_PATH . $dirBasePath;
         $uploaderErrors = '';
@@ -124,9 +177,9 @@ switch ($op) {
             $renameFile  = $fileName !== $fileNameOld;
             if ($directoryIdOld !== $directoryId) {
                 //move and rename file
-                $dirBasePathOld = DS;
+                $dirBasePathOld = '/';
                 $dirBasePathOld .= $directoryHandler->getFullPath($directoryIdOld);
-                $dirBasePathOld .= DS;
+                $dirBasePathOld .= '/';
 
                 $fileHandler->renameFile($dirBasePathOld . $fileNameOld, $dirBasePath . $fileName);
             } else {
@@ -203,7 +256,7 @@ switch ($op) {
             if ($fileHandler->delete($fileObj)) {
                 //get param list
                 $params = '?op=list';
-                $params .= '&amp;dir_id=' . $dirId;
+                $params .= '&amp;dir_id=' . $fileObj->getVar('directory_id');
                 $params .= '&amp;start=' . $start;
                 $params .= '&amp;limit=' . $limit;
                 \redirect_header('index.php' . $params, 3, \_MA_WGFILEMANAGER_FORM_DELETE_OK);

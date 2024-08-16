@@ -239,12 +239,16 @@ class File extends \XoopsObject
 
         $fileName        = $this->getVar('name');
         $ret['dir_name'] = \_MA_WGFILEMANAGER_DIRECTORY_HOME;
-        $ret['real_url'] = \WGFILEMANAGER_REPO_URL . DS . $fileName;
+        $ret['real_url'] = \WGFILEMANAGER_REPO_URL . '/' . $fileName;
+        //$ret['real_path'] = \WGFILEMANAGER_REPO_PATH . '/' . $fileName;
         $directoryObj = $directoryHandler->get($this->getVar('directory_id'));
         if (\is_object($directoryObj) && '' !== $directoryObj->getVar('name')) {
             $ret['dir_name'] = $directoryObj->getVar('name');
-            $ret['real_url'] = \WGFILEMANAGER_REPO_URL . $directoryObj->getVar('fullpath') . DS . $fileName;
+            $ret['dir_fullpath'] = $directoryObj->getVar('fullpath');
+            $ret['real_url'] = \WGFILEMANAGER_REPO_URL . $directoryObj->getVar('fullpath') . '/' . $fileName;
+            //$ret['real_path'] = \WGFILEMANAGER_REPO_PATH . $directoryObj->getVar('fullpath') . '/' . $fileName;
         }
+        $ret['print_url']          = $ret['real_url'];
         $ret['description_text']   = $this->getVar('description', 'e');
         $ret['description_short']  = $utility::truncateHtml($ret['description'], $editorMaxchar);
         $status                    = $this->getVar('status');

@@ -105,21 +105,21 @@ switch ($op) {
             $renameDir = $dirName !== $dirNameOld;
         }
         // get full path
-        $dirBasePath = DS;
+        $dirBasePath = '/';
         $dirFullPath = $dirBasePath;
         if ($dirParentId > 0) {
             $path = $directoryHandler->getFullPath($dirParentId);
             if ('' !== $path) {
-                $dirBasePath .= $path . DS;
+                $dirBasePath .= $path . '/';
             }
             $dirFullPath = $dirBasePath . \mb_strtolower($dirName);
         }
         $dirFullPathOld = '';
         if ($moveDir) {
-            $dirBasePathOld = DS;
+            $dirBasePathOld = '/';
             if ($dirParentIdOld > 1) {
                 $dirBasePathOld .= $directoryHandler->getFullPath($dirParentIdOld);
-                $dirBasePathOld .= DS;
+                $dirBasePathOld .= '/';
             }
             $dirFullPathOld = $dirBasePathOld . \mb_strtolower($dirNameOld);
         }
@@ -305,8 +305,8 @@ switch ($op) {
                 if ($dirParentId > 0) {
                     $dirFullPath .= $directoryObjNew->getVar('fullpath');
                 }
-                if (!\str_ends_with($dirFullPath, DS)) {
-                    $dirFullPath .= DS;
+                if (!\str_ends_with($dirFullPath, '/')) {
+                    $dirFullPath .= '/';
                 }
                 $dirFullPath .= \mb_strtolower($dirName);
                 //check whether directory exist

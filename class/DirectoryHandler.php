@@ -139,10 +139,10 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         if ('' === $path) {
             return '';
         }
-        $pathArray = \explode(DS, $path);
+        $pathArray = \explode('/', $path);
         \krsort($pathArray);
 
-        return \implode(DS, \array_filter($pathArray));
+        return \implode('/', \array_filter($pathArray));
     }
 
     /**
@@ -157,7 +157,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
             $directoryObj = $this->get($parent_id);
             $path .= mb_strtolower($directoryObj->getVar('name'));
             if ($directoryObj->getVar('parent_id') > 1) {
-                $path .= DS . $this->getFullPathRecursive($directoryObj->getVar('parent_id'));
+                $path .= '/' . $this->getFullPathRecursive($directoryObj->getVar('parent_id'));
             }
         }
         return $path;
@@ -274,7 +274,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         }
         $files = scandir($path);
         for($i = 0 ; $i < count($files) ; $i++){
-            if(\is_file($path .  DS . $files[$i]) && $files[$i] !='.' && $files[$i] !='..'  && $files[$i] !='index.php'  && $files[$i] !='index.html') {
+            if(\is_file($path .  '/' . $files[$i]) && $files[$i] !='.' && $files[$i] !='..'  && $files[$i] !='index.php'  && $files[$i] !='index.html') {
                 $file_new[] = $files[$i];
             }
         }
@@ -421,7 +421,9 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         $result = [];
         do {
             $dirObj = $this->get($dirId);
-            $result[$dirId] = $dirObj->getVar('name');
+            if ($dirId > 1) {
+                $result[$dirId] = $dirObj->getVar('name');
+            }
             $dirId = $dirObj->getVar('parent_id');
         } while ($dirId > 0);
 

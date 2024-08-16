@@ -33,6 +33,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_INDEX_STYLELIST', 'Show in list style');
 \define('_MA_WGFILEMANAGER_INDEX_STYLEGROUPED', 'Show in grouped style');
 \define('_MA_WGFILEMANAGER_INDEX_STYLECARD', 'Show in card style');
+\define('_MA_WGFILEMANAGER_INVALID_PARAMS', 'Invalid parameters');
 // ---------------- Contents ----------------
 // Directory
 \define('_MA_WGFILEMANAGER_DIRECTORY', 'Directory');
@@ -107,6 +108,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_FILE_ERROR_DONOTEXIST', 'ERROR: file does not exist');
 \define('_MA_WGFILEMANAGER_FILE_DOWNLOAD', 'Download file');
 \define('_MA_WGFILEMANAGER_FILE_UPLOAD', 'Upload file');
+\define('_MA_WGFILEMANAGER_FILE_SHOWPREVIEW', 'Show preview');
 // Buttons
 \define('_MA_WGFILEMANAGER_SUBMIT', 'Submit');
 \define('_MA_WGFILEMANAGER_SAVE', 'Save');

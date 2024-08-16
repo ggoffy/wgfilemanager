@@ -31,19 +31,18 @@ require __DIR__ . '/header.php';
 $op     = Request::getString('op', 'list');
 $fileId = Request::getInt('file_id');
 
+// get download vars
+$fileObj = $fileHandler->get($fileId);
 // check permissions
-$permDownload = $permissionsHandler->getPermDownloadFile();
+$permDownload = $permissionsHandler->getPermDownloadFileFromDir($fileObj->getVar('directory_id'));
 if (!$permDownload) {
     \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_NO_PERM_DOWNLOAD);
 }
-
-// get download vars
-$fileObj = $fileHandler->get($fileId);
 $fileName = $fileObj->getVar('name');
 $fileMimetype = $fileObj->getVar('mimetype');
 $fileSize = $fileObj->getVar('size');
 $dirObj = $directoryHandler->get($fileObj->getVar('directory_id'));
-$file = \WGFILEMANAGER_REPO_PATH . $dirObj->getVar('fullpath') . DS . $fileName;
+$file = \WGFILEMANAGER_REPO_PATH . $dirObj->getVar('fullpath') . '/' . $fileName;
 if (!\file_exists($file)) {
     \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_FILE_ERROR_DONOTEXIST);
 }

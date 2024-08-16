@@ -92,10 +92,10 @@ switch ($op) {
         $directoryIdOld = Request::getInt('directory_id_old');
         $fileObj->setVar('directory_id', $directoryId);
         // get full path of current directory
-        $dirBasePath = DS;
+        $dirBasePath = '/';
         if ($directoryId > 0) {
             $dirBasePath .= $directoryHandler->getFullPath($directoryId);
-            $dirBasePath .= DS;
+            $dirBasePath .= '/';
         }
         $repoPath = \WGFILEMANAGER_REPO_PATH . $dirBasePath;
         $uploaderErrors = '';
@@ -142,9 +142,9 @@ switch ($op) {
             $renameFile  = $fileName !== $fileNameOld;
             if ($directoryIdOld !== $directoryId) {
                 //move and rename file
-                $dirBasePathOld = DS;
+                $dirBasePathOld = '/';
                 $dirBasePathOld .= $directoryHandler->getFullPath($directoryIdOld);
-                $dirBasePathOld .= DS;
+                $dirBasePathOld .= '/';
 
                 $fileHandler->renameFile($dirBasePathOld . $fileNameOld, $dirBasePath . $fileName);
             } else {
