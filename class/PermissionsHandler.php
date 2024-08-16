@@ -177,10 +177,10 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
             case Constants::PERM_DIRECTORY_VIEW:
                 $permName = 'wgfilemanager_view_directory';
                 break;
-            case Constants::PERM_DIRECTORY_DOWNLOAD:
+            case Constants::PERM_FILE_DOWNLOAD_FROM_DIR:
                 $permName = 'wgfilemanager_download_directory';
                 break;
-            case Constants::PERM_DIRECTORY_UPLOAD:
+            case Constants::PERM_FILE_UPLOAD_TO_DIR:
                 $permName = 'wgfilemanager_upload_directory';
                 break;
             case 0:
@@ -246,7 +246,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /******************************************
      * Permissions for files
     /*******************************************/
-    
+
     /**
      * @public function getPermDownloadDirectory
      * returns right for downloading files from directory
