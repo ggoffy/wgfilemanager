@@ -119,12 +119,12 @@ class File extends \XoopsObject
         // Form Table directory
         $directoryId = (int)$this->getVar('directory_id');
         $directoryHandler = $helper->getHandler('Directory');
-        $fileCategory_idSelect = new \XoopsFormSelect(\_MA_WGFILEMANAGER_FILE_DIRECTORY_ID, 'directory_id', $directoryId);
+        $fileDirectory_idSelect = new \XoopsFormSelect(\_MA_WGFILEMANAGER_FILE_DIRECTORY_ID, 'directory_id', $directoryId);
         $dirListSelect = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($directoryHandler->getDirListFormSelect(0)));
         foreach ($dirListSelect as $key => $value) {
-            $fileCategory_idSelect->addOption($key, $value);
+            $fileDirectory_idSelect->addOption($key, $value);
         }
-        $form->addElement($fileCategory_idSelect, true);
+        $form->addElement($fileDirectory_idSelect, true);
         $form->addElement(new \XoopsFormHidden('directory_id_old', $directoryId));
         // Form File: Upload fileName
         $fileName = $this->isNew() ? '' : $this->getVar('name');
@@ -249,10 +249,10 @@ class File extends \XoopsObject
         //$ret['real_path'] = \WGFILEMANAGER_REPO_PATH . '/' . $fileName;
         $directoryObj = $directoryHandler->get($this->getVar('directory_id'));
         if (\is_object($directoryObj) && '' !== $directoryObj->getVar('name')) {
-            $ret['dir_name'] = $directoryObj->getVar('name');
+            $ret['dir_name']     = $directoryObj->getVar('name');
             $ret['dir_fullpath'] = $directoryObj->getVar('fullpath');
-            $ret['real_url'] = \WGFILEMANAGER_REPO_URL . $directoryObj->getVar('fullpath') . '/' . $fileName;
-            //$ret['real_path'] = \WGFILEMANAGER_REPO_PATH . $directoryObj->getVar('fullpath') . '/' . $fileName;
+            $ret['real_url']     = \WGFILEMANAGER_REPO_URL . $directoryObj->getVar('fullpath') . '/' . $fileName;
+            $ret['real_path']    = \WGFILEMANAGER_REPO_PATH . $directoryObj->getVar('fullpath') . '/' . $fileName;
         }
         $ret['print_url']          = $ret['real_url'];
         $ret['description_text']   = $this->getVar('description', 'e');

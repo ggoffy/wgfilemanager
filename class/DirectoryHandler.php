@@ -397,7 +397,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
                 $directory = $directoryAll[$i]->getValuesDir();
                 $name = $directory['name'];
                 if ($dirId > 0) {
-                    $level = \mb_substr_count($directory['fullpath'], '\\');
+                    $level = \mb_substr_count($directory['fullpath'], '/');
                     $name = \str_repeat('- ', $level) . $name;
                 }
                 $result[$i] = [$directory['id'] => $name];

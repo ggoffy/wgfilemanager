@@ -209,7 +209,7 @@ switch ($op) {
             $fileObj->setVar('ctime', \filectime($fileSaved));
             $fileObj->setVar('size', \filesize($fileSaved));
             $fileHandler->insert($fileObj);
-            \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_AM_WGFILEMANAGER_FORM_OK);
+            \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;dir_id=' . $dirId, 2, \_AM_WGFILEMANAGER_FORM_OK);
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $fileObj->getHtmlErrors());
@@ -250,12 +250,14 @@ switch ($op) {
             \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
         }
         $fileObj = $fileHandler->get($fileId);
-        $fileName = $fileObj->getVar('name');
+        $file = $fileObj->getValuesFile();
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('index.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+            $filePath = $file['real_path'];
             if ($fileHandler->delete($fileObj)) {
+                \unlink($filePath);
                 //get param list
                 $params = '?op=list';
                 $params .= '&amp;dir_id=' . $fileObj->getVar('directory_id');
@@ -269,7 +271,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'id' => $fileId, 'start' => $start, 'limit' => $limit, 'dir_id' => $dirId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGFILEMANAGER_FORM_SURE_DELETE, $fileName));
+                \sprintf(\_MA_WGFILEMANAGER_FORM_SURE_DELETE, $file['name']));
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
