@@ -396,15 +396,6 @@ $modversion['config'][] = [
     'default'     => 'default',
     'options'     => ['default' => 'default', 'primary' => 'primary', 'success' => 'success', 'info' => 'info', 'warning' => 'warning', 'danger' => 'danger'],
 ];
-// Advertise
-$modversion['config'][] = [
-    'name'        => 'advertise',
-    'title'       => '\_MI_WGFILEMANAGER_ADVERTISE',
-    'description' => '\_MI_WGFILEMANAGER_ADVERTISE_DESC',
-    'formtype'    => 'textarea',
-    'valuetype'   => 'text',
-    'default'     => '',
-];
 // Make Sample button visible?
 $modversion['config'][] = [
     'name'        => 'displaySampleButton',

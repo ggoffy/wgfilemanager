@@ -243,10 +243,9 @@ class File extends \XoopsObject
         $fileHandler      = $helper->getHandler('File');
         $editorMaxchar    = $helper->getConfig('editor_maxchar');
         $ret              = $this->getValues($keys, $format, $maxDepth);
-
-        $fileName        = $this->getVar('name');
-        $ret['dir_name'] = \_MA_WGFILEMANAGER_DIRECTORY_HOME;
-        $ret['real_url'] = \WGFILEMANAGER_REPO_URL . '/' . $fileName;
+        $fileName         = $this->getVar('name');
+        $ret['dir_name']  = \_MA_WGFILEMANAGER_DIRECTORY_HOME;
+        $ret['real_url']  = \WGFILEMANAGER_REPO_URL . '/' . $fileName;
         //$ret['real_path'] = \WGFILEMANAGER_REPO_PATH . '/' . $fileName;
         $directoryObj = $directoryHandler->get($this->getVar('directory_id'));
         if (\is_object($directoryObj) && '' !== $directoryObj->getVar('name')) {
@@ -259,15 +258,17 @@ class File extends \XoopsObject
         $ret['description_text']   = $this->getVar('description', 'e');
         $ret['description_short']  = $utility::truncateHtml($ret['description'], $editorMaxchar);
         $status                    = $this->getVar('status');
-        $ret['status']             = $status;
         switch ($status) {
             case Constants::STATUS_NONE:
             default:
                 $status_text = \_AM_WGFILEMANAGER_STATUS_NONE;
                 break;
-            case Constants::STATUS_OFFLINE:
+            /*case Constants::STATUS_OFFLINE:
                 $status_text = \_AM_WGFILEMANAGER_STATUS_OFFLINE;
                 break;
+            case Constants::STATUS_APPROVED:
+                $status_text = \_AM_WGFILEMANAGER_STATUS_APPROVED;
+                break;*/
             case Constants::STATUS_SUBMITTED:
                 $status_text = \_AM_WGFILEMANAGER_STATUS_SUBMITTED;
                 break;

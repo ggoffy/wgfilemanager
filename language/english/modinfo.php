@@ -98,8 +98,6 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_USE_BROKEN_DESC', 'Decide whether you want to use festure BROKEN. Users can notify admins about broken file links.');
 \define('_MI_WGFILEMANAGER_SHOW_BREADCRUMBS', 'Show breadcrumb navigation');
 \define('_MI_WGFILEMANAGER_SHOW_BREADCRUMBS_DESC', 'Show breadcrumb navigation which displays the current page in context within the site structure');
-\define('_MI_WGFILEMANAGER_ADVERTISE', 'Advertisement Code');
-\define('_MI_WGFILEMANAGER_ADVERTISE_DESC', 'Insert here the advertisement code');
 \define('_MI_WGFILEMANAGER_MAINTAINEDBY', 'Maintained By');
 \define('_MI_WGFILEMANAGER_MAINTAINEDBY_DESC', 'Allow url of support site or community');
 \define('_MI_WGFILEMANAGER_BOOKMARKS', 'Social Bookmarks');
