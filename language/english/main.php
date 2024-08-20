@@ -27,7 +27,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_INDEX', 'Overview wgFileManager');
 \define('_MA_WGFILEMANAGER_TITLE', 'wgFileManager');
 \define('_MA_WGFILEMANAGER_DETAILS', 'Show details');
-\define('_MA_WGFILEMANAGER_BROKEN', 'Notify broken');
+\define('_MA_WGFILEMANAGER_BROKEN', 'Notify as broken');
 \define('_MA_WGFILEMANAGER_INDEX_NOFILES', 'No files in this directory');
 \define('_MA_WGFILEMANAGER_ACTION', 'Action');
 \define('_MA_WGFILEMANAGER_INDEX_STYLELIST', 'Show in list style');

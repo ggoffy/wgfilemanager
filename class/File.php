@@ -119,12 +119,12 @@ class File extends \XoopsObject
         // Form Table directory
         $directoryId = (int)$this->getVar('directory_id');
         $directoryHandler = $helper->getHandler('Directory');
-        $fileCategory_idSelect = new \XoopsFormSelect(\_MA_WGFILEMANAGER_FILE_DIRECTORY_ID, 'directory_id', $directoryId);
+        $fileDirectory_idSelect = new \XoopsFormSelect(\_MA_WGFILEMANAGER_FILE_DIRECTORY_ID, 'directory_id', $directoryId);
         $dirListSelect = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($directoryHandler->getDirListFormSelect(0)));
         foreach ($dirListSelect as $key => $value) {
-            $fileCategory_idSelect->addOption($key, $value);
+            $fileDirectory_idSelect->addOption($key, $value);
         }
-        $form->addElement($fileCategory_idSelect, true);
+        $form->addElement($fileDirectory_idSelect, true);
         $form->addElement(new \XoopsFormHidden('directory_id_old', $directoryId));
         // Form File: Upload fileName
         $fileName = $this->isNew() ? '' : $this->getVar('name');
@@ -190,12 +190,19 @@ class File extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('ip', $fileIp));
         }
         // Form Select Status fileStatus
-/*        $fileStatusSelect = new \XoopsFormSelect(\_MA_WGFILEMANAGER_FILE_STATUS, 'status', $this->getVar('status'));
-        $fileStatusSelect->addOption(Constants::STATUS_NONE, \_AM_WGFILEMANAGER_STATUS_NONE);
-        $fileStatusSelect->addOption(Constants::STATUS_OFFLINE, \_AM_WGFILEMANAGER_STATUS_OFFLINE);
-        $fileStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_AM_WGFILEMANAGER_STATUS_SUBMITTED);
-        $fileStatusSelect->addOption(Constants::STATUS_BROKEN, \_AM_WGFILEMANAGER_STATUS_BROKEN);
-        $form->addElement($fileStatusSelect);*/
+        $fileStatus = $this->isNew() ? Constants::STATUS_SUBMITTED : $this->getVar('status');
+        if ($isAdmin) {
+            $fileStatusSelect = new \XoopsFormSelect(\_MA_WGFILEMANAGER_FILE_STATUS, 'status', $fileStatus);
+            $fileStatusSelect->addOption(Constants::STATUS_NONE, \_AM_WGFILEMANAGER_STATUS_NONE);
+            //$fileStatusSelect->addOption(Constants::STATUS_OFFLINE, \_AM_WGFILEMANAGER_STATUS_OFFLINE);
+            $fileStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_AM_WGFILEMANAGER_STATUS_SUBMITTED);
+            //$fileStatusSelect->addOption(Constants::STATUS_APPROVED, \_AM_WGFILEMANAGER_STATUS_APPROVED);
+            $fileStatusSelect->addOption(Constants::STATUS_BROKEN, \_AM_WGFILEMANAGER_STATUS_BROKEN);
+            $form->addElement($fileStatusSelect);
+        } else {
+            $form->addElement(new \XoopsFormHidden('status', $fileStatus));
+        }
+
         // Form Text Date Select fileDate_created
         $fileDate_created = $this->isNew() ? \time() : $this->getVar('date_created');
         if ($isAdmin) {
@@ -236,31 +243,32 @@ class File extends \XoopsObject
         $fileHandler      = $helper->getHandler('File');
         $editorMaxchar    = $helper->getConfig('editor_maxchar');
         $ret              = $this->getValues($keys, $format, $maxDepth);
-
-        $fileName        = $this->getVar('name');
-        $ret['dir_name'] = \_MA_WGFILEMANAGER_DIRECTORY_HOME;
-        $ret['real_url'] = \WGFILEMANAGER_REPO_URL . '/' . $fileName;
+        $fileName         = $this->getVar('name');
+        $ret['dir_name']  = \_MA_WGFILEMANAGER_DIRECTORY_HOME;
+        $ret['real_url']  = \WGFILEMANAGER_REPO_URL . '/' . $fileName;
         //$ret['real_path'] = \WGFILEMANAGER_REPO_PATH . '/' . $fileName;
         $directoryObj = $directoryHandler->get($this->getVar('directory_id'));
         if (\is_object($directoryObj) && '' !== $directoryObj->getVar('name')) {
-            $ret['dir_name'] = $directoryObj->getVar('name');
+            $ret['dir_name']     = $directoryObj->getVar('name');
             $ret['dir_fullpath'] = $directoryObj->getVar('fullpath');
-            $ret['real_url'] = \WGFILEMANAGER_REPO_URL . $directoryObj->getVar('fullpath') . '/' . $fileName;
-            //$ret['real_path'] = \WGFILEMANAGER_REPO_PATH . $directoryObj->getVar('fullpath') . '/' . $fileName;
+            $ret['real_url']     = \WGFILEMANAGER_REPO_URL . $directoryObj->getVar('fullpath') . '/' . $fileName;
+            $ret['real_path']    = \WGFILEMANAGER_REPO_PATH . $directoryObj->getVar('fullpath') . '/' . $fileName;
         }
         $ret['print_url']          = $ret['real_url'];
         $ret['description_text']   = $this->getVar('description', 'e');
         $ret['description_short']  = $utility::truncateHtml($ret['description'], $editorMaxchar);
         $status                    = $this->getVar('status');
-        $ret['status']             = $status;
         switch ($status) {
             case Constants::STATUS_NONE:
             default:
                 $status_text = \_AM_WGFILEMANAGER_STATUS_NONE;
                 break;
-            case Constants::STATUS_OFFLINE:
+            /*case Constants::STATUS_OFFLINE:
                 $status_text = \_AM_WGFILEMANAGER_STATUS_OFFLINE;
                 break;
+            case Constants::STATUS_APPROVED:
+                $status_text = \_AM_WGFILEMANAGER_STATUS_APPROVED;
+                break;*/
             case Constants::STATUS_SUBMITTED:
                 $status_text = \_AM_WGFILEMANAGER_STATUS_SUBMITTED;
                 break;

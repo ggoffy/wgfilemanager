@@ -23,7 +23,7 @@ declare(strict_types=1);
 if ($helper->getConfig('show_breadcrumbs') && \count($xoBreadcrumbs) > 0) {
     $GLOBALS['xoopsTpl']->assign('xoBreadcrumbs', $xoBreadcrumbs);
 }
-$GLOBALS['xoopsTpl']->assign('adv', $helper->getConfig('advertise'));
+
 // Description
 wgfilemanagerMetaDescription((string)$helper->getConfig('metadescription'));
 // 

@@ -293,16 +293,6 @@ $modversion['config'][] = [
     'default'     => 3145728,
     'options'     => $optionMaxsize,
 ];
-// handle file name
-$modversion['config'][] = [
-    'name'        => 'file_handlename',
-    'title'       => '\_MI_WGFILEMANAGER_FILE_HANDLENAME',
-    'description' => '\_MI_WGFILEMANAGER_FILE_HANDLENAME_DESC',
-    'formtype'    => 'select',
-    'valuetype'   => 'text',
-    'default'     => Constants::FILE_HANDLENAME_ORIGINAL,
-    'options'     => ['\_MI_WGFILEMANAGER_FILE_HANDLENAME_ORIGINAL' => Constants::FILE_HANDLENAME_ORIGINAL, '\_MI_WGFILEMANAGER_FILE_HANDLENAME_UNIQUE' => Constants::FILE_HANDLENAME_UNIQUE],
-];
 // Admin pager
 $modversion['config'][] = [
     'name'        => 'adminpager',
@@ -320,6 +310,16 @@ $modversion['config'][] = [
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => 10,
+];
+// handle file name
+$modversion['config'][] = [
+    'name'        => 'file_handlename',
+    'title'       => '\_MI_WGFILEMANAGER_FILE_HANDLENAME',
+    'description' => '\_MI_WGFILEMANAGER_FILE_HANDLENAME_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => Constants::FILE_HANDLENAME_ORIGINAL,
+    'options'     => ['\_MI_WGFILEMANAGER_FILE_HANDLENAME_ORIGINAL' => Constants::FILE_HANDLENAME_ORIGINAL, '\_MI_WGFILEMANAGER_FILE_HANDLENAME_UNIQUE' => Constants::FILE_HANDLENAME_UNIQUE],
 ];
 // Icon set
 $modversion['config'][] = [
@@ -358,6 +358,15 @@ $modversion['config'][] = [
     'default'     => 'default',
     'options'     => ['default' => 'default', 'sortable' => 'sortable'],
 ];
+// Use Feature 'Broken'
+$modversion['config'][] = [
+    'name'        => 'use_broken',
+    'title'       => '\_MI_WGFILEMANAGER_USE_BROKEN',
+    'description' => '\_MI_WGFILEMANAGER_USE_BROKEN_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
 // Show Breadcrumbs
 $modversion['config'][] = [
     'name'        => 'show_breadcrumbs',
@@ -386,15 +395,6 @@ $modversion['config'][] = [
     'valuetype'   => 'text',
     'default'     => 'default',
     'options'     => ['default' => 'default', 'primary' => 'primary', 'success' => 'success', 'info' => 'info', 'warning' => 'warning', 'danger' => 'danger'],
-];
-// Advertise
-$modversion['config'][] = [
-    'name'        => 'advertise',
-    'title'       => '\_MI_WGFILEMANAGER_ADVERTISE',
-    'description' => '\_MI_WGFILEMANAGER_ADVERTISE_DESC',
-    'formtype'    => 'textarea',
-    'valuetype'   => 'text',
-    'default'     => '',
 ];
 // Make Sample button visible?
 $modversion['config'][] = [
