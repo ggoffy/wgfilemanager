@@ -190,8 +190,9 @@ class File extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('ip', $fileIp));
         }
         // Form Select Status fileStatus
+        $fileStatus = $this->isNew() ? Constants::STATUS_SUBMITTED : $this->getVar('status');
         if ($isAdmin) {
-            $fileStatusSelect = new \XoopsFormSelect(\_MA_WGFILEMANAGER_FILE_STATUS, 'status', $this->getVar('status'));
+            $fileStatusSelect = new \XoopsFormSelect(\_MA_WGFILEMANAGER_FILE_STATUS, 'status', $fileStatus);
             $fileStatusSelect->addOption(Constants::STATUS_NONE, \_AM_WGFILEMANAGER_STATUS_NONE);
             //$fileStatusSelect->addOption(Constants::STATUS_OFFLINE, \_AM_WGFILEMANAGER_STATUS_OFFLINE);
             $fileStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_AM_WGFILEMANAGER_STATUS_SUBMITTED);
@@ -199,7 +200,7 @@ class File extends \XoopsObject
             $fileStatusSelect->addOption(Constants::STATUS_BROKEN, \_AM_WGFILEMANAGER_STATUS_BROKEN);
             $form->addElement($fileStatusSelect);
         } else {
-            $form->addElement(new \XoopsFormHidden('status', $this->getVar('status')));
+            $form->addElement(new \XoopsFormHidden('status', $fileStatus));
         }
 
         // Form Text Date Select fileDate_created

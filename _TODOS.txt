@@ -1,5 +1,4 @@
 - pdf print in firefox
 
-- add broken
 - pin file
 
