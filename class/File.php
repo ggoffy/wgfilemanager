@@ -190,12 +190,18 @@ class File extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('ip', $fileIp));
         }
         // Form Select Status fileStatus
-/*        $fileStatusSelect = new \XoopsFormSelect(\_MA_WGFILEMANAGER_FILE_STATUS, 'status', $this->getVar('status'));
-        $fileStatusSelect->addOption(Constants::STATUS_NONE, \_AM_WGFILEMANAGER_STATUS_NONE);
-        $fileStatusSelect->addOption(Constants::STATUS_OFFLINE, \_AM_WGFILEMANAGER_STATUS_OFFLINE);
-        $fileStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_AM_WGFILEMANAGER_STATUS_SUBMITTED);
-        $fileStatusSelect->addOption(Constants::STATUS_BROKEN, \_AM_WGFILEMANAGER_STATUS_BROKEN);
-        $form->addElement($fileStatusSelect);*/
+        if ($isAdmin) {
+            $fileStatusSelect = new \XoopsFormSelect(\_MA_WGFILEMANAGER_FILE_STATUS, 'status', $this->getVar('status'));
+            $fileStatusSelect->addOption(Constants::STATUS_NONE, \_AM_WGFILEMANAGER_STATUS_NONE);
+            //$fileStatusSelect->addOption(Constants::STATUS_OFFLINE, \_AM_WGFILEMANAGER_STATUS_OFFLINE);
+            $fileStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_AM_WGFILEMANAGER_STATUS_SUBMITTED);
+            //$fileStatusSelect->addOption(Constants::STATUS_APPROVED, \_AM_WGFILEMANAGER_STATUS_APPROVED);
+            $fileStatusSelect->addOption(Constants::STATUS_BROKEN, \_AM_WGFILEMANAGER_STATUS_BROKEN);
+            $form->addElement($fileStatusSelect);
+        } else {
+            $form->addElement(new \XoopsFormHidden('status', $this->getVar('status')));
+        }
+
         // Form Text Date Select fileDate_created
         $fileDate_created = $this->isNew() ? \time() : $this->getVar('date_created');
         if ($isAdmin) {

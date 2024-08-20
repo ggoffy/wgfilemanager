@@ -45,11 +45,13 @@ $crFile->setLimit($limit);
 if ($fileCount > 0) {
     $fileAll = $fileHandler->getAll($crFile);
     foreach (\array_keys($fileAll) as $i) {
+        $file = [];
         $file['table'] = 'File';
         $file['key'] = 'id';
         $file['keyval'] = $fileAll[$i]->getVar('id');
-        $file['main'] = $fileAll[$i]->getVar('directory_id');
+        $file['main'] = $fileAll[$i]->getVar('name');
         $GLOBALS['xoopsTpl']->append('file_list', $file);
+        unset($file);
     }
     // Display Navigation
     if ($fileCount > $limit) {

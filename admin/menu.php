@@ -26,6 +26,7 @@ $moduleHandler = \xoops_getHandler('module');
 $xoopsModule   = XoopsModule::getByDirname($dirname);
 $moduleInfo    = $moduleHandler->get($xoopsModule->getVar('mid'));
 $sysPathIcon32 = $moduleInfo->getInfo('sysicons32');
+$helper = \XoopsModules\Wgfilemanager\Helper::getInstance();
 
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ADMENU1,
@@ -42,11 +43,13 @@ $adminmenu[] = [
     'link' => 'admin/file.php',
     'icon' => 'assets/icons/32/fileshare.png',
 ];
-/*$adminmenu[] = [
-    'title' => \_MI_WGFILEMANAGER_ADMENU4,
-    'link' => 'admin/broken.php',
-    'icon' => $sysPathIcon32.'/brokenlink.png',
-];*/
+if ((bool)$helper->getConfig('use_broken')) {
+    $adminmenu[] = [
+        'title' => \_MI_WGFILEMANAGER_ADMENU4,
+        'link' => 'admin/broken.php',
+        'icon' => $sysPathIcon32.'/brokenlink.png',
+    ];
+}
 $adminmenu[] = [
     'title' => \_MI_WGFILEMANAGER_ADMENU5,
     'link' => 'admin/mimetype.php',

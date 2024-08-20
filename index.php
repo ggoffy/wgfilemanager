@@ -48,6 +48,7 @@ $GLOBALS['xoopsTpl']->assign('wgfilemanager_upload_url', \WGFILEMANAGER_UPLOAD_U
 $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
 $GLOBALS['xoopsTpl']->assign('panel_type', $helper->getConfig('panel_type'));
 $GLOBALS['xoopsTpl']->assign('indexDirPosition', $helper->getConfig('indexdirposition'));
+$GLOBALS['xoopsTpl']->assign('useBroken', (bool)$helper->getConfig('use_broken'));
 $iconSet = $helper->getConfig('iconset');
 // Keywords
 $keywords = [];

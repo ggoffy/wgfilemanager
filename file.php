@@ -31,7 +31,7 @@ $GLOBALS['xoopsOption']['template_main'] = 'wgfilemanager_file.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 
 $op     = Request::getCmd('op', 'list');
-$fileId = Request::getInt('id');
+$fileId = Request::getInt('file_id');
 $dirId  = Request::getInt('dir_id');
 $start  = Request::getInt('start');
 $limit  = Request::getInt('limit', $helper->getConfig('userpager'));
@@ -51,6 +51,9 @@ $keywords = [];
 $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX, 'link' => 'index.php'];
 // Permissions
 $GLOBALS['xoopsTpl']->assign('showItem', $fileId > 0);
+// params for url
+$urlParams = '&amp;start=' . $start . '&amp;limit=' . $limit;
+$urlParams = '&amp;dir_id=' . $dirId . '&amp;limit=' . $limit;
 
 switch ($op) {
     case 'show':
@@ -65,15 +68,14 @@ switch ($op) {
             \redirect_header('file.php', 3, \_MA_WGFILEMANAGER_INVALID_PARAMS);
         }
         $GLOBALS['xoopsTpl']->assign('fileShow', true);
-        //get permissions
+        $GLOBALS['xoopsTpl']->assign('showBtnBack', true);
+        $GLOBALS['xoopsTpl']->assign('useBroken', (bool)$helper->getConfig('use_broken'));
+        // get permissions
         $GLOBALS['xoopsTpl']->assign('permEditFile', $permissionsHandler->getPermSubmitDirectory($dirId));
         $GLOBALS['xoopsTpl']->assign('permDownloadFileFromDir', $permissionsHandler->getPermDownloadFileFromDir($dirId));
         $GLOBALS['xoopsTpl']->assign('permUploadFileToDir', $permissionsHandler->getPermUploadFileToDir($dirId));
         $GLOBALS['xoopsTpl']->assign('permViewDirectory', $permissionsHandler->getPermViewDirectory($dirId));
-
-        $GLOBALS['xoopsTpl']->assign('showBtnBack', true);
-
-
+        // get iconset
         $iconSet = $helper->getConfig('iconset');
         $fileIcons = [];
         if ('none' !== $iconSet) {
@@ -114,7 +116,7 @@ switch ($op) {
     case 'save':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            \redirect_header('file.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            \redirect_header('index.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if ($fileId > 0) {
             $fileObj = $fileHandler->get($fileId);
@@ -280,14 +282,14 @@ switch ($op) {
             \redirect_header('file.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
         }
         $fileObj = $fileHandler->get($fileId);
-        $fileCategory_id = $fileObj->getVar('directory_id');
+        $fileName = $fileObj->getVar('name');
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('file.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             $fileObj->setVar('status', Constants::STATUS_BROKEN);
             if ($fileHandler->insert($fileObj)) {
-                \redirect_header('file.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGFILEMANAGER_FORM_OK);
+                \redirect_header('index.php?op=list' . $urlParams, 2, \_MA_WGFILEMANAGER_FORM_OK);
             } else {
                 $GLOBALS['xoopsTpl']->assign('error', $fileObj->getHtmlErrors());
             }
@@ -295,7 +297,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'id' => $fileId, 'start' => $start, 'limit' => $limit, 'op' => 'broken'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGFILEMANAGER_FORM_SURE_BROKEN, $fileCategory_id));
+                \sprintf(\_MA_WGFILEMANAGER_FORM_SURE_BROKEN, $fileName));
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
