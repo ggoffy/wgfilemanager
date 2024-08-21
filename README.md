@@ -29,7 +29,31 @@ If you like the wgFilemanager module and thanks to the long process for giving t
 **wgFilemanager is ready for PHP 8.0**
 
 ## Features
-- 
+The module currently provides:
+* Browse files and directories
+  * 3 different styles
+    * list
+    * grouped
+    * cards
+  * display/hide file preview and/or icons
+
+* File management:
+  * Upload file
+  * Download file
+  * Print file
+  * Preview for image and pdf file (modal)
+  * Edit file
+  * Delete file
+
+* Directory management:
+  * Create directory
+  * Rename directory
+  * Move directory by drag&drop
+  * Deleting directory with complete content
+
+* Permission management:
+  * Global permissions
+  * Permissions by directory
 
 ## Extras
 
