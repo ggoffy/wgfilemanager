@@ -9,7 +9,7 @@
     <table class='table table-bordered'>
         <thead>
             <tr class='head'>
-                <th class="center"><{$smarty.const._MS_WGFILEMANAGER_DIRECTORY_ID}></th>
+                <th class="center"><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_ID}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_PARENT_ID}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_NAME}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_DESCRIPTION}></th>
