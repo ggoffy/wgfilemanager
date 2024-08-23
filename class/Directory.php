@@ -137,7 +137,7 @@ class Directory extends \XoopsObject
         // Form Text dirFullpath
         $dirFullpath = $this->getVar('fullpath');
         if ($isAdmin) {
-            $tbFullpath = new \XoopsFormText(\_MA_WGFILEMANAGER_DIRECTORY_FULLPATH, 'fullpath', 50, 255, $dirFullpath);
+            $tbFullpath = new \XoopsFormLabel(\_MA_WGFILEMANAGER_DIRECTORY_FULLPATH, $dirFullpath);
             $tbFullpath->setDescription(sprintf(\_MA_WGFILEMANAGER_DIRECTORY_FULLPATH_DESCR, WGFILEMANAGER_UPLOAD_PATH));
             $form->addElement($tbFullpath);
             $form->addElement(new \XoopsFormHidden('fullpath', $dirFullpath));
