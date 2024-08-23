@@ -39,6 +39,7 @@ return (object)[
     ],
         'uploadFolders'  => [
         \XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+            \XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/repository',
     ],
     'copyBlankFiles'  => [],
     'copyTestFolders'  => [
