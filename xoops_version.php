@@ -32,7 +32,7 @@ include \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/preloads/autoloader.
 // ------------------- Informations ------------------- //
 $modversion = [
     'name'                => \_MI_WGFILEMANAGER_NAME,
-    'version'             => '1.0.0',
+    'version'             => '1.0.1',
     'description'         => \_MI_WGFILEMANAGER_DESC,
     'author'              => 'Goffy - Wedega',
     'author_mail'         => 'webmaster@wedega.com',
@@ -65,7 +65,7 @@ $modversion = [
     'module_website_url'  => 'www.xoops.org',
     'module_website_name' => 'XOOPS Project',
     'release'             => '05/25/2020',
-    'module_status'       => 'Beta 1',
+    'module_status'       => 'Beta 2',
     'system_menu'         => 1,
     'hasAdmin'            => 1,
     'hasMain'             => 1,

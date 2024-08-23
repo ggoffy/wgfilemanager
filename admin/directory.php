@@ -73,7 +73,7 @@ switch ($op) {
             $directoryObj->setVar('parent_id', 0);
             $directoryObj->setVar('name', \_MA_WGFILEMANAGER_DIRECTORY_BASICNAME);
             $directoryObj->setVar('description', '');
-            $directoryObj->setVar('fullpath', '\\');
+            $directoryObj->setVar('fullpath', '/');
             $directoryObj->setVar('weight', 1);
             $directoryObj->setVar('date_created', time());
             $uidCurrent = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->uid() : 0;
@@ -82,9 +82,8 @@ switch ($op) {
             if ($directoryHandler->insert($directoryObj)) {
                 \redirect_header('directory.php?op=list&amp;createbasic=1', 0);
             } else {
-
+                throw new \Exception('Error saving basic directory');
             }
-            $GLOBALS['xoopsTpl']->assign('error', \_AM_WGFILEMANAGER_THEREARENT_DIRECTORY);
         }
         break;
     case 'new':

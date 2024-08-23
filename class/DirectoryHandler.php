@@ -183,11 +183,8 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
      */
     public function createDirectory($path) {
 
-        if (FilesManagement::createFolder(\WGFILEMANAGER_REPO_PATH . $path)) {
-            return true;
-        } else {
-            throw new \Exception('New filename already exists.');
-        }
+        FilesManagement::createFolder(\WGFILEMANAGER_REPO_PATH . $path);
+
     }
 
     /**
