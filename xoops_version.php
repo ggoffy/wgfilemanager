@@ -104,6 +104,8 @@ $modversion['templates'] = [
     ['file' => 'wgfilemanager_directory_sortable.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_directory_sortable_list.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_file.tpl', 'description' => ''],
+    ['file' => 'wgfilemanager_modal.tpl', 'description' => ''],
+    ['file' => 'wgfilemanager_print.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_breadcrumbs.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_search.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_footer.tpl', 'description' => ''],
@@ -141,7 +143,16 @@ if ($currdirname == $moduleDirName) {
     ];
 }
 // ------------------- Default Blocks ------------------- //
-
+// Directory list
+$modversion['blocks'][] = [
+    'file'        => 'directory.php',
+    'name'        => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST,
+    'description' => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_DESC,
+    'show_func'   => 'b_wgfilemanager_dirlist_show',
+    'edit_func'   => '',
+    'template'    => 'wgfilemanager_block_dirlist.tpl',
+    'options'     => 'dirlist',
+];
 // Directory last
 $modversion['blocks'][] = [
     'file'        => 'directory.php',
@@ -346,7 +357,7 @@ $modversion['config'][] = [
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'default'     => 'left',
-    'options'     => ['_MI_WGFILEMANAGER_INDEX_DIRPOSITION_LEFT' => 'left', '_MI_WGFILEMANAGER_INDEX_DIRPOSITION_TOP' => 'top'],
+    'options'     => ['_MI_WGFILEMANAGER_INDEX_DIRPOSITION_NONE' => 'none', '_MI_WGFILEMANAGER_INDEX_DIRPOSITION_LEFT' => 'left', '_MI_WGFILEMANAGER_INDEX_DIRPOSITION_TOP' => 'top'],
 ];
 // Style on directory page
 $modversion['config'][] = [

@@ -21,11 +21,33 @@ declare(strict_types=1);
  * @author       Goffy - Wedega - Email:webmaster@wedega.com - Website:https://xoops.wedega.com
  */
 
-use XoopsModules\Wgfilemanager;
+//use XoopsModules\Wgfilemanager;
 use XoopsModules\Wgfilemanager\Helper;
-use XoopsModules\Wgfilemanager\Constants;
+//use XoopsModules\Wgfilemanager\Constants;
+use Xmf\Request;
 
 require_once \XOOPS_ROOT_PATH . '/modules/wgfilemanager/include/common.php';
+
+/**
+ * Function show block
+ * @param  $options
+ * @return array
+ */
+function b_wgfilemanager_dirlist_show($options)
+{
+    $block       = [];
+    $helper      = Helper::getInstance();
+    $directoryHandler = $helper->getHandler('Directory');
+
+    $dirId = Request::getInt('dir_id', 1);
+
+    //get directory list
+    $block = $directoryHandler->getDirList(0, $dirId);
+    $GLOBALS['xoopsTpl']->assign('dir_list', $block);
+    $GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
+    return $block;
+
+}
 
 /**
  * Function show block

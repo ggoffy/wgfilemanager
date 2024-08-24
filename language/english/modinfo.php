@@ -48,12 +48,14 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_SMNAME3', 'Submit File');
 //\define('_MI_WGFILEMANAGER_SMNAME6', 'Search');
 // Blocks
+\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST', 'Block directory list');
+\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_DESC', 'Block for list of directories');
 \define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_LAST', 'Block last directories');
-\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_LAST_DESC', 'Block last directories description');
+\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_LAST_DESC', 'Block show last directories');
 \define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_NEW', 'Block new directories');
-\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_NEW_DESC', 'Block new directories');
+\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_NEW_DESC', 'Block show new directories');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_LAST', 'Block last files');
-\define('_MI_WGFILEMANAGER_FILE_BLOCK_LAST_DESC', 'Block last files description');
+\define('_MI_WGFILEMANAGER_FILE_BLOCK_LAST_DESC', 'Block show last files');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_NEW', 'Block new files');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_NEW_DESC', 'Block new files description');
 // Config
@@ -86,6 +88,7 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_ICONSET_NONE', 'Do not use an icon set');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION', 'Position Directory List');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_DESC', 'Select the position of the directory list on index page');
+\define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_NONE', 'Do not use directory list on index page');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_LEFT', 'Left side');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_TOP', 'On top');
 \define('_MI_WGFILEMANAGER_DIRECTORYSTYLE', 'List Style Directory Page');
