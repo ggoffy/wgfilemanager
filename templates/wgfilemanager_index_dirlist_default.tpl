@@ -5,7 +5,7 @@
                 <{if $dir.state|default:'closed' == 'open'}>
                     <i class="fa fa-folder-open"></i><{$dir.name}>
                 <{else}>
-                    <a class='' href='index.php?op?list&amp;dir_id=<{$dir.id}>' title='<{$dir.name}>'><i class="fa fa-folder-o"></i><{$dir.name}></a>
+                    <a class='' href='<{$wgfilemanager_url}>/index.php?op?list&amp;dir_id=<{$dir.id}>' title='<{$dir.name}>'><i class="fa fa-folder-o"></i><{$dir.name}></a>
                 <{/if}>
                 <{if $dir.count_subdirs > 0}>
                     <{include file='db:wgfilemanager_index_dirlist_default.tpl' dir_list=$dir.subdirs}>
