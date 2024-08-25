@@ -22,16 +22,10 @@ a.space-before {
     margin-left:20px;
 }
 .wgf-preview-0 {
-    max-width:30px;
+    max-width:30px !important;
 }
 .wgf-preview-1 {
-    max-width:100px;
-}
-.wgf-dirlist-default-level1 {
-    padding-left:30px;
-}
-.wgf-dirlist i {
-    margin-right:5px;
+    max-width:100px !important;
 }
 .wgf-card {
     width: 14rem;
