@@ -37,7 +37,6 @@ require_once \XOOPS_ROOT_PATH . '/header.php';
 // Define Stylesheet
 $GLOBALS['xoTheme']->addStylesheet($style, null);
 $GLOBALS['xoTheme']->addStylesheet(\WGFILEMANAGER_URL . '/assets/css/default.css');
-$GLOBALS['xoTheme']->addStylesheet(\WGFILEMANAGER_URL . '/assets/css/dirlist.css');
 // Paths
 $GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGFILEMANAGER_URL.'/index.php');
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
@@ -138,14 +137,13 @@ switch ($op) {
             $ext  = substr(strrchr($file['name'], '.'), 1);
             $fileCategory = isset($fileIcons['files'][$ext]) ? (int)$fileIcons['files'][$ext]['category'] : 0;
             $file['category']  = $fileCategory;
-            $file['icon_url']  = '';
+            $file['icon_url']  = isset($fileIcons['files'][$ext]) ? $fileIcons['files'][$ext]['src'] : $fileIcons['default'];
             $file['image']     = false;
             $file['image_url'] = '';
             $file['pdf']       = false;
             $file['pdf_url']   = '';
             switch ($fileCategory) {
                 case 0:
-                    $file['icon_url'] = isset($fileIcons['files'][$ext]) ? $fileIcons['files'][$ext]['src'] : $fileIcons['default'];
                     break;
                 case Constants::MIMETYPE_CAT_IMAGE:
                     $file['image'] = true;

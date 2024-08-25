@@ -37,8 +37,6 @@ function b_wgfilemanager_dirlist_show($options)
 {
     global $xoopsModule;
 
-    $GLOBALS['xoTheme']->addStylesheet(\WGFILEMANAGER_URL . '/assets/css/dirlist.css');
-
     $helper      = Helper::getInstance();
     $directoryHandler = $helper->getHandler('Directory');
 

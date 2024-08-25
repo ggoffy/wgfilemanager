@@ -21,7 +21,7 @@
                                         <{if $file.image|default:false}>
                                             <img class="card-img-top center wgf-preview-<{$file.category|default:0}>" src="<{$file.image_url}>" alt="<{$file.name}>">
                                         <{else}>
-                                            <img class="card-img-top center wgf-preview-<{$file.category|default:0}>" src="<{$file.icon_url}>" alt="<{$file.name}>">
+                                            <img class="card-img-top center wgf-preview-0" src="<{$file.icon_url}>" alt="<{$file.name}>">
                                         <{/if}>
                                     <{/if}>
                                     <span class="wgf-filename"><{$file.name}></span>
