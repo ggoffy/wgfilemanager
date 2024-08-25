@@ -56,7 +56,7 @@ The module currently provides:
   * Permissions by directory
 
 ## Extras
-
+/themes/bootstrap4: templates for Bootstrap4 themes like xswatch4
 
 
 ### Tutorial:
