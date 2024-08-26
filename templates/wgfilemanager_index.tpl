@@ -1,9 +1,7 @@
 <style>
-    .wgf-dirlist-default-level1 {
-        padding-left:30px;
-    }
-    .wgf-dirlist i {
-        margin-right:5px;
+    .wgf-dirlist i,
+    .wgf-dirlist svg {
+        margin-right:0.5rem;
     }
 </style>
 
