@@ -333,7 +333,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
      * @param int $levelCurrent
      * @return array
      */
-    public function getDirList($dirId, $dirCurrent, $levelCurrent = 0) {
+    public function getDirList($dirId, $dirCurrent, $levelCurrent = 1) {
 
         $result = [];
 /*        if (0 === $dirId) {

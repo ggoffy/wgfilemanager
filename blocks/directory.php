@@ -35,11 +35,20 @@ require_once \XOOPS_ROOT_PATH . '/modules/wgfilemanager/include/common.php';
  */
 function b_wgfilemanager_dirlist_show($options)
 {
-    $block       = [];
+    global $xoopsModule;
+
     $helper      = Helper::getInstance();
     $directoryHandler = $helper->getHandler('Directory');
 
-    $dirId = Request::getInt('dir_id', 1);
+    $dirId = Request::getInt('dir_id', 0);
+    if ((!empty($xoopsModule))) {
+        $moduleDirName = \basename(\dirname(__DIR__));
+/*        echo "<br>xoopsModule:".$moduleDirName. " " . $xoopsModule->getByDirname($moduleDirName)->getVar('mid');
+        echo "<br>xoopsModule:".$xoopsModule->getVar('mid');*/
+        if ($xoopsModule->getByDirname($moduleDirName)->getVar('mid') === $xoopsModule->getVar('mid')) {
+            $dirId = Request::getInt('dir_id', 1);
+        }
+    }
 
     //get directory list
     $block = $directoryHandler->getDirList(0, $dirId);
