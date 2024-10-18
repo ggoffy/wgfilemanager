@@ -127,20 +127,12 @@ $modversion['search'] = [
 // ------------------- Menu ------------------- //
 $currdirname  = isset($GLOBALS['xoopsModule']) && \is_object($GLOBALS['xoopsModule']) ? $GLOBALS['xoopsModule']->getVar('dirname') : 'system';
 if ($currdirname == $moduleDirName) {
-    $modversion['sub'][] = [
-        'name' => \_MI_WGFILEMANAGER_SMNAME1,
-        'url'  => 'index.php',
-    ];
-    // Sub directory
-    $modversion['sub'][] = [
-        'name' => \_MI_WGFILEMANAGER_SMNAME2,
-        'url'  => 'directory.php',
-    ];
-    // Sub Submit
-    $modversion['sub'][] = [
-        'name' => \_MI_WGFILEMANAGER_SMNAME3,
-        'url'  => 'file.php?op=new',
-    ];
+    $submenu = new \XoopsModules\Wgfilemanager\Modulemenu;
+    $menuItems = $submenu->getMenuitemsDefault();
+    foreach ($menuItems as $key => $menuItem) {
+        $modversion['sub'][$key]['name'] = $menuItem['name'];
+        $modversion['sub'][$key]['url'] = $menuItem['url'];
+    }
 }
 // ------------------- Default Blocks ------------------- //
 // Directory list
@@ -358,16 +350,6 @@ $modversion['config'][] = [
     'valuetype'   => 'text',
     'default'     => 'left',
     'options'     => ['_MI_WGFILEMANAGER_INDEX_DIRPOSITION_NONE' => 'none', '_MI_WGFILEMANAGER_INDEX_DIRPOSITION_LEFT' => 'left', '_MI_WGFILEMANAGER_INDEX_DIRPOSITION_TOP' => 'top'],
-];
-// Style on directory page
-$modversion['config'][] = [
-    'name'        => 'directorystyle',
-    'title'       => '\_MI_WGFILEMANAGER_DIRECTORYSTYLE',
-    'description' => '\_MI_WGFILEMANAGER_DIRECTORYSTYLE_DESC',
-    'formtype'    => 'select',
-    'valuetype'   => 'text',
-    'default'     => 'default',
-    'options'     => ['default' => 'default', 'sortable' => 'sortable'],
 ];
 // Use Feature 'Broken'
 $modversion['config'][] = [

@@ -12,7 +12,7 @@
         <tr class='<{cycle values="odd, even"}>'>
             <td class='center'><{$file.name|default:false}></td>
             <td class='center'><{$file.dir_name|default:false}></td>
-            <td class='center'><a href='<{$wgfilemanager_url}>/file.php?op=show&amp;id=<{$file.id|default:false}>' title='<{$smarty.const._MB_WGFILEMANAGER_FILE_GOTO}>'><{$smarty.const._MB_WGFILEMANAGER_FILE_GOTO}></a></td>
+            <td class='center'><a href='<{$wgfilemanager_url}>/file.php?op=show&amp;file_id=<{$file.id|default:false}>&amp;dir_id=<{$file.dir_id|default:0}>' title='<{$smarty.const._MB_WGFILEMANAGER_FILE_GOTO}>'><{$smarty.const._MB_WGFILEMANAGER_FILE_GOTO}></a></td>
         </tr>
         <{/foreach}>
     </tbody>

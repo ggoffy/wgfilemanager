@@ -366,7 +366,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
                 $result[$i]['count_files'] = $directory['count_files'];
                 $result[$i]['level'] = $levelCurrent;
                 if ($directory['count_subdirs'] > 0) {
-                                        $result[$i]['subdirs'] = $this->getDirList($i, $dirCurrent, $levelCurrent);
+                    $result[$i]['subdirs'] = $this->getDirList($i, $dirCurrent, $levelCurrent);
                 }
             }
         }
