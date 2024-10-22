@@ -48,7 +48,16 @@ $GLOBALS['xoopsTpl']->assign('wgfilemanager_upload_url', \WGFILEMANAGER_UPLOAD_U
 // Keywords
 $keywords = [];
 // Breadcrumbs
-$xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX, 'link' => 'index.php'];
+if ($dirId > 1) {
+    $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX, 'link' => 'index.php'];
+    $dirArray = $directoryHandler->getDirListBreadcrumb($dirId);
+    $dirListBreadcrumb = array_reverse($dirArray, true);
+    foreach ($dirListBreadcrumb as $key => $value) {
+        $xoBreadcrumbs[] = ['title' => $value, 'link' => 'index.php?dir_id=' . $key];
+    }
+} else {
+    $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX];
+}
 // Permissions
 $GLOBALS['xoopsTpl']->assign('showItem', $fileId > 0);
 // params for url

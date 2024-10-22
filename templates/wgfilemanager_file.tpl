@@ -63,7 +63,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="2" class="center"><{include file='db:wgfilemanager_index_fileactions.tpl' }></td>
+                <td colspan="2" class="center"><{include file='db:wgfilemanager_index_actions_file.tpl' }></td>
             </tr>
         </tfoot>
     </table>

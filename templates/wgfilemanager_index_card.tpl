@@ -27,7 +27,7 @@
                             </p>
                         </div>
                         <div class="card-footer center wgf-fileaction">
-                            <{include file='db:wgfilemanager_index_fileactions.tpl' }>
+                            <{include file='db:wgfilemanager_index_actions_file.tpl' }>
                         </div>
                     </div>
                 <{/foreach}>

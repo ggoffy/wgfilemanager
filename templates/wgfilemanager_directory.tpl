@@ -6,11 +6,7 @@
 <{/if}>
 
 <{if $directoryCount|default:0 > 0}>
-    <{if $directoryStyle|default:'' == 'sortable'}>
-        <{include file='db:wgfilemanager_directory_sortable.tpl'}>
-    <{else}>
-        <{include file='db:wgfilemanager_directory_default_table.tpl'}>
-    <{/if}>
+    <{include file='db:wgfilemanager_directory_default_table.tpl'}>
 <{/if}>
 <{if $form|default:''}>
     <{$form|default:false}>

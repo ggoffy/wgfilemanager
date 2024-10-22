@@ -107,6 +107,7 @@ switch ($op) {
     }
 
     //get permissions
+    $GLOBALS['xoopsTpl']->assign('permEditDir', $permissionsHandler->getPermSubmitDirectory($dirId));
     $GLOBALS['xoopsTpl']->assign('permEditFile', $permissionsHandler->getPermSubmitDirectory($dirId));
     $GLOBALS['xoopsTpl']->assign('permDownloadFileFromDir', $permissionsHandler->getPermDownloadFileFromDir($dirId));
     $GLOBALS['xoopsTpl']->assign('permUploadFileToDir', $permissionsHandler->getPermUploadFileToDir($dirId));
@@ -116,6 +117,11 @@ switch ($op) {
     $dirList = $directoryHandler->getDirList(0, $dirId);
     $GLOBALS['xoopsTpl']->assign('dir_list', $dirList);
     $GLOBALS['xoopsTpl']->assign('dirId', $dirId);
+
+    $indexDirList = $directoryHandler->getSubDirList($dirId);
+    $GLOBALS['xoopsTpl']->assign('indexDirlist', $indexDirList);
+    $GLOBALS['xoopsTpl']->assign('indexDirlistIcon', WGFILEMANAGER_ICONS_URL . '/foldericons/folder2.png');
+
 
     $crFile = new \CriteriaCompo();
     $crFile->add(new \Criteria('directory_id', $dirId));
@@ -157,7 +163,7 @@ switch ($op) {
             $fileList[$i]        = $file;
         }
     }
-    $GLOBALS['xoopsTpl']->assign('file_list', $fileList);
+    $GLOBALS['xoopsTpl']->assign('indexFilelist', $fileList);
     // Display Navigation
     if ($fileCount > $limit) {
         require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';

@@ -64,6 +64,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGFILEMANAGER_MIMETYPE_CAT', 'Category');
 \define('_AM_WGFILEMANAGER_MIMETYPE_CAT_NONE', 'No category');
 \define('_AM_WGFILEMANAGER_MIMETYPE_CAT_IMAGE', 'Image');
+\define('_AM_WGFILEMANAGER_MIMETYPE_CAT_PDF', 'Pdf-file');
 \define('_AM_WGFILEMANAGER_MIMETYPE_DATE_CREATED', 'Date created');
 \define('_AM_WGFILEMANAGER_MIMETYPE_SUBMITTER', 'Submitter');
 \define('_AM_WGFILEMANAGER_MIMETYPE_LOAD_DEFAULT', 'Do your really want to load default mimetype set. Existing set will be deleted');

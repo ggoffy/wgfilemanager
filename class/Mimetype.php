@@ -117,6 +117,7 @@ class Mimetype extends \XoopsObject
         $mimeCategorySelect = new \XoopsFormSelect(\_AM_WGFILEMANAGER_MIMETYPE_CAT, 'category', $this->getVar('category'));
         $mimeCategorySelect->addOption(Constants::MIMETYPE_CAT_NONE, \_AM_WGFILEMANAGER_MIMETYPE_CAT_NONE);
         $mimeCategorySelect->addOption(Constants::MIMETYPE_CAT_IMAGE, \_AM_WGFILEMANAGER_MIMETYPE_CAT_IMAGE);
+        $mimeCategorySelect->addOption(Constants::MIMETYPE_CAT_PDF, \_AM_WGFILEMANAGER_MIMETYPE_CAT_PDF);
         $form->addElement($mimeCategorySelect, true);
         // Form Text Date Select mimeDate_created
         $mimeDate_created = $this->isNew() ? \time() : $this->getVar('date_created');
@@ -159,6 +160,8 @@ class Mimetype extends \XoopsObject
     private function getCategoryMimetype($category)
     {
         switch ($category) {
+            case Constants::MIMETYPE_CAT_PDF:
+                return \_AM_WGFILEMANAGER_MIMETYPE_CAT_PDF;
             case Constants::MIMETYPE_CAT_IMAGE:
                 return \_AM_WGFILEMANAGER_MIMETYPE_CAT_IMAGE;
             case 0:
