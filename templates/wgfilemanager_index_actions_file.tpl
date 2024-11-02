@@ -9,7 +9,7 @@
         <a class='btn btn-sm btn-outline-primary' onclick="printFile('<{$file.print_url}>')" href='#' title='<{$smarty.const._PRINT}>'><img src="<{$wgfilemanager_icon_bi_url}>printer.svg" alt="<{$smarty.const._PRINT}>" ></a>
     <{/if}>
     <{if $showBtnDetails|default:false}>
-        <a class='btn btn-sm btn-outline-primary' href='file.php?op=show&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_DETAILS}>'><img src="<{$wgfilemanager_icon_bi_url}>arrow-right.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_DETAILS}>" ></a>
+        <a class='btn btn-sm btn-outline-primary' href='file.php?op=show&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_DETAILS}>'><img src="<{$wgfilemanager_icon_bi_url}>search.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_DETAILS}>" ></a>
     <{/if}>
 </div>
 <{if $permEditFile|default:false || $showBtnBack|default:false}>

@@ -25,7 +25,7 @@ require_once __DIR__ . '/common.php';
 
 // ---------------- Admin Main ----------------
 \define('_MI_WGFILEMANAGER_NAME', 'wgFileManager');
-\define('_MI_WGFILEMANAGER_DESC', 'This module is storing files in directories');
+\define('_MI_WGFILEMANAGER_DESC', 'This module is maintaining files and directories');
 // ---------------- Admin Menu ----------------
 \define('_MI_WGFILEMANAGER_ADMENU1', 'Dashboard');
 \define('_MI_WGFILEMANAGER_ADMENU2', 'Directory');
@@ -81,8 +81,6 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_FILE_HANDLENAME_DESC', 'Define which file name should be used');
 \define('_MI_WGFILEMANAGER_FILE_HANDLENAME_ORIGINAL', 'Use original file name');
 \define('_MI_WGFILEMANAGER_FILE_HANDLENAME_UNIQUE', 'Create unique name based on original file name');
-\define('_MI_WGFILEMANAGER_MIMETYPES_FILE', 'Mime types file');
-\define('_MI_WGFILEMANAGER_MIMETYPES_FILE_DESC', 'Define the allowed mime types for uploading files');
 \define('_MI_WGFILEMANAGER_ICONSET', 'Icon Set');
 \define('_MI_WGFILEMANAGER_ICONSET_DESC', 'Define which icon set you want use');
 \define('_MI_WGFILEMANAGER_ICONSET_NONE', 'Do not use an icon set');
@@ -91,8 +89,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_NONE', 'Do not use directory list on index page');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_LEFT', 'Left side');
 \define('_MI_WGFILEMANAGER_INDEX_DIRPOSITION_TOP', 'On top');
-\define('_MI_WGFILEMANAGER_DIRECTORYSTYLE', 'List Style Directory Page');
-\define('_MI_WGFILEMANAGER_DIRECTORYSTYLE_DESC', 'Select list style on directory page');
+//\define('_MI_WGFILEMANAGER_DIRECTORYSTYLE', 'List Style Directory Page');
+//\define('_MI_WGFILEMANAGER_DIRECTORYSTYLE_DESC', 'Select list style on directory page');
 \define('_MI_WGFILEMANAGER_TABLE_TYPE', 'Table Type');
 \define('_MI_WGFILEMANAGER_TABLE_TYPE_DESC', 'Table Type is the bootstrap html table');
 \define('_MI_WGFILEMANAGER_PANEL_TYPE', 'Panel Type');
@@ -101,15 +99,7 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_USE_BROKEN_DESC', 'Decide whether you want to use festure BROKEN. Users can notify admins about broken file links.');
 \define('_MI_WGFILEMANAGER_SHOW_BREADCRUMBS', 'Show breadcrumb navigation');
 \define('_MI_WGFILEMANAGER_SHOW_BREADCRUMBS_DESC', 'Show breadcrumb navigation which displays the current page in context within the site structure');
+\define('_MI_WGFILEMANAGER_SHOW_COPYRIGHT', 'Show copyright');
+\define('_MI_WGFILEMANAGER_SHOW_COPYRIGHT_DESC', 'You can remove the copyright from the wgSimpleAcc, but a backlinks to www.wedega.com is expected, anywhere on your site');
 \define('_MI_WGFILEMANAGER_MAINTAINEDBY', 'Maintained By');
 \define('_MI_WGFILEMANAGER_MAINTAINEDBY_DESC', 'Allow url of support site or community');
-\define('_MI_WGFILEMANAGER_BOOKMARKS', 'Social Bookmarks');
-\define('_MI_WGFILEMANAGER_BOOKMARKS_DESC', 'Show Social Bookmarks in the single page');
-// Permissions Groups
-\define('_MI_WGFILEMANAGER_GROUPS', 'Groups access');
-\define('_MI_WGFILEMANAGER_GROUPS_DESC', 'Select general access permission for groups.');
-\define('_MI_WGFILEMANAGER_ADMIN_GROUPS', 'Admin Group Permissions');
-\define('_MI_WGFILEMANAGER_ADMIN_GROUPS_DESC', 'Which groups have access to tools and permissions page');
-\define('_MI_WGFILEMANAGER_UPLOAD_GROUPS', 'Upload Group Permissions');
-\define('_MI_WGFILEMANAGER_UPLOAD_GROUPS_DESC', 'Which groups have permissions to upload files');
-// ---------------- End ----------------

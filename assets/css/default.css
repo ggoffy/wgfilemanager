@@ -27,6 +27,24 @@ a.space-before {
 .wgf-preview-1 {
     max-width:100px !important;
 }
+.wgf-preview-2 {
+    max-width:30px !important;
+}
+.wgf-preview-card-folder {
+    max-width:100px !important;
+    margin-top:20px;
+}
+.wgf-preview-card-0 {
+    max-width:30px !important;
+    margin-top:20px;
+}
+.wgf-preview-card-1 {
+    margin-top:20px;
+}
+.wgf-preview-card-2 {
+    max-width:30px !important;
+    margin-top:20px;
+}
 .wgf-card {
     width: 14rem;
 }

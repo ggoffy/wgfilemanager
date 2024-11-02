@@ -33,7 +33,7 @@
                                 <td class='wgf-default-list'><{$file.ctime_text}></td>
                                 <td class='wgf-default-list'><{$file.submitter_text}></td>
                                 <td class='wgf-default-list right wgf-fileaction'>
-                                    <{include file='db:wgfilemanager_index_fileactions.tpl' }>
+                                    <{include file='db:wgfilemanager_index_actions_file.tpl' }>
                                 </td>
                             </tr>
                         <{/foreach}>

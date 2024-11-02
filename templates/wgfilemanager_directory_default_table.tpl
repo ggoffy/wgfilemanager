@@ -11,6 +11,6 @@
         <tbody>
             <{include file='db:wgfilemanager_directory_default_row.tpl'}>
         </tbody>
-        <tfoot><tr><td class="center" colspan="4"><a class='btn btn-primary' href='directory.php?op=new' title='<{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_ADD}>'><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_ADD}></a></td></tr></tfoot>
+        <tfoot><tr><td class="center" colspan="4"><a class='btn btn-success' href='directory.php?op=new' title='<{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_ADD}>'><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_ADD}></a></td></tr></tfoot>
     </table>
 </div>

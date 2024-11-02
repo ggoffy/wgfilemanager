@@ -28,6 +28,9 @@ if ($helper->getConfig('show_breadcrumbs') && \count($xoBreadcrumbs) > 0) {
 wgfilemanagerMetaDescription((string)$helper->getConfig('metadescription'));
 // 
 $GLOBALS['xoopsTpl']->assign('admin', \WGFILEMANAGER_ADMIN);
-$GLOBALS['xoopsTpl']->assign('copyright', $copyright);
+
+if ($helper->getConfig('show_copyright')) {
+    $GLOBALS['xoopsTpl']->assign('copyright', $copyright);
+}
 // 
 require_once \XOOPS_ROOT_PATH . '/footer.php';

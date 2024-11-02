@@ -33,6 +33,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_INDEX_STYLELIST', 'Show in list style');
 \define('_MA_WGFILEMANAGER_INDEX_STYLEGROUPED', 'Show in grouped style');
 \define('_MA_WGFILEMANAGER_INDEX_STYLECARD', 'Show in card style');
+\define('_MA_WGFILEMANAGER_INDEX_STYLECARDBIG', 'Show in big card style');
 \define('_MA_WGFILEMANAGER_INVALID_PARAMS', 'Invalid parameters');
 // ---------------- Contents ----------------
 // Directory
@@ -46,8 +47,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_DIRECTORY_REFRESH', 'Refresh List');
 \define('_MA_WGFILEMANAGER_DIRECTORY_TITLE', 'Directory title');
 \define('_MA_WGFILEMANAGER_DIRECTORY_DESC', 'Directory description');
-\define('_MA_WGFILEMANAGER_DIRECTORY_DELETE_SINGLE', 'Do you really want to delete directory %s with all files?');
-\define('_MA_WGFILEMANAGER_DIRECTORY_DELETE_ISPARENT', 'This directory %s is used also as parent directory for other directories. Do you really want to delete directory with all files and subdirectories?');
+\define('_MA_WGFILEMANAGER_DIRECTORY_DELETE_SINGLE', "Do you really want to delete directory '%s' with all files?<br>");
+\define('_MA_WGFILEMANAGER_DIRECTORY_DELETE_ISPARENT', "This directory '%s' is used also as parent directory for other directories. Do you really want to delete directory with all files and subdirectories?");
 \define('_MA_WGFILEMANAGER_DIRECTORY_HOME', 'Basic Directory');
 \define('_MA_WGFILEMANAGER_DIRECTORY_GOTO', 'Goto Directory');
 \define('_MA_WGFILEMANAGER_DIRECTORY_SHOWHIDE', 'Show/hide Sub Directory');
@@ -103,7 +104,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_FILE_NAME_UPLOADS', 'Uploaded files in: %s');
 // File misc
 \define('_MA_WGFILEMANAGER_INDEX_THEREARE', 'There are %s File');
-\define('_MA_WGFILEMANAGER_INDEX_LATEST_LIST', 'Last wgFileManager');
+\define('_MA_WGFILEMANAGER_INDEX_LATEST_LIST', 'Last items in wgFileManager');
 \define('_MA_WGFILEMANAGER_FILE_ERROR_EXISTS', 'ERROR: file already exists in this directory');
 \define('_MA_WGFILEMANAGER_FILE_ERROR_DONOTEXIST', 'ERROR: file does not exist');
 \define('_MA_WGFILEMANAGER_FILE_DOWNLOAD', 'Download file');

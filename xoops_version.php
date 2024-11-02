@@ -33,6 +33,9 @@ include \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/preloads/autoloader.
 $modversion = [
     'name'                => \_MI_WGFILEMANAGER_NAME,
     'version'             => '1.0.1',
+    'module_status'       => 'Beta 2',
+    'release'             => '06/29/2024',
+    'release_date'        => '2024/06/29',
     'description'         => \_MI_WGFILEMANAGER_DESC,
     'author'              => 'Goffy - Wedega',
     'author_mail'         => 'webmaster@wedega.com',
@@ -44,7 +47,6 @@ $modversion = [
     'help'                => 'page=help',
     'release_info'        => 'release_info',
     'release_file'        => \XOOPS_URL . '/modules/wgfilemanager/docs/release_info file',
-    'release_date'        => '2024/06/29',
     'manual'              => 'link to manual file',
     'manual_file'         => \XOOPS_URL . '/modules/wgfilemanager/docs/install.txt',
     'min_php'             => '8.0',
@@ -64,8 +66,6 @@ $modversion = [
     'support_name'        => 'Support Forum',
     'module_website_url'  => 'www.xoops.org',
     'module_website_name' => 'XOOPS Project',
-    'release'             => '05/25/2020',
-    'module_status'       => 'Beta 2',
     'system_menu'         => 1,
     'hasAdmin'            => 1,
     'hasMain'             => 1,
@@ -93,7 +93,8 @@ $modversion['templates'] = [
     ['file' => 'wgfilemanager_index.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_default.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_grouped.tpl', 'description' => ''],
-    ['file' => 'wgfilemanager_index_fileactions.tpl', 'description' => ''],
+    ['file' => 'wgfilemanager_index_actions_dir.tpl', 'description' => ''],
+    ['file' => 'wgfilemanager_index_actions_file.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_card.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_dirlist_default.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_filepanel_header.tpl', 'description' => ''],
@@ -101,8 +102,6 @@ $modversion['templates'] = [
     ['file' => 'wgfilemanager_directory_default_table.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_directory_default_row.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_directory_default_item.tpl', 'description' => ''],
-    ['file' => 'wgfilemanager_directory_sortable.tpl', 'description' => ''],
-    ['file' => 'wgfilemanager_directory_sortable_list.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_file.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_modal.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_print.tpl', 'description' => ''],
@@ -127,20 +126,12 @@ $modversion['search'] = [
 // ------------------- Menu ------------------- //
 $currdirname  = isset($GLOBALS['xoopsModule']) && \is_object($GLOBALS['xoopsModule']) ? $GLOBALS['xoopsModule']->getVar('dirname') : 'system';
 if ($currdirname == $moduleDirName) {
-    $modversion['sub'][] = [
-        'name' => \_MI_WGFILEMANAGER_SMNAME1,
-        'url'  => 'index.php',
-    ];
-    // Sub directory
-    $modversion['sub'][] = [
-        'name' => \_MI_WGFILEMANAGER_SMNAME2,
-        'url'  => 'directory.php',
-    ];
-    // Sub Submit
-    $modversion['sub'][] = [
-        'name' => \_MI_WGFILEMANAGER_SMNAME3,
-        'url'  => 'file.php?op=new',
-    ];
+    $submenu = new \XoopsModules\Wgfilemanager\Modulemenu;
+    $menuItems = $submenu->getMenuitemsDefault();
+    foreach ($menuItems as $key => $menuItem) {
+        $modversion['sub'][$key]['name'] = $menuItem['name'];
+        $modversion['sub'][$key]['url'] = $menuItem['url'];
+    }
 }
 // ------------------- Default Blocks ------------------- //
 // Directory list
@@ -359,16 +350,6 @@ $modversion['config'][] = [
     'default'     => 'left',
     'options'     => ['_MI_WGFILEMANAGER_INDEX_DIRPOSITION_NONE' => 'none', '_MI_WGFILEMANAGER_INDEX_DIRPOSITION_LEFT' => 'left', '_MI_WGFILEMANAGER_INDEX_DIRPOSITION_TOP' => 'top'],
 ];
-// Style on directory page
-$modversion['config'][] = [
-    'name'        => 'directorystyle',
-    'title'       => '\_MI_WGFILEMANAGER_DIRECTORYSTYLE',
-    'description' => '\_MI_WGFILEMANAGER_DIRECTORYSTYLE_DESC',
-    'formtype'    => 'select',
-    'valuetype'   => 'text',
-    'default'     => 'default',
-    'options'     => ['default' => 'default', 'sortable' => 'sortable'],
-];
 // Use Feature 'Broken'
 $modversion['config'][] = [
     'name'        => 'use_broken',
@@ -383,6 +364,15 @@ $modversion['config'][] = [
     'name'        => 'show_breadcrumbs',
     'title'       => '\_MI_WGFILEMANAGER_SHOW_BREADCRUMBS',
     'description' => '\_MI_WGFILEMANAGER_SHOW_BREADCRUMBS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+// Show copyright
+$modversion['config'][] = [
+    'name'        => 'show_copyright',
+    'title'       => '_MI_WGFILEMANAGER_SHOW_COPYRIGHT',
+    'description' => '_MI_WGFILEMANAGER_SHOW_COPYRIGHT_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 1,

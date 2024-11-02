@@ -79,12 +79,12 @@ switch ($op) {
     $GLOBALS['xoopsTpl']->assign('styledefault', Constants::COOKIE_STYLE_DEFAULT);
     $GLOBALS['xoopsTpl']->assign('stylegrouped', Constants::COOKIE_STYLE_GROUPED);
     $GLOBALS['xoopsTpl']->assign('stylecard', Constants::COOKIE_STYLE_CARD);
+    $GLOBALS['xoopsTpl']->assign('stylecardbig', Constants::COOKIE_STYLE_CARDBIG);
 
-    $cookieIndexPreview = Request::getString($cookieStyle, 'none', 'COOKIE');
-    if ('none' === $cookiePreview) {
+    $cookieIndexPreview = Request::getString($cookiePreview, 'none', 'COOKIE');
+    if ('none' === $cookieIndexPreview) {
         $cookieIndexPreview = Constants::COOKIE_NOPREVIEW;
         xoops_setcookie($cookiePreview, $cookieIndexPreview, time() + 60 * 60 * 24 * 30);
-
     } else {
         $cookieIndexPreview = $_COOKIE[$cookiePreview];
     }
@@ -107,6 +107,8 @@ switch ($op) {
     }
 
     //get permissions
+    $GLOBALS['xoopsTpl']->assign('permCreateDir', $permissionsHandler->getPermSubmitDirectory($dirId));
+    $GLOBALS['xoopsTpl']->assign('permEditDir', $permissionsHandler->getPermSubmitDirectory($dirId));
     $GLOBALS['xoopsTpl']->assign('permEditFile', $permissionsHandler->getPermSubmitDirectory($dirId));
     $GLOBALS['xoopsTpl']->assign('permDownloadFileFromDir', $permissionsHandler->getPermDownloadFileFromDir($dirId));
     $GLOBALS['xoopsTpl']->assign('permUploadFileToDir', $permissionsHandler->getPermUploadFileToDir($dirId));
@@ -116,6 +118,11 @@ switch ($op) {
     $dirList = $directoryHandler->getDirList(0, $dirId);
     $GLOBALS['xoopsTpl']->assign('dir_list', $dirList);
     $GLOBALS['xoopsTpl']->assign('dirId', $dirId);
+
+    $indexDirList = $directoryHandler->getSubDirList($dirId);
+    $GLOBALS['xoopsTpl']->assign('indexDirlist', $indexDirList);
+    $GLOBALS['xoopsTpl']->assign('indexDirlistIcon', WGFILEMANAGER_ICONS_URL . '/foldericons/folder2.png');
+
 
     $crFile = new \CriteriaCompo();
     $crFile->add(new \Criteria('directory_id', $dirId));
@@ -157,7 +164,7 @@ switch ($op) {
             $fileList[$i]        = $file;
         }
     }
-    $GLOBALS['xoopsTpl']->assign('file_list', $fileList);
+    $GLOBALS['xoopsTpl']->assign('indexFilelist', $fileList);
     // Display Navigation
     if ($fileCount > $limit) {
         require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';

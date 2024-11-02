@@ -271,7 +271,7 @@ switch ($op) {
         } else {
             $confirmText = \sprintf(\_MA_WGFILEMANAGER_DIRECTORY_DELETE_SINGLE, $dirName);
             if ($directoryHandler->dirIsParent($dirId)) {
-                $confirmText = \sprintf(\_MA_WGFILEMANAGER_DIRECTORY_DELETE_ISPARENT, $dirName);
+                $confirmText .= \sprintf(\_MA_WGFILEMANAGER_DIRECTORY_DELETE_ISPARENT, $dirName);
             }
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'id' => $dirId, 'start' => $start, 'limit' => $limit, 'op' => 'delete'],

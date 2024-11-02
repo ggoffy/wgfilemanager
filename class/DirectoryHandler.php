@@ -366,7 +366,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
                 $result[$i]['count_files'] = $directory['count_files'];
                 $result[$i]['level'] = $levelCurrent;
                 if ($directory['count_subdirs'] > 0) {
-                                        $result[$i]['subdirs'] = $this->getDirList($i, $dirCurrent, $levelCurrent);
+                    $result[$i]['subdirs'] = $this->getDirList($i, $dirCurrent, $levelCurrent);
                 }
             }
         }
@@ -425,6 +425,38 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         } while ($dirId > 0);
 
         return $result;
+    }
+
+    /**
+     * Returns an array directories
+     *
+     * @param int $dirId
+     * @return array
+     */
+    public function getSubDirList($dirId) {
+
+        $result = [];
+        $crSubDir = new \CriteriaCompo();
+        $crSubDir->add(new \Criteria('parent_id', $dirId));
+        $crSubDir->setSort('weight ASC, id');
+        $crSubDir->setOrder('ASC');
+        if ($this->getCount($crSubDir) > 0) {
+            $directoryAll = $this->getAll($crSubDir);
+            foreach (\array_keys($directoryAll) as $i) {
+                $directory = $directoryAll[$i]->getValuesDir();
+                $result[$i]['id'] = $directory['id'];
+                $result[$i]['parent_id'] = $directory['parent_id'];
+                $result[$i]['name'] = $directory['name'];
+                $result[$i]['description_text']  = $directory['description_text'];
+                $result[$i]['submitter_text']  = $directory['submitter_text'];
+                $result[$i]['count_subdirs'] = $directory['count_subdirs'];
+                $result[$i]['count_files'] = $directory['count_files'];
+                $result[$i]['ctime_text'] = \formatTimestamp($directory['date_created'], 's');
+            }
+        }
+
+        return $result;
+
     }
 
 }

@@ -38,7 +38,7 @@
                                     </p>
                                 </td>
                                 <td class='wgf-grouped-list right wgf-fileaction'>
-                                    <{include file='db:wgfilemanager_index_fileactions.tpl' }>
+                                    <{include file='db:wgfilemanager_index_actions_file.tpl' }>
                                 </td>
                             </tr>
                         <{/foreach}>
