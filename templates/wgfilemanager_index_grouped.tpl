@@ -15,11 +15,11 @@
                         <!-- Start dir loop -->
                         <{foreach item=dir from=$indexDirlist|default:false name=dir}>
                             <tr>
-                                <td class='wgf-grouped-list'>
-                                    <{if $wgfindexpreview|default:false}>
+                                <{if $wgfindexpreview|default:false}>
+                                    <td class='wgf-grouped-list'>
                                         <img class="card-img-top center wgf-preview-0" src="<{$indexDirlistIcon}>" alt="<{$dir.name}>">
-                                    <{/if}>
-                                </td>
+                                    </td>
+                                <{/if}>
                                 <td class='wgf-default-list'>
                                     <span class="wgf-filename"><{$dir.name}></span>
                                     <{if $dir.description_text|default:''}>
