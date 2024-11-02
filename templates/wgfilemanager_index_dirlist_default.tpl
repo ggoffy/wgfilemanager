@@ -3,7 +3,7 @@
         <{foreach item=dir from=$dir_list name=dir}>
             <li class="wgf-dirlist <{if $dir.level|default:0 == 1}>wgf-dirlist-default-level1<{/if}>">
                 <{if $dir.state|default:'closed' == 'open'}>
-                    <a class='nav-link disabled active' href='#' title='<{$dir.name}>'><i class="fa fa-folder-open"></i><{$dir.name}></a>
+                    <a class='nav-link active' href='<{$wgfilemanager_url}>/index.php?op?list&amp;dir_id=<{$dir.id}>' title='<{$dir.name}>'><i class="fa fa-folder-open"></i><{$dir.name}></a>
                 <{else}>
                     <a class='nav-link ' href='<{$wgfilemanager_url}>/index.php?op?list&amp;dir_id=<{$dir.id}>' title='<{$dir.name}>'><i class="fa fa-folder"></i><{$dir.name}></a>
                 <{/if}>

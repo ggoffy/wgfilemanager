@@ -68,6 +68,7 @@ interface Constants
     public const COOKIE_STYLE_DEFAULT = 'DEFAULT';
     public const COOKIE_STYLE_GROUPED = 'GROUPED';
     public const COOKIE_STYLE_CARD    = 'CARD';
+    public const COOKIE_STYLE_CARDBIG = 'CARDBIG';
 
     public const COOKIE_NOPREVIEW = 0;
     public const COOKIE_PREVIEW   = 1;

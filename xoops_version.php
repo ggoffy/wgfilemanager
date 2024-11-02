@@ -368,6 +368,15 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 1,
 ];
+// Show copyright
+$modversion['config'][] = [
+    'name'        => 'show_copyright',
+    'title'       => '_MI_WGFILEMANAGER_SHOW_COPYRIGHT',
+    'description' => '_MI_WGFILEMANAGER_SHOW_COPYRIGHT_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
 // Table type
 $modversion['config'][] = [
     'name'        => 'table_type',

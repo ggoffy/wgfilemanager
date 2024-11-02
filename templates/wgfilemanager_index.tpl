@@ -26,7 +26,7 @@
         <{/if}>
             <{if $wgfindexstyle|default:'' == 'GROUPED'}>
                 <{include file='db:wgfilemanager_index_grouped.tpl' }>
-            <{elseif $wgfindexstyle|default:'' == 'CARD'}>
+            <{elseif $wgfindexstyle|default:'' == 'CARD' || $wgfindexstyle|default:'' == 'CARDBIG'}>
                 <{include file='db:wgfilemanager_index_card.tpl' }>
             <{else}>
                 <{include file='db:wgfilemanager_index_default.tpl' }>

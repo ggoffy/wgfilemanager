@@ -79,12 +79,12 @@ switch ($op) {
     $GLOBALS['xoopsTpl']->assign('styledefault', Constants::COOKIE_STYLE_DEFAULT);
     $GLOBALS['xoopsTpl']->assign('stylegrouped', Constants::COOKIE_STYLE_GROUPED);
     $GLOBALS['xoopsTpl']->assign('stylecard', Constants::COOKIE_STYLE_CARD);
+    $GLOBALS['xoopsTpl']->assign('stylecardbig', Constants::COOKIE_STYLE_CARDBIG);
 
-    $cookieIndexPreview = Request::getString($cookieStyle, 'none', 'COOKIE');
-    if ('none' === $cookiePreview) {
+    $cookieIndexPreview = Request::getString($cookiePreview, 'none', 'COOKIE');
+    if ('none' === $cookieIndexPreview) {
         $cookieIndexPreview = Constants::COOKIE_NOPREVIEW;
         xoops_setcookie($cookiePreview, $cookieIndexPreview, time() + 60 * 60 * 24 * 30);
-
     } else {
         $cookieIndexPreview = $_COOKIE[$cookiePreview];
     }
@@ -107,6 +107,7 @@ switch ($op) {
     }
 
     //get permissions
+    $GLOBALS['xoopsTpl']->assign('permCreateDir', $permissionsHandler->getPermSubmitDirectory($dirId));
     $GLOBALS['xoopsTpl']->assign('permEditDir', $permissionsHandler->getPermSubmitDirectory($dirId));
     $GLOBALS['xoopsTpl']->assign('permEditFile', $permissionsHandler->getPermSubmitDirectory($dirId));
     $GLOBALS['xoopsTpl']->assign('permDownloadFileFromDir', $permissionsHandler->getPermDownloadFileFromDir($dirId));

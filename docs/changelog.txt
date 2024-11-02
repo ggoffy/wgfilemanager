@@ -3,7 +3,10 @@
 ==============================================================
  - added block for directory list (goffy)
  - fixed bugs (JJDai54/goffy)
-
+ - added german lang files (goffy)
+ - added big cards (goffy)
+ - updated templates (goffy)
+ 
 ==============================================================
 1.0 [2024/06/29 13:11:46]
 ==============================================================

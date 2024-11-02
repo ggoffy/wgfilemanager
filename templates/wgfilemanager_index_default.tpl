@@ -4,7 +4,7 @@
         </div>
         <div class="row wgf-filepanel-right-body">
             <div class="col-12 col-xs-12 col-sm-12">
-                <{if  $indexDirlist|default:false ||  $indexFilelist|default:false}>
+                <{if $indexDirlist|default:false || $indexFilelist|default:false}>
                     <table class='table table-<{$table_type|default:'none'}>'>
                         <tr>
                             <th class=''><{$smarty.const._MA_WGFILEMANAGER_FILE_NAME}></th>
@@ -13,7 +13,7 @@
                             <th class=''><{$smarty.const._MA_WGFILEMANAGER_FILE_SUBMITTER}></th>
                             <th class=''><{$smarty.const._MA_WGFILEMANAGER_ACTION}></th>
                         </tr>
-                        <!-- Start new dir loop -->
+                        <!-- Start dir loop -->
                         <{foreach item=dir from=$indexDirlist|default:false name=dir}>
                         <tr>
                             <td class='wgf-default-list'>
@@ -21,8 +21,8 @@
                                     <img class="card-img-top center wgf-preview-0" src="<{$indexDirlistIcon}>" alt="<{$dir.name}>">
                                 <{/if}>
                                 <span class="wgf-filename"><{$dir.name}></span>
-                                <{if $dir.description_short|default:''}>
-                                <p class="wgf-fileinfo"><{$dir.description_short}></p>
+                                <{if $dir.description_text|default:''}>
+                                <p class="wgf-fileinfo"><{$dir.description_text}></p>
                                 <{/if}>
                             </td>
                             <td class='wgf-default-list'>
@@ -36,7 +36,7 @@
                             </td>
                         </tr>
                         <{/foreach}>
-                        <!-- Start new file loop -->
+                        <!-- Start file loop -->
                         <{foreach item=file from=$indexFilelist|default:false name=file}>
                             <tr>
                                 <td class='wgf-default-list'>
