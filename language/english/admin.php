@@ -30,11 +30,13 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGFILEMANAGER_THEREARE_DIRECTORY', "There are <span class='bold'>%s</span> directories in the database");
 \define('_AM_WGFILEMANAGER_THEREARE_FILE', "There are <span class='bold'>%s</span> files in the database");
 \define('_AM_WGFILEMANAGER_THEREARE_MIMETYPE', "There are <span class='bold'>%s</span> mime types in the database");
+\define('_AM_WGFILEMANAGER_THEREARE_FILEBROKEN', "There are <span class='bold'>%s</span> broken files in the database");
 // ---------------- Admin Files ----------------
 // There aren't
 \define('_AM_WGFILEMANAGER_THEREARENT_DIRECTORY', "There aren't directories");
 \define('_AM_WGFILEMANAGER_THEREARENT_FILE', "There aren't files");
 \define('_AM_WGFILEMANAGER_THEREARENT_MIMETYPE', "There aren't mime types");
+\define('_AM_WGFILEMANAGER_THEREARENT_FILEBROKEN', "There aren't broken files");
 // Save/Delete
 \define('_AM_WGFILEMANAGER_FORM_OK', 'Successfully saved');
 \define('_AM_WGFILEMANAGER_FORM_DELETE_OK', 'Successfully deleted');
