@@ -52,9 +52,18 @@ function wgfilemanager_search($queryarray, $andor, $limit, $offset, $userid)
         $crKeywords = new \CriteriaCompo();
         for ($i = 0; $i  <  $elementCount; $i++) {
             $crKeyword = new \CriteriaCompo();
+            if ('exact' === $andor) {
+                $crKeyword->add(new \Criteria('name', $queryarray[$i]));
+                $crKeyword->add(new \Criteria('name', $queryarray[$i]));
+            } else {
+                $crKeyword->add(new \Criteria('name', '%' . $queryarray[$i] . '%', 'LIKE'));
+                $crKeyword->add(new \Criteria('description', '%' . $queryarray[$i] . '%', 'LIKE'), 'OR');
+            }
+            $crKeywords->add($crKeyword, $andor);
             unset($crKeyword);
         }
     }
+
     // search user(s)
     if ($userid && \is_array($userid)) {
         $userid = array_map('\intval', $userid);
@@ -64,6 +73,7 @@ function wgfilemanager_search($queryarray, $andor, $limit, $offset, $userid)
         $crUser = new \CriteriaCompo();
         $crUser->add(new \Criteria('submitter', $userid), 'OR');
     }
+
     $crSearch = new \CriteriaCompo();
     if (isset($crKeywords)) {
         $crSearch->add($crKeywords);
@@ -79,8 +89,8 @@ function wgfilemanager_search($queryarray, $andor, $limit, $offset, $userid)
     foreach (\array_keys($fileAll) as $i) {
         $ret[] = [
             'image'  => 'assets/icons/16/file.png',
-            'link'   => 'file.php?op=show&amp;id=' . $fileAll[$i]->getVar('id'),
-            'title'  => $fileAll[$i]->getVar('directory_id'),
+            'link'   => 'file.php?op=show&amp;file_id=' . $fileAll[$i]->getVar('id') . '&amp;dir_id=' . $fileAll[$i]->getVar('directory_id'),
+            'title'  => $fileAll[$i]->getVar('name'),
             'time'   => $fileAll[$i]->getVar('date_created')
         ];
     }
@@ -89,6 +99,63 @@ function wgfilemanager_search($queryarray, $andor, $limit, $offset, $userid)
     unset($crUser);
     unset($crSearch);
 
+    // search in table directory
+    // search keywords
+    $elementCount = 0;
+    $directoryHandler = $helper->getHandler('Directory');
+    if (\is_array($queryarray)) {
+        $elementCount = \count($queryarray);
+    }
+    if ($elementCount > 0) {
+        $crKeywords = new \CriteriaCompo();
+        for ($i = 0; $i  <  $elementCount; $i++) {
+            $crKeyword = new \CriteriaCompo();
+            if ('exact' === $andor) {
+                $crKeyword->add(new \Criteria('name', $queryarray[$i]));
+                $crKeyword->add(new \Criteria('name', $queryarray[$i]));
+            } else {
+                $crKeyword->add(new \Criteria('name', '%' . $queryarray[$i] . '%', 'LIKE'));
+                $crKeyword->add(new \Criteria('description', '%' . $queryarray[$i] . '%', 'LIKE'), 'OR');
+            }
+            $crKeywords->add($crKeyword, $andor);
+            unset($crKeyword);
+        }
+    }
+
+    // search user(s)
+    if ($userid && \is_array($userid)) {
+        $userid = array_map('\intval', $userid);
+        $crUser = new \CriteriaCompo();
+        $crUser->add(new \Criteria('submitter', '(' . \implode(',', $userid) . ')', 'IN'), 'OR');
+    } elseif (is_numeric($userid) && $userid > 0) {
+        $crUser = new \CriteriaCompo();
+        $crUser->add(new \Criteria('submitter', $userid), 'OR');
+    }
+
+    $crSearch = new \CriteriaCompo();
+    if (isset($crKeywords)) {
+        $crSearch->add($crKeywords);
+    }
+    if (isset($crUser)) {
+        $crSearch->add($crUser);
+    }
+    $crSearch->setStart($offset);
+    $crSearch->setLimit($limit);
+    $crSearch->setSort('date_created');
+    $crSearch->setOrder('DESC');
+    $directoryAll = $directoryHandler->getAll($crSearch);
+    foreach (\array_keys($directoryAll) as $i) {
+        $ret[] = [
+            'image'  => 'assets/icons/16/folder.png',
+            'link'   => 'directory.php?op=list&amp;dir_id=' . $directoryAll[$i]->getVar('id'),
+            'title'  => $directoryAll[$i]->getVar('name'),
+            'time'   => $directoryAll[$i]->getVar('date_created')
+        ];
+    }
+    unset($crKeywords);
+    unset($crKeyword);
+    unset($crUser);
+    unset($crSearch);
     return $ret;
 
 }
