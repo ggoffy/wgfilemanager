@@ -7,7 +7,8 @@
  - added big cards (goffy)
  - updated templates (goffy)
  - updated search (goffy)
- 
+ - added file sorting (goffy)
+
 ==============================================================
 1.0 [2024/06/29 13:11:46]
 ==============================================================

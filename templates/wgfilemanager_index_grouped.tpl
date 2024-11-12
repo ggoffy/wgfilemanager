@@ -28,8 +28,8 @@
                                     <p class="wgf-fileinfo">
                                         <{$smarty.const._MA_WGFILEMANAGER_COUNT_SUBDIRS}>: <{$dir.count_subdirs}><br>
                                         <{$smarty.const._MA_WGFILEMANAGER_COUNT_FILES}>: <{$dir.count_files}><br>
-                                        <{$smarty.const._MA_WGFILEMANAGER_FILE_CTIME}>: <{$dir.ctime_text}><br>
-                                        <{$smarty.const._MA_WGFILEMANAGER_FILE_SUBMITTER}>: <{$dir.submitter_text}>
+                                        <{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_DATE_CREATED}>: <{$dir.date_created_text}><br>
+                                        <{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_SUBMITTER}>: <{$dir.submitter_text}>
                                     </p>
 
                                 </td>
@@ -60,6 +60,7 @@
                                     <p class="wgf-fileinfo">
                                         <{$smarty.const._MA_WGFILEMANAGER_FILE_SIZE}>: <{$file.size_text}><br>
                                         <{$smarty.const._MA_WGFILEMANAGER_FILE_CTIME}>: <{$file.ctime_text}><br>
+                                        <{$smarty.const._MA_WGFILEMANAGER_FILE_DATE_CREATED}>: <{$file.date_created_text}><br>
                                         <{$smarty.const._MA_WGFILEMANAGER_FILE_SUBMITTER}>: <{$file.submitter_text}>
                                     </p>
                                 </td>

@@ -35,6 +35,11 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_INDEX_STYLECARD', 'Zeige als Cards');
 \define('_MA_WGFILEMANAGER_INDEX_STYLECARDBIG', 'Zeige als große Cards');
 \define('_MA_WGFILEMANAGER_INVALID_PARAMS', 'Ungültiger Parameter');
+//sorting
+\define('_MA_WGFILEMANAGER_INDEX_SORTLIST', 'Sortierung Liste');
+\define('_MA_WGFILEMANAGER_NAME', 'nach Name');
+\define('_MA_WGFILEMANAGER_DATE_CREATE', 'nach Einsendedatum');
+\define('_MA_WGFILEMANAGER_CTIME', 'nach Erstelldatum');
 // ---------------- Contents ----------------
 // Directory
 \define('_MA_WGFILEMANAGER_DIRECTORY', 'Verzeichnis');

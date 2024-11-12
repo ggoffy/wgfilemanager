@@ -448,6 +448,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
                 $result[$i]['parent_id'] = $directory['parent_id'];
                 $result[$i]['name'] = $directory['name'];
                 $result[$i]['description_text']  = $directory['description_text'];
+                $result[$i]['date_created_text']  = $directory['date_created_text'];
                 $result[$i]['submitter_text']  = $directory['submitter_text'];
                 $result[$i]['count_subdirs'] = $directory['count_subdirs'];
                 $result[$i]['count_files'] = $directory['count_files'];

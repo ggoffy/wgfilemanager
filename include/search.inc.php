@@ -156,6 +156,7 @@ function wgfilemanager_search($queryarray, $andor, $limit, $offset, $userid)
     unset($crKeyword);
     unset($crUser);
     unset($crSearch);
+
     return $ret;
 
 }
