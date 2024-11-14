@@ -20,6 +20,7 @@ declare(strict_types=1);
  * @package      wgfilemanager
  * @author       Goffy - Wedega - Email:webmaster@wedega.com - Website:https://xoops.wedega.com
  */
+
 if ($helper->getConfig('show_breadcrumbs') && \count($xoBreadcrumbs) > 0) {
     $GLOBALS['xoopsTpl']->assign('xoBreadcrumbs', $xoBreadcrumbs);
 }

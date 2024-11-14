@@ -37,6 +37,8 @@ require_once \XOOPS_ROOT_PATH . '/header.php';
 // Define Stylesheet
 $GLOBALS['xoTheme']->addStylesheet($style, null);
 $GLOBALS['xoTheme']->addStylesheet(\WGFILEMANAGER_URL . '/assets/css/default.css');
+
+$GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
 // Paths
 $GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGFILEMANAGER_URL.'/index.php');
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);

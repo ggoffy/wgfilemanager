@@ -1,8 +1,8 @@
 <div class="btn-group btn-group-sm" role="group" aria-label="group_view">
     <{if $file.image}>
-        <a class='btn btn-sm btn-outline-primary' href='#' data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$file.real_url}>" title='<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>'><img src="<{$wgfilemanager_icon_bi_url}>eye.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>" ></a>
+        <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#imgModal" data-bs-title="<{$file.name}>" data-bs-info="<{$file.real_url}>" title='<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>'><img src="<{$wgfilemanager_icon_bi_url}>eye.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>"></a>
     <{elseif $file.pdf}>
-        <a class='btn btn-sm btn-outline-primary' href='#' data-toggle="modal" data-target="#pdfModal" data-title="<{$file.name}>" data-info="<{$file.real_url}>" title='<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>>'><img src="<{$wgfilemanager_icon_bi_url}>eye.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>" ></a>
+        <a class='btn btn-sm btn-outline-primary' href='#' data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-title="<{$file.name}>" data-bs-info="<{$file.real_url}>" title='<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>'><img src="<{$wgfilemanager_icon_bi_url}>eye.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>" ></a>
     <{/if}>
     <{if $permDownloadFileFromDir|default:false}>
         <a class="btn btn-sm btn-outline-primary" href='download.php?op=download&amp;file_id=<{$file.id|default:0}>' title='<{$smarty.const._MA_WGFILEMANAGER_FILE_DOWNLOAD}>'><img src="<{$wgfilemanager_icon_bi_url}>download.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_DOWNLOAD}>" ></a>
