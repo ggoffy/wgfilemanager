@@ -35,6 +35,10 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_INDEX_STYLECARD', 'Zeige als Cards');
 \define('_MA_WGFILEMANAGER_INDEX_STYLECARDBIG', 'Zeige als große Cards');
 \define('_MA_WGFILEMANAGER_INVALID_PARAMS', 'Ungültiger Parameter');
+\define('_MA_WGFILEMANAGER_FAVORITE', 'Favoriten');
+\define('_MA_WGFILEMANAGER_FAVORITE_PIN', 'In Favoriten anzeigen');
+\define('_MA_WGFILEMANAGER_FAVORITE_UNPIN', 'Aus Favoriten enfernen');
+\define('_MA_WGFILEMANAGER_FAVORITE_ERROR_SET', 'FEHLER: Setzen Favoriten fehlgeschlagen');
 //sorting
 \define('_MA_WGFILEMANAGER_INDEX_SORTLIST', 'Sortierung Liste');
 \define('_MA_WGFILEMANAGER_NAME', 'nach Name');

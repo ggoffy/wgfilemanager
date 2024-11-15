@@ -97,6 +97,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_PANEL_TYPE_DESC', 'Panel Type is the bootstrap html div');
 \define('_MI_WGFILEMANAGER_USE_BROKEN', 'Use Feature BROKEN');
 \define('_MI_WGFILEMANAGER_USE_BROKEN_DESC', 'Decide whether you want to use festure BROKEN. Users can notify admins about broken file links.');
+\define('_MI_WGFILEMANAGER_USE_FAVORITES', 'Use Feature FAVORITES');
+\define('_MI_WGFILEMANAGER_USE_FAVORITES_DESC', 'Decide whether you want to use festure FAVORITES. Users can pin folders and files in order to be shown under favorites.');
 \define('_MI_WGFILEMANAGER_SHOW_BREADCRUMBS', 'Show breadcrumb navigation');
 \define('_MI_WGFILEMANAGER_SHOW_BREADCRUMBS_DESC', 'Show breadcrumb navigation which displays the current page in context within the site structure');
 \define('_MI_WGFILEMANAGER_SHOW_COPYRIGHT', 'Show copyright');

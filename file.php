@@ -39,7 +39,9 @@ $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
 
 // Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 // Paths
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
@@ -48,15 +50,13 @@ $GLOBALS['xoopsTpl']->assign('wgfilemanager_upload_url', \WGFILEMANAGER_UPLOAD_U
 // Keywords
 $keywords = [];
 // Breadcrumbs
+$xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX, 'link' => 'index.php'];
 if ($dirId > 1) {
-    $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX, 'link' => 'index.php'];
     $dirArray = $directoryHandler->getDirListBreadcrumb($dirId);
     $dirListBreadcrumb = array_reverse($dirArray, true);
     foreach ($dirListBreadcrumb as $key => $value) {
         $xoBreadcrumbs[] = ['title' => $value, 'link' => 'index.php?dir_id=' . $key];
     }
-} else {
-    $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX];
 }
 // Permissions
 $GLOBALS['xoopsTpl']->assign('showItem', $fileId > 0);
@@ -312,6 +312,27 @@ switch ($op) {
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
+        break;
+    case 'favorite_pin':
+    case 'favorite_unpin':
+        //check perms
+        if (!$permissionsHandler->getPermGlobalSubmit()) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
+        // Check params
+        if (0 === $fileId) {
+            \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
+        }
+        $fileObj   = $fileHandler->get($fileId);
+        $fileObj->setVar('favorite', (int)('favorite_pin' === $op));
+        if ($fileHandler->insert($fileObj)) {
+            \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_AM_WGFILEMANAGER_FORM_OK);
+        } else {
+            \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGFILEMANAGER_FAVORITE_ERROR_SET);
+        }
+        unset($fileObj);
+
+
         break;
 }
 

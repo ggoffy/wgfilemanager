@@ -97,6 +97,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_PANEL_TYPE_DESC', 'Bootstrap Panel Typ');
 \define('_MI_WGFILEMANAGER_USE_BROKEN', 'Verwende Feature FEHLERHAFT');
 \define('_MI_WGFILEMANAGER_USE_BROKEN_DESC', 'Entscheide ob das Feature FEHLERHAFT verwendet werden soll. Benutzer können dann die Administratoren über fehlerhafte Dateilinks informieren.');
+\define('_MI_WGFILEMANAGER_USE_FAVORITES', 'Verwende Feature FAVORITEN');
+\define('_MI_WGFILEMANAGER_USE_FAVORITES_DESC', 'Entscheide ob das Feature FAVORITEN verwendet werden soll. Benutzer können dann Verzeichnisse oder Dateien pinnen, damit diese unter Favoriten angezeigt werden.');
 \define('_MI_WGFILEMANAGER_SHOW_BREADCRUMBS', 'Brotkrumen-Navigation (breadcrumbs) anzeigen');
 \define('_MI_WGFILEMANAGER_SHOW_BREADCRUMBS_DESC', 'Eine Brotkrumen-Navigation zeigt den aktuellen Seitenstand innerhalb der Websitestruktur');
 \define('_MI_WGFILEMANAGER_SHOW_COPYRIGHT', 'Copyright anzeigen');

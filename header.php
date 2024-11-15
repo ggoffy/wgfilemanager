@@ -34,7 +34,9 @@ $permissionsHandler = $helper->getHandler('Permissions');
 // 
 $myts = MyTextSanitizer::getInstance();
 // Default Css Style
-$style = \WGFILEMANAGER_URL . '/assets/css/style.css';
+$styles = [];
+$styles[] = \WGFILEMANAGER_URL . '/assets/css/style.css';
+$styles[] = \WGFILEMANAGER_URL . '/assets/icons/bootstrap/font/bootstrap-icons.min.css';
 // Smarty Default
 $sysPathIcon16 = $GLOBALS['xoopsModule']->getInfo('sysicons16');
 $sysPathIcon32 = $GLOBALS['xoopsModule']->getInfo('sysicons32');

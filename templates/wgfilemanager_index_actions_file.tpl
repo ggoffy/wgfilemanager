@@ -11,6 +11,13 @@
     <{if $showBtnDetails|default:false}>
         <a class='btn btn-sm btn-outline-primary' href='file.php?op=show&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_DETAILS}>'><img src="<{$wgfilemanager_icon_bi_url}>search.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_DETAILS}>" ></a>
     <{/if}>
+    <{if $useFavorites|default:false}>
+        <{if $file.favorite > 0}>
+            <a class='btn btn-sm btn-outline-primary' href='file.php?op=favorite_unpin&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_UNPIN}>'><img src="<{$wgfilemanager_icon_bi_url}>pin.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_UNPIN}>" ></a>
+        <{else}>
+            <a class='btn btn-sm btn-outline-primary' href='file.php?op=favorite_pin&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}>'><img src="<{$wgfilemanager_icon_bi_url}>pin-angle.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}>" ></a>
+        <{/if}>
+    <{/if}>
 </div>
 <{if $permEditFile|default:false || $showBtnBack|default:false}>
     <div class="btn-group btn-group-sm" role="group" aria-label="group_view">

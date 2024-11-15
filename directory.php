@@ -39,7 +39,9 @@ $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
 
 // Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 $GLOBALS['xoTheme']->addStylesheet(\WGFILEMANAGER_URL . '/assets/css/default.css');
 // Paths
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
@@ -207,7 +209,7 @@ switch ($op) {
             \redirect_header('directory.php?op=list', 3, \_NOPERM);
         }
         // Check params
-        if (0 == $dirId) {
+        if (0 === $dirId) {
             \redirect_header('directory.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
         }
         // Get Form
@@ -227,7 +229,7 @@ switch ($op) {
         // Request source
         $dirIdSource = Request::getInt('id_source');
         // Check params
-        if (0 == $dirIdSource) {
+        if (0 === $dirIdSource) {
             \redirect_header('directory.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
         }
         // Get Form
@@ -244,7 +246,7 @@ switch ($op) {
             \redirect_header('directory.php?op=list', 3, \_NOPERM);
         }
         // Check params
-        if (0 == $dirId) {
+        if (0 === $dirId) {
             \redirect_header('directory.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
         }
         $directoryObj = $directoryHandler->get($dirId);
@@ -281,7 +283,28 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
         break;
-    case 'order':
+    case 'favorite_pin':
+    case 'favorite_unpin':
+        //check perms
+        if (!$permissionsHandler->getPermGlobalSubmit()) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
+        // Check params
+        if (0 === $dirId) {
+            \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
+        }
+        $directoryObj   = $directoryHandler->get($dirId);
+        $directoryObj->setVar('favorite', (int)('favorite_pin' === $op));
+        if ($directoryHandler->insert($directoryObj)) {
+            \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_AM_WGFILEMANAGER_FORM_OK);
+        } else {
+            \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGFILEMANAGER_FAVORITE_ERROR_SET);
+        }
+        unset($directoryObj);
+
+        
+        break;
+/*    case 'order':
         $aorder         = Request::getArray('menuItem');
         $i              = 0;
         $moveDir        = false;
@@ -339,7 +362,7 @@ switch ($op) {
             }
         }
 
-        break;
+        break;*/
 }
 
 // Keywords

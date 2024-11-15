@@ -97,6 +97,7 @@ $modversion['templates'] = [
     ['file' => 'wgfilemanager_index_actions_file.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_card.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_dirlist_default.tpl', 'description' => ''],
+    ['file' => 'wgfilemanager_index_favlist_default.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_filepanel_header.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_directory.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_directory_default_table.tpl', 'description' => ''],
@@ -355,6 +356,15 @@ $modversion['config'][] = [
     'name'        => 'use_broken',
     'title'       => '\_MI_WGFILEMANAGER_USE_BROKEN',
     'description' => '\_MI_WGFILEMANAGER_USE_BROKEN_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+// Use Feature 'Favorites'
+$modversion['config'][] = [
+    'name'        => 'use_favorites',
+    'title'       => '\_MI_WGFILEMANAGER_USE_FAVORITES',
+    'description' => '\_MI_WGFILEMANAGER_USE_FAVORITES_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 1,

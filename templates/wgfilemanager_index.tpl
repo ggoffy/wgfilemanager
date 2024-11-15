@@ -11,12 +11,14 @@
     <div class="row panel panel-<{$panel_type|default:'none'}>">
         <{if $indexDirPosTop|default:false}>
             <div class="col-sm-12 wgf-filepanel-left">
-                <{include file='db:wgfilemanager_index_dirlist_default.tpl' directory=$dir_list}>
+                <{include file='db:wgfilemanager_index_favlist_default.tpl'}>
+                <{include file='db:wgfilemanager_index_dirlist_default.tpl'}>
             </div>
         <{/if}>
         <{if $indexDirPosLeft|default:false}>
             <div class="col-xs-12 col-sm-4 wgf-filepanel-left">
-                <{include file='db:wgfilemanager_index_dirlist_default.tpl' directory=$dir_list}>
+                <{include file='db:wgfilemanager_index_favlist_default.tpl'}>
+                <{include file='db:wgfilemanager_index_dirlist_default.tpl'}>
             </div>
         <{/if}>
         <{if $indexDirPosTop|default:false || $indexDirPosNone|default:false}>

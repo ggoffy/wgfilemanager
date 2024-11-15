@@ -3,6 +3,13 @@
     <{if $permEditDir|default:false}>
         <a class='btn btn-sm btn-outline-primary' href='directory.php?op=new&amp;parent_id=<{$dir.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_ADD}>'><img src="<{$wgfilemanager_icon_bi_url}>folder-plus.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_ADD}>" ></a>
     <{/if}>
+    <{if $useFavorites|default:false}>
+        <{if $dir.favorite > 0}>
+            <a class='btn btn-sm btn-outline-primary' href='directory.php?op=favorite_unpin&amp;id=<{$dir.id}>&amp;parent_id=<{$dir.parent_id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_UNPIN}>'><img src="<{$wgfilemanager_icon_bi_url}>pin.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_UNPIN}>" ></a>
+        <{else}>
+            <a class='btn btn-sm btn-outline-primary' href='directory.php?op=favorite_pin&amp;id=<{$dir.id}>&amp;parent_id=<{$dir.parent_id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}>'><img src="<{$wgfilemanager_icon_bi_url}>pin-angle.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}>" ></a>
+        <{/if}>
+    <{/if}>
 </div>
 <{if $permEditDir|default:false || $showBtnBack|default:false}>
     <div class="btn-group btn-group-sm" role="group" aria-label="group_view">

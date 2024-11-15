@@ -55,6 +55,7 @@ class Directory extends \XoopsObject
         $this->initVar('description', \XOBJ_DTYPE_OTHER);
         $this->initVar('fullpath', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('weight', \XOBJ_DTYPE_INT);
+        $this->initVar('favorite', \XOBJ_DTYPE_INT);
         $this->initVar('date_created', \XOBJ_DTYPE_INT);
         $this->initVar('submitter', \XOBJ_DTYPE_INT);
     }

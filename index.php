@@ -35,7 +35,9 @@ $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $GLOBALS['xoopsOption']['template_main'] = 'wgfilemanager_index.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 // Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 $GLOBALS['xoTheme']->addStylesheet(\WGFILEMANAGER_URL . '/assets/css/default.css');
 
 $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
@@ -54,6 +56,7 @@ $GLOBALS['xoopsTpl']->assign('indexDirPosLeft', 'left' === $indexDirPosition);
 $GLOBALS['xoopsTpl']->assign('indexDirPosTop', 'top' === $indexDirPosition);
 $GLOBALS['xoopsTpl']->assign('indexDirPosNone', 'none' === $indexDirPosition);
 $GLOBALS['xoopsTpl']->assign('useBroken', (bool)$helper->getConfig('use_broken'));
+$GLOBALS['xoopsTpl']->assign('useFavorites', (bool)$helper->getConfig('use_favorites'));
 $iconSet = $helper->getConfig('iconset');
 // Keywords
 $keywords = [];
@@ -216,6 +219,17 @@ switch ($op) {
             }
         }
         $GLOBALS['xoopsTpl']->assign('indexFilelist', $fileList);
+
+        $block['fav_list'] = [];
+        if ((bool)$helper->getConfig('use_favorites')) {
+            //get fav list
+            $favList = [];
+            //get directory fav list
+            $favList['dirs'] = $directoryHandler->getFavDirList();
+            //get directory fav list
+            $favList['files'] = $fileHandler->getFavFileList();
+            $GLOBALS['xoopsTpl']->assign('fav_list', $favList);
+        }
         // Display Navigation
         if ($fileCount > $limit) {
             require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
