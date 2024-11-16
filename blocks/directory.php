@@ -41,6 +41,8 @@ function b_wgfilemanager_dirlist_show($options)
     $directoryHandler = $helper->getHandler('Directory');
     $fileHandler      = $helper->getHandler('File');
 
+    $block = [];
+
     $dirId = Request::getInt('dir_id', 0);
     if ((!empty($xoopsModule))) {
         $moduleDirName = \basename(\dirname(__DIR__));
