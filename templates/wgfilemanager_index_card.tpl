@@ -13,11 +13,11 @@
 <div class="row wgf-filepanel-right-header">
     <{include file='db:wgfilemanager_index_filepanel_header.tpl' }>
 </div>
-<div class="row wgf-filepanel-right-body">
+<div class="row wgf-filepanel-right-body panel panel-<{$panel_type|default:'none'}>">
     <{if $indexDirlist|default:false || $indexFilelist|default:false}>
         <!-- Start dir loop -->
         <{foreach item=dir from=$indexDirlist|default:false name=dir}>
-            <div class="card wgf-card <{if $wgfindexstyle|default:'' == 'CARD'}>wgf-card-sm<{else}>wgf-card-lg<{/if}>">
+            <div class="card wgf-card wgf-card-<{$table_type|default:'none'}> <{if $wgfindexstyle|default:'' == 'CARD'}>wgf-card-sm<{else}>wgf-card-lg<{/if}>">
                 <{if $wgfindexpreview|default:false}>
                     <div class="text-center"><img class="card-img-top center wgf-preview-card-folder" src="<{$indexDirlistIcon}>" alt="<{$dir.name}>"></div>
                 <{/if}>
@@ -47,7 +47,7 @@
         <div class="clear"></div>
         <!-- Start file loop -->
         <{foreach item=file from=$indexFilelist|default:false name=file}>
-            <div class="card wgf-card <{if $wgfindexstyle|default:'' == 'CARD'}>wgf-card-sm<{else}>wgf-card-lg<{/if}>">
+            <div class="card wgf-card wgf-card-<{$table_type|default:'none'}> <{if $wgfindexstyle|default:'' == 'CARD'}>wgf-card-sm<{else}>wgf-card-lg<{/if}>">
                 <{if $wgfindexpreview|default:false}>
                     <div class="text-center">
                         <{if $file.image|default:false}>
