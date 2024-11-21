@@ -20,6 +20,9 @@ declare(strict_types=1);
  * @package      wgfilemanager
  * @author       Goffy - Wedega - Email:webmaster@wedega.com - Website:https://xoops.wedega.com
  */
+
+require_once __DIR__ . '/main.php';
+
 // Admin Edit
 \define('_MB_WGFILEMANAGER_DISPLAY', 'Wie viele Einträge anzeigen');
 //\define('_MB_WGFILEMANAGER_DISPLAY_SPOTLIGHT', "How Many Items to Display (only valid if you select 'all')");
