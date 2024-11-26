@@ -127,6 +127,9 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             \redirect_header('index.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
+        if (!$permissionsHandler->getPermUploadFileToDir($dirId) && !$permissionsHandler->getPermSubmitDirectory($dirId)) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
         if ($fileId > 0) {
             $fileObj = $fileHandler->get($fileId);
         } else {
@@ -226,6 +229,9 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'new':
+        if (!$permissionsHandler->getPermUploadFileToDir($dirId)) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_FILE_ADD];
         // Form Create
@@ -238,6 +244,9 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'edit':
+        if (!$permissionsHandler->getPermSubmitDirectory($dirId)) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_FILE_EDIT];
         // Check params
@@ -252,6 +261,9 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'delete':
+        if (!$permissionsHandler->getPermSubmitDirectory($dirId)) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_FILE_DELETE];
         // Check params
@@ -316,7 +328,7 @@ switch ($op) {
     case 'favorite_pin':
     case 'favorite_unpin':
         //check perms
-        if (!$permissionsHandler->getPermGlobalSubmit()) {
+        if (!$permissionsHandler->getPermSubmitDirectory($dirId)) {
             \redirect_header('index.php?op=list', 3, \_NOPERM);
         }
         // Check params
@@ -331,8 +343,6 @@ switch ($op) {
             \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGFILEMANAGER_FAVORITE_ERROR_SET);
         }
         unset($fileObj);
-
-
         break;
 }
 
