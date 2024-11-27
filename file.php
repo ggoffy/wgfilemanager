@@ -148,6 +148,8 @@ switch ($op) {
         }
         $repoPath = \WGFILEMANAGER_REPO_PATH . $dirBasePath;
         $uploaderErrors = '';
+        $redirOp = $fileId > 0 ? 'edit' : 'new';
+
         if (0 == $fileId) {
             //upload new file
             require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
@@ -156,12 +158,14 @@ switch ($op) {
             $fileSize     = $_FILES['name']['size'];
             $fileNewName  = substr($filename, 0, (strlen($filename)) - (strlen(strrchr($filename, '.'))));
             $extension    = \str_replace($fileNewName, '', $filename);
-            if (Constants::FILE_HANDLENAME_UNIQUE === $fileHandlename) {
-                $fileNewName = \preg_replace("/[^a-zA-Z0-9]+/", '', $fileNewName);
-            }
+            //do same replacements as class/uploader.php
+            $fileNewName = iconv('UTF-8', 'ASCII//TRANSLIT', $fileNewName);
+            $fileNewName = preg_replace('!\s+!', '_', $fileNewName);
+            $fileNewName = preg_replace("/[^a-zA-Z0-9\._-]/", '', $fileNewName);
+
             //check for new files, whether file already exists
-            if (Constants::FILE_HANDLENAME_ORIGINAL === $fileHandlename && file_exists($repoPath . $fileNewName . $extension)) {
-                \redirect_header('file.php?op=list', 5, \_MA_WGFILEMANAGER_FILE_ERROR_EXISTS);
+            if (file_exists($repoPath . $fileNewName . $extension)) {
+                \redirect_header('file.php?op=' . $redirOp . '&amp;file_id=' . $fileId . '&amp;dir_id=' . $directoryId, 5, \_MA_WGFILEMANAGER_FILE_ERROR_EXISTS);
             }
             $allowedMimeTypes = $mimetypeHandler->getMimetypeArray();
             $uploader = new \XoopsMediaUploader($repoPath, $allowedMimeTypes, $helper->getConfig('maxsize_file'), null, null);
@@ -176,12 +180,12 @@ switch ($op) {
                     $uploaderErrors .= '<br>' . $uploader->getErrors();
                 }
             } else {
-                if ($filename > '') {
+                if ('' !== $filename) {
                     $uploaderErrors .= '<br>' . $uploader->getErrors();
                 }
             }
             if ('' !== $uploaderErrors) {
-                \redirect_header('file.php?op=edit&file_id=' . $fileId, 5, $uploaderErrors);
+                \redirect_header('file.php?op=' . $redirOp . '&amp;file_id=' . $fileId . '&amp;dir_id=' . $directoryId, 5, $uploaderErrors);
             }
         } else {
             //handle existing
@@ -207,8 +211,12 @@ switch ($op) {
         $fileObj->setVar('description', Request::getText('description'));
         $fileObj->setVar('ip', Request::getString('ip'));
         $fileObj->setVar('status', Request::getInt('status'));
-        $fileDate_createdObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('date_created'));
-        $fileObj->setVar('date_created', $fileDate_createdObj->getTimestamp());
+        if (Request::hasVar('date_created')) {
+            $fileDate_createdObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('date_created'));
+            $fileObj->setVar('date_created', $fileDate_createdObj->getTimestamp());
+        } else {
+            $fileObj->setVar('date_created', time());
+        }
         $fileObj->setVar('submitter', Request::getInt('submitter'));
         // Insert Data
         if ($fileHandler->insert($fileObj)) {
