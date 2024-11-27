@@ -55,6 +55,7 @@ class Directory extends \XoopsObject
         $this->initVar('description', \XOBJ_DTYPE_OTHER);
         $this->initVar('fullpath', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('weight', \XOBJ_DTYPE_INT);
+        $this->initVar('favorite', \XOBJ_DTYPE_INT);
         $this->initVar('date_created', \XOBJ_DTYPE_INT);
         $this->initVar('submitter', \XOBJ_DTYPE_INT);
     }
@@ -138,7 +139,7 @@ class Directory extends \XoopsObject
         $dirFullpath = $this->getVar('fullpath');
         if ($isAdmin) {
             $tbFullpath = new \XoopsFormLabel(\_MA_WGFILEMANAGER_DIRECTORY_FULLPATH, $dirFullpath);
-            $tbFullpath->setDescription(sprintf(\_MA_WGFILEMANAGER_DIRECTORY_FULLPATH_DESCR, WGFILEMANAGER_UPLOAD_PATH));
+            $tbFullpath->setDescription(sprintf(\_MA_WGFILEMANAGER_DIRECTORY_FULLPATH_DESCR, WGFILEMANAGER_UPLOAD_PATH . '/repository'));
             $form->addElement($tbFullpath);
             $form->addElement(new \XoopsFormHidden('fullpath', $dirFullpath));
             $form->addElement(new \XoopsFormHidden('fullpath_old', $dirFullpath));

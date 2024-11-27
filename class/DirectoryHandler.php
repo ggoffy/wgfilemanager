@@ -428,7 +428,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * Returns an array directories
+     * Returns an array of directories
      *
      * @param int $dirId
      * @return array
@@ -448,15 +448,39 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
                 $result[$i]['parent_id'] = $directory['parent_id'];
                 $result[$i]['name'] = $directory['name'];
                 $result[$i]['description_text']  = $directory['description_text'];
+                $result[$i]['date_created_text']  = $directory['date_created_text'];
                 $result[$i]['submitter_text']  = $directory['submitter_text'];
                 $result[$i]['count_subdirs'] = $directory['count_subdirs'];
                 $result[$i]['count_files'] = $directory['count_files'];
                 $result[$i]['ctime_text'] = \formatTimestamp($directory['date_created'], 's');
+                $result[$i]['favorite'] = $directory['favorite'];
             }
         }
 
         return $result;
 
+    }
+
+    /**
+     * Returns an array of favorite directories
+     *
+     * @return array
+     */
+    public function getFavDirList() {
+        $result = [];
+        $crDirectory = new \CriteriaCompo();
+        $crDirectory->add(new \Criteria('favorite', '1'));
+        $directoryCount = $this->getCount($crDirectory);
+        if ($directoryCount > 0) {
+            $crDirectory->setSort('name');
+            $crDirectory->setOrder('asc');
+            $directoryAll = $this->getAll($crDirectory);
+            foreach (\array_keys($directoryAll) as $i) {
+                $result[] = $directoryAll[$i]->getValuesDir();
+            }
+        }
+
+        return $result;
     }
 
 }

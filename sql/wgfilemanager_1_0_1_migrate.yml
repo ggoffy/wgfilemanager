@@ -20,6 +20,9 @@ wgfilemanager_directory:
             name: weight
             attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
         -
+            name: favorite
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
             name: date_created
             attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
         -
@@ -61,6 +64,9 @@ wgfilemanager_file:
             attributes: ' VARCHAR(45)     NOT NULL DEFAULT '''''''' '
         -
             name: status
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: favorite
             attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
         -
             name: date_created

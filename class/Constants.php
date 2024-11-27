@@ -72,4 +72,13 @@ interface Constants
 
     public const COOKIE_NOPREVIEW = 0;
     public const COOKIE_PREVIEW   = 1;
+
+    // Constants for cookies
+    public const COOKIE_SORT_NAME_ASC         = 1;
+    public const COOKIE_SORT_NAME_DESC        = 2;
+    public const COOKIE_SORT_CTIME_ASC        = 3;
+    public const COOKIE_SORT_CTIME_DESC       = 4;
+    public const COOKIE_SORT_DATE_CREATE_ASC  = 5;
+    public const COOKIE_SORT_DATE_CREATE_DESC = 6;
+
 }

@@ -18,6 +18,7 @@ CREATE TABLE `wgfilemanager_directory` (
   `description`  TEXT            NOT NULL ,
   `fullpath`     VARCHAR(255)    NOT NULL DEFAULT '',
   `weight`       INT(10)         NOT NULL DEFAULT '0',
+  `favorite`     INT(1)          NOT NULL DEFAULT '0',
   `date_created` INT(11)         NOT NULL DEFAULT '0',
   `submitter`    INT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -38,6 +39,7 @@ CREATE TABLE `wgfilemanager_file` (
   `size`         INT(11)         NOT NULL DEFAULT '0',
   `ip`           VARCHAR(45)     NOT NULL DEFAULT '',
   `status`       INT(1)          NOT NULL DEFAULT '0',
+  `favorite`     INT(1)          NOT NULL DEFAULT '0',
   `date_created` INT(11)         NOT NULL DEFAULT '0',
   `submitter`    INT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)

@@ -170,10 +170,10 @@ switch ($op) {
             if ($mimetypeHandler->getCountMimetype() > 0 && !$mimetypeHandler->deleteAll()) {
                 $GLOBALS['xoopsTpl']->assign('error', $mimetypeHandler->getHtmlErrors());
             }
-            $tabledata = Yaml::readWrapped(\WGFILEMANAGER_PATH . '\testdata\english\wgfilemanager_mimetype.yml');
+            $tabledata = Yaml::readWrapped(\WGFILEMANAGER_PATH . '/testdata/english/wgfilemanager_mimetype.yml');
             TableLoad::truncateTable('wgfilemanager_mimetype');
             TableLoad::loadTableFromArray('wgfilemanager_mimetype', $tabledata);
-            \redirect_header('mimetype.php', 3, \_AM_WGFILEMANAGER_LOAD_MIMETYPE_OK);
+            //\redirect_header('mimetype.php', 3, \_AM_WGFILEMANAGER_LOAD_MIMETYPE_OK);
         } else {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'id' => $mimeId, 'start' => $start, 'limit' => $limit, 'op' => 'load_default'],

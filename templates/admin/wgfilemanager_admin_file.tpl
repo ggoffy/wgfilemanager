@@ -15,6 +15,7 @@
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_FILE_SIZE}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_FILE_IP}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_FILE_STATUS}></th>
+                <th class="center"><{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_FILE_DATE_CREATED}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_FILE_SUBMITTER}></th>
                 <th class="center width5"><{$smarty.const._MA_WGFILEMANAGER_FORM_ACTION}></th>
@@ -34,6 +35,7 @@
                 <td class='center'><{$file.size_text|default:false}></td>
                 <td class='center'><{$file.ip|default:false}></td>
                 <td class='center'><img src="<{$modPathIcon16}>status<{$file.status|default:false}>.png" alt="<{$file.status_text|default:false}>" title="<{$file.status_text|default:false}>" ></td>
+                <td class='center'><{$file.favorite|default:false}></td>
                 <td class='center'><{$file.date_created_text|default:false}></td>
                 <td class='center'><{$file.submitter_text|default:false}></td>
                 <td class="center  width5">

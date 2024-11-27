@@ -21,7 +21,10 @@ declare(strict_types=1);
  * @author       Goffy - Wedega - Email:webmaster@wedega.com - Website:https://xoops.wedega.com
  */
 
-use XoopsModules\Wgfilemanager\Common;
+use XoopsModules\Wgfilemanager\{
+    Common,
+    Constants
+};
 
 require_once \dirname(__DIR__) . '/preloads/autoloader.php';
 require __DIR__ . '/header.php';
@@ -30,14 +33,22 @@ require __DIR__ . '/header.php';
 $templateMain = 'wgfilemanager_admin_index.tpl';
 
 // Count elements
-$countDirectory = $directoryHandler->getCount();
-$countFile = $fileHandler->getCount();
+$countDirectory  = $directoryHandler->getCount();
+$countFile       = $fileHandler->getCount();
+$countMimetype   = $mimetypeHandler->getCount();
 
 // InfoBox Statistics
 $adminObject->addInfoBox(\_AM_WGFILEMANAGER_STATISTICS);
 // Info elements
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGFILEMANAGER_THEREARE_DIRECTORY . '</label>', $countDirectory));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGFILEMANAGER_THEREARE_FILE . '</label>', $countFile));
+$adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGFILEMANAGER_THEREARE_MIMETYPE . '</label>', $countMimetype));
+if ((bool)$helper->getConfig('use_broken')) {
+    $crFile = new \CriteriaCompo();
+    $crFile->add(new \Criteria('status', Constants::STATUS_BROKEN));
+    $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGFILEMANAGER_THEREARE_FILEBROKEN . '</label>', $fileHandler->getCount($crFile)));
+}
+
 
 // Upload Folders
 $configurator = new Common\Configurator();

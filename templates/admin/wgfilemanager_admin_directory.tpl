@@ -17,6 +17,7 @@
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_WEIGHT}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_COUNT_SUBDIRS}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_COUNT_FILES}></th>
+                <th class="center"><{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_DATE_CREATED}></th>
                 <th class="center"><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_SUBMITTER}></th>
                 <th class="center width5"><{$smarty.const._MA_WGFILEMANAGER_FORM_ACTION}></th>
@@ -40,6 +41,7 @@
                     <span style="color:red;font-weight:700"><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_ERROR_DONOTEXIST}></span>
                     <{/if}>
                 </td>
+                <td class='center'><{$directory.favorite|default:false}></td>
                 <td class='center'><{$directory.date_created_text|default:false}></td>
                 <td class='center'><{$directory.submitter_text|default:false}></td>
                 <td class="center  width5">

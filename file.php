@@ -39,7 +39,9 @@ $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
 
 // Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 // Paths
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
@@ -48,15 +50,13 @@ $GLOBALS['xoopsTpl']->assign('wgfilemanager_upload_url', \WGFILEMANAGER_UPLOAD_U
 // Keywords
 $keywords = [];
 // Breadcrumbs
+$xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX, 'link' => 'index.php'];
 if ($dirId > 1) {
-    $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX, 'link' => 'index.php'];
     $dirArray = $directoryHandler->getDirListBreadcrumb($dirId);
     $dirListBreadcrumb = array_reverse($dirArray, true);
     foreach ($dirListBreadcrumb as $key => $value) {
         $xoBreadcrumbs[] = ['title' => $value, 'link' => 'index.php?dir_id=' . $key];
     }
-} else {
-    $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_INDEX];
 }
 // Permissions
 $GLOBALS['xoopsTpl']->assign('showItem', $fileId > 0);
@@ -127,6 +127,9 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             \redirect_header('index.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
+        if (!$permissionsHandler->getPermUploadFileToDir($dirId) && !$permissionsHandler->getPermSubmitDirectory($dirId)) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
         if ($fileId > 0) {
             $fileObj = $fileHandler->get($fileId);
         } else {
@@ -145,6 +148,8 @@ switch ($op) {
         }
         $repoPath = \WGFILEMANAGER_REPO_PATH . $dirBasePath;
         $uploaderErrors = '';
+        $redirOp = $fileId > 0 ? 'edit' : 'new';
+
         if (0 == $fileId) {
             //upload new file
             require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
@@ -153,12 +158,14 @@ switch ($op) {
             $fileSize     = $_FILES['name']['size'];
             $fileNewName  = substr($filename, 0, (strlen($filename)) - (strlen(strrchr($filename, '.'))));
             $extension    = \str_replace($fileNewName, '', $filename);
-            if (Constants::FILE_HANDLENAME_UNIQUE === $fileHandlename) {
-                $fileNewName = \preg_replace("/[^a-zA-Z0-9]+/", '', $fileNewName);
-            }
+            //do same replacements as class/uploader.php
+            $fileNewName = iconv('UTF-8', 'ASCII//TRANSLIT', $fileNewName);
+            $fileNewName = preg_replace('!\s+!', '_', $fileNewName);
+            $fileNewName = preg_replace("/[^a-zA-Z0-9\._-]/", '', $fileNewName);
+
             //check for new files, whether file already exists
-            if (Constants::FILE_HANDLENAME_ORIGINAL === $fileHandlename && file_exists($repoPath . $fileNewName . $extension)) {
-                \redirect_header('file.php?op=list', 5, \_MA_WGFILEMANAGER_FILE_ERROR_EXISTS);
+            if (file_exists($repoPath . $fileNewName . $extension)) {
+                \redirect_header('file.php?op=' . $redirOp . '&amp;file_id=' . $fileId . '&amp;dir_id=' . $directoryId, 5, \_MA_WGFILEMANAGER_FILE_ERROR_EXISTS);
             }
             $allowedMimeTypes = $mimetypeHandler->getMimetypeArray();
             $uploader = new \XoopsMediaUploader($repoPath, $allowedMimeTypes, $helper->getConfig('maxsize_file'), null, null);
@@ -173,12 +180,12 @@ switch ($op) {
                     $uploaderErrors .= '<br>' . $uploader->getErrors();
                 }
             } else {
-                if ($filename > '') {
+                if ('' !== $filename) {
                     $uploaderErrors .= '<br>' . $uploader->getErrors();
                 }
             }
             if ('' !== $uploaderErrors) {
-                \redirect_header('file.php?op=edit&file_id=' . $fileId, 5, $uploaderErrors);
+                \redirect_header('file.php?op=' . $redirOp . '&amp;file_id=' . $fileId . '&amp;dir_id=' . $directoryId, 5, $uploaderErrors);
             }
         } else {
             //handle existing
@@ -204,8 +211,12 @@ switch ($op) {
         $fileObj->setVar('description', Request::getText('description'));
         $fileObj->setVar('ip', Request::getString('ip'));
         $fileObj->setVar('status', Request::getInt('status'));
-        $fileDate_createdObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('date_created'));
-        $fileObj->setVar('date_created', $fileDate_createdObj->getTimestamp());
+        if (Request::hasVar('date_created')) {
+            $fileDate_createdObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('date_created'));
+            $fileObj->setVar('date_created', $fileDate_createdObj->getTimestamp());
+        } else {
+            $fileObj->setVar('date_created', time());
+        }
         $fileObj->setVar('submitter', Request::getInt('submitter'));
         // Insert Data
         if ($fileHandler->insert($fileObj)) {
@@ -226,6 +237,9 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'new':
+        if (!$permissionsHandler->getPermUploadFileToDir($dirId)) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_FILE_ADD];
         // Form Create
@@ -238,6 +252,9 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'edit':
+        if (!$permissionsHandler->getPermSubmitDirectory($dirId)) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_FILE_EDIT];
         // Check params
@@ -252,6 +269,9 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'delete':
+        if (!$permissionsHandler->getPermSubmitDirectory($dirId)) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGFILEMANAGER_FILE_DELETE];
         // Check params
@@ -312,6 +332,25 @@ switch ($op) {
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
+        break;
+    case 'favorite_pin':
+    case 'favorite_unpin':
+        //check perms
+        if (!$permissionsHandler->getPermSubmitDirectory($dirId)) {
+            \redirect_header('index.php?op=list', 3, \_NOPERM);
+        }
+        // Check params
+        if (0 === $fileId) {
+            \redirect_header('index.php?op=list', 3, \_MA_WGFILEMANAGER_INVALID_PARAM);
+        }
+        $fileObj   = $fileHandler->get($fileId);
+        $fileObj->setVar('favorite', (int)('favorite_pin' === $op));
+        if ($fileHandler->insert($fileObj)) {
+            \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_AM_WGFILEMANAGER_FORM_OK);
+        } else {
+            \redirect_header('index.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGFILEMANAGER_FAVORITE_ERROR_SET);
+        }
+        unset($fileObj);
         break;
 }
 

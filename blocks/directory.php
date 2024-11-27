@@ -37,8 +37,11 @@ function b_wgfilemanager_dirlist_show($options)
 {
     global $xoopsModule;
 
-    $helper      = Helper::getInstance();
+    $helper           = Helper::getInstance();
     $directoryHandler = $helper->getHandler('Directory');
+    $fileHandler      = $helper->getHandler('File');
+
+    $block = [];
 
     $dirId = Request::getInt('dir_id', 0);
     if ((!empty($xoopsModule))) {
@@ -49,11 +52,22 @@ function b_wgfilemanager_dirlist_show($options)
             $dirId = Request::getInt('dir_id', 1);
         }
     }
-
     //get directory list
-    $block = $directoryHandler->getDirList(0, $dirId);
-    $GLOBALS['xoopsTpl']->assign('dir_list', $block);
+    $block['dir_list'] = $directoryHandler->getDirList(0, $dirId);
+
+    $block['fav_list'] = [];
+    if ((bool)$helper->getConfig('use_favorites')) {
+        //get fav list
+        $favList = [];
+        //get directory fav list
+        $favList['dirs'] = $directoryHandler->getFavDirList();
+        //get directory fav list
+        $favList['files'] = $fileHandler->getFavFileList();
+        $block['fav_list'] = $favList;
+    }
+    //$GLOBALS['xoopsTpl']->assign('dir_list', $block);
     $GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
+    $GLOBALS['xoopsTpl']->assign('wgfilemanager_icon_bi_url', \WGFILEMANAGER_ICONS_URL . '/bootstrap/');
     return $block;
 
 }

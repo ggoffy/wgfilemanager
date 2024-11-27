@@ -312,4 +312,26 @@ class FileHandler extends \XoopsPersistableObjectHandler
 
     }
 
+    /**
+     * Returns an array of favorite files
+     *
+     * @return array
+     */
+    public function getFavFileList() {
+        $result = [];
+        $crFile = new \CriteriaCompo();
+        $crFile->add(new \Criteria('favorite', '1'));
+        $fileCount = $this->getCount($crFile);
+        if ($fileCount > 0) {
+            $crFile->setSort('name');
+            $crFile->setOrder('asc');
+            $fileAll = $this->getAll($crFile);
+            foreach (\array_keys($fileAll) as $i) {
+                $result[] = $fileAll[$i]->getValuesFile();
+            }
+        }
+
+        return $result;
+    }
+
 }

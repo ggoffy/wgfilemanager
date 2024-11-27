@@ -2,3 +2,13 @@
 
 - pin file
 
+https://github.com/nao-pon/xelfinder
+which is XOOPS implementation of the elFinder (here is the demo: https://studio-42.github.io/elFinder/)
+Tutorial: https://github.com/Studio-42/elFinder/wiki
+
+https://github.com/prasathmani/tinyfilemanager
+https://tinyfilemanager.github.io/
+Demo: https://tinyfilemanager.github.io/demo/
+
+
+

@@ -35,6 +35,15 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGFILEMANAGER_INDEX_STYLECARD', 'Show in card style');
 \define('_MA_WGFILEMANAGER_INDEX_STYLECARDBIG', 'Show in big card style');
 \define('_MA_WGFILEMANAGER_INVALID_PARAMS', 'Invalid parameters');
+\define('_MA_WGFILEMANAGER_FAVORITE', 'Favorites');
+\define('_MA_WGFILEMANAGER_FAVORITE_PIN', 'Show in favorites');
+\define('_MA_WGFILEMANAGER_FAVORITE_UNPIN', 'Remove from favorites');
+\define('_MA_WGFILEMANAGER_FAVORITE_ERROR_SET', 'ERROR: setting favorites failed');
+//sorting
+\define('_MA_WGFILEMANAGER_INDEX_SORTLIST', 'Sort List');
+\define('_MA_WGFILEMANAGER_NAME', 'by name');
+\define('_MA_WGFILEMANAGER_DATE_CREATE', 'by date submission');
+\define('_MA_WGFILEMANAGER_CTIME', 'by file creation date');
 // ---------------- Contents ----------------
 // Directory
 \define('_MA_WGFILEMANAGER_DIRECTORY', 'Directory');

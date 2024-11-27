@@ -1,8 +1,8 @@
 <div class="btn-group btn-group-sm" role="group" aria-label="group_view">
     <{if $file.image}>
-        <a class='btn btn-sm btn-outline-primary' href='#' data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$file.real_url}>" title='<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>'><img src="<{$wgfilemanager_icon_bi_url}>eye.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>" ></a>
+        <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#imgModal" data-bs-title="<{$file.name}>" data-bs-info="<{$file.real_url}>" title='<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>'><img src="<{$wgfilemanager_icon_bi_url}>eye.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>"></a>
     <{elseif $file.pdf}>
-        <a class='btn btn-sm btn-outline-primary' href='#' data-toggle="modal" data-target="#pdfModal" data-title="<{$file.name}>" data-info="<{$file.real_url}>" title='<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>>'><img src="<{$wgfilemanager_icon_bi_url}>eye.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>" ></a>
+        <a class='btn btn-sm btn-outline-primary' href='#' data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-title="<{$file.name}>" data-bs-info="<{$file.real_url}>" title='<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>'><img src="<{$wgfilemanager_icon_bi_url}>eye.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_SHOWPREVIEW}>" ></a>
     <{/if}>
     <{if $permDownloadFileFromDir|default:false}>
         <a class="btn btn-sm btn-outline-primary" href='download.php?op=download&amp;file_id=<{$file.id|default:0}>' title='<{$smarty.const._MA_WGFILEMANAGER_FILE_DOWNLOAD}>'><img src="<{$wgfilemanager_icon_bi_url}>download.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FILE_DOWNLOAD}>" ></a>
@@ -10,6 +10,13 @@
     <{/if}>
     <{if $showBtnDetails|default:false}>
         <a class='btn btn-sm btn-outline-primary' href='file.php?op=show&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_DETAILS}>'><img src="<{$wgfilemanager_icon_bi_url}>search.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_DETAILS}>" ></a>
+    <{/if}>
+    <{if $useFavorites|default:false}>
+        <{if $file.favorite > 0}>
+            <a class='btn btn-sm btn-outline-primary' href='file.php?op=favorite_unpin&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_UNPIN}>'><img src="<{$wgfilemanager_icon_bi_url}>pin.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_UNPIN}>" ></a>
+        <{else}>
+            <a class='btn btn-sm btn-outline-primary' href='file.php?op=favorite_pin&amp;file_id=<{$file.id}><{$params|default:''}>' title='<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}>'><img src="<{$wgfilemanager_icon_bi_url}>pin-angle.svg" alt="<{$smarty.const._MA_WGFILEMANAGER_FAVORITE_PIN}>" ></a>
+        <{/if}>
     <{/if}>
 </div>
 <{if $permEditFile|default:false || $showBtnBack|default:false}>

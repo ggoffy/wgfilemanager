@@ -59,6 +59,7 @@ class File extends \XoopsObject
         $this->initVar('mtime', \XOBJ_DTYPE_INT);
         $this->initVar('ip', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('status', \XOBJ_DTYPE_INT);
+        $this->initVar('favorite', \XOBJ_DTYPE_INT);
         $this->initVar('date_created', \XOBJ_DTYPE_INT);
         $this->initVar('submitter', \XOBJ_DTYPE_INT);
     }
@@ -91,26 +92,15 @@ class File extends \XoopsObject
      */
     public function getForm($action = false)
     {
-        $helper      = \XoopsModules\Wgfilemanager\Helper::getInstance();
-        $fileHandler = $helper->getHandler('File');
+        $helper             = \XoopsModules\Wgfilemanager\Helper::getInstance();
+        $fileHandler        = $helper->getHandler('File');
+        $permissionsHandler = $helper->getHandler('Permissions');
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         $isAdmin = \is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
-        // Permissions for uploader
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $groups = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : \XOOPS_GROUP_ANONYMOUS;
-        $permissionUpload = $grouppermHandler->checkRight('upload_groups', 32, $groups, $GLOBALS['xoopsModule']->getVar('mid'));
         // Title
         $title = $this->isNew() ? \_MA_WGFILEMANAGER_FILE_ADD : \_MA_WGFILEMANAGER_FILE_EDIT;
-        /*if ($this->isNew()) {
-            $title = \_MA_WGFILEMANAGER_FILE_ADD;
-            $formType = 'add';
-
-        } else {
-            $title = \_MA_WGFILEMANAGER_FILE_EDIT;
-            $formType = 'edit';
-        }*/
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
@@ -129,10 +119,10 @@ class File extends \XoopsObject
         // Form File: Upload fileName
         $fileName = $this->isNew() ? '' : $this->getVar('name');
         if ($this->isNew()) {
-            if ($permissionUpload) {
+            if ($permissionsHandler->getPermUploadFileToDir($directoryId)) {
                 $fileUploadTray = new \XoopsFormElementTray(\_MA_WGFILEMANAGER_FILE_NAME, '<br>');
-                $fileDirectory = '/uploads/wgfilemanager/files/file';
-                $fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_MA_WGFILEMANAGER_FILE_NAME_UPLOADS, ".$fileDirectory/"), $fileName));
+                //$fileDirectory = '/uploads/wgfilemanager/files/file';
+                //$fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_MA_WGFILEMANAGER_FILE_NAME_UPLOADS, ".$fileDirectory/"), $fileName));
                 $maxsize = $helper->getConfig('maxsize_file');
                 $fileUploadTray->addElement(new \XoopsFormFile('', 'name', $maxsize));
                 $fileUploadTray->addElement(new \XoopsFormLabel(\_MA_WGFILEMANAGER_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' ' . \_MA_WGFILEMANAGER_FORM_UPLOAD_SIZE_MB));
