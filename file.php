@@ -147,6 +147,7 @@ switch ($op) {
             $dirBasePath .= '/';
         }
         $repoPath = \WGFILEMANAGER_REPO_PATH . $dirBasePath;
+
         $uploaderErrors = '';
         $redirOp = $fileId > 0 ? 'edit' : 'new';
 
