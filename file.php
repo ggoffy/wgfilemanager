@@ -173,6 +173,8 @@ switch ($op) {
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
                 if (Constants::FILE_HANDLENAME_UNIQUE === $fileHandlename) {
                     $uploader->setPrefix($fileNewName . '_');
+                } else {
+                    $uploader->setTargetFileName($fileNewName . $extension);
                 }
                 $uploader->fetchMedia($_POST['xoops_upload_file'][0]);
                 if ($uploader->upload()) {

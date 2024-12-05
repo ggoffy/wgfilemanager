@@ -195,7 +195,10 @@ switch ($op) {
             $fileAll = $fileHandler->getAll($crFile);
             foreach (\array_keys($fileAll) as $i) {
                 $file = $fileAll[$i]->getValuesFile();
-                $ext  = substr(strrchr($file['name'], '.'), 1);
+                $ext = '';
+                if (strpos($file['name'],'.') > 0) {
+                    $ext  = substr(strrchr($file['name'], '.'), 1);
+                }
                 $fileCategory = isset($fileIcons['files'][$ext]) ? (int)$fileIcons['files'][$ext]['category'] : 0;
                 $file['category']  = $fileCategory;
                 $file['icon_url']  = isset($fileIcons['files'][$ext]) ? $fileIcons['files'][$ext]['src'] : $fileIcons['default'];
