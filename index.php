@@ -134,11 +134,11 @@ switch ($op) {
                 $orderby = 'DESC';
                 break;
             case Constants::COOKIE_SORT_DATE_CREATE_ASC:
-                $sortby = 'date_create';
+                $sortby = 'date_created';
                 $orderby = 'ASC';
                 break;
             case Constants::COOKIE_SORT_DATE_CREATE_DESC:
-                $sortby = 'date_create';
+                $sortby = 'date_created';
                 $orderby = 'DESC';
                 break;
         }
