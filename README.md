@@ -55,6 +55,8 @@ The module currently provides:
   * Global permissions
   * Permissions by directory
 
+Themes: this module is optimized for https://github.com/XoopsThemes/sbadmin5
+
 ## Extras
 /themes/bootstrap4: templates for Bootstrap4 themes like xswatch4
 

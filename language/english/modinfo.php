@@ -58,6 +58,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_LAST_DESC', 'Block show last files');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_NEW', 'Block new files');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_NEW_DESC', 'Block new files description');
+\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_COLLAPSABLE', 'Block directory list collapsable');
+\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_COLLAPSABLE_DESC', 'Block for list of directories collapsable');
 // Config
 \define('_MI_WGFILEMANAGER_EDITOR_ADMIN', 'Editor admin');
 \define('_MI_WGFILEMANAGER_EDITOR_ADMIN_DESC', 'Select the editor which should be used in admin area for text area fields');

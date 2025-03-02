@@ -1,4 +1,3 @@
-
 <{if $dir_list|default:false}>
     <ul style="list-style-type: none;<{if $dir.id|default:0 == 0}>padding:0 0;<{/if}>">
         <{foreach item=dir from=$dir_list name=dir}>

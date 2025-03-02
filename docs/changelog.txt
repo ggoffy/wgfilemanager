@@ -10,6 +10,7 @@
  - added file sorting (goffy)
  - added favorites (goffy)
  - fixed bug with file name with special chars (goffy)
+ - added collapsable link block (goffy)
 
 ==============================================================
 1.0 [2024/06/29 13:11:46]

@@ -1,5 +1,5 @@
-<{if $fav_list|default:false}>
-    <ul style="list-style-type: none;padding:0 0;">
+<{if $countFavlist|default:0 > 0}>
+    <ul style="list-style-type: none;">
         <li class="wgf-dirlist nav-link"><i class="bi-pin-angle"></i><{$smarty.const._MA_WGFILEMANAGER_FAVORITE}>
         <li class="wgf-dirlist nav-link">
             <ul style="list-style-type: none;padding:0 0;">

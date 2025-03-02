@@ -119,26 +119,32 @@ switch ($op) {
             case Constants::COOKIE_SORT_NAME_ASC:
             default:
                 $sortby = 'name';
+                $sortbyDir = 'name';
                 $orderby = 'ASC';
                 break;
             case Constants::COOKIE_SORT_NAME_DESC:
                 $sortby = 'name';
+                $sortbyDir = 'name';
                 $orderby = 'DESC';
                 break;
             case Constants::COOKIE_SORT_CTIME_ASC:
                 $sortby = 'ctime';
+                $sortbyDir = 'date_created';
                 $orderby = 'ASC';
                 break;
             case Constants::COOKIE_SORT_CTIME_DESC:
                 $sortby = 'ctime';
+                $sortbyDir = 'date_created';
                 $orderby = 'DESC';
                 break;
             case Constants::COOKIE_SORT_DATE_CREATE_ASC:
                 $sortby = 'date_created';
+                $sortbyDir = 'date_created';
                 $orderby = 'ASC';
                 break;
             case Constants::COOKIE_SORT_DATE_CREATE_DESC:
                 $sortby = 'date_created';
+                $sortbyDir = 'date_created';
                 $orderby = 'DESC';
                 break;
         }
@@ -172,7 +178,7 @@ switch ($op) {
         $dirList = $directoryHandler->getDirList(0, $dirId);
         $GLOBALS['xoopsTpl']->assign('dir_list', $dirList);
         $GLOBALS['xoopsTpl']->assign('dirId', $dirId);
-        $indexDirList = $directoryHandler->getSubDirList($dirId);
+        $indexDirList = $directoryHandler->getSubDirList($dirId, $sortbyDir, $orderby);
         $GLOBALS['xoopsTpl']->assign('indexDirlist', $indexDirList);
         $GLOBALS['xoopsTpl']->assign('indexDirlistIcon', WGFILEMANAGER_ICONS_URL . '/foldericons/folder2.png');
 

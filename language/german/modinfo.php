@@ -58,6 +58,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_LAST_DESC', 'Block letzte Dateien');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_NEW', 'Block neue Dateien');
 \define('_MI_WGFILEMANAGER_FILE_BLOCK_NEW_DESC', 'Block neue Dateien');
+\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_COLLAPSABLE', 'Block Liste Verzeichnisse aufklappbar');
+\define('_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_COLLAPSABLE_DESC', 'Block Liste Verzeichnisse aufklappbar');
 // Config
 \define('_MI_WGFILEMANAGER_EDITOR_ADMIN', 'Editor Admin');
 \define('_MI_WGFILEMANAGER_EDITOR_ADMIN_DESC', 'Bitte den zu verwendenden Editor für den Admin-Bereich wählen');

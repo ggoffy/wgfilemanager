@@ -41,6 +41,10 @@ function b_wgfilemanager_dirlist_show($options)
     $directoryHandler = $helper->getHandler('Directory');
     $fileHandler      = $helper->getHandler('File');
 
+    $typeBlock   = $options[0];
+    $GLOBALS['xoopsTpl']->assign('wgfilemanager_typeblock', $typeBlock);
+    $GLOBALS['xoTheme']->addStylesheet(\WGFILEMANAGER_URL . '/assets/css/default.css');
+
     $block = [];
 
     $dirId = Request::getInt('dir_id', 0);
@@ -65,7 +69,7 @@ function b_wgfilemanager_dirlist_show($options)
         $favList['files'] = $fileHandler->getFavFileList();
         $block['fav_list'] = $favList;
     }
-    //$GLOBALS['xoopsTpl']->assign('dir_list', $block);
+    $GLOBALS['xoopsTpl']->assign('countFavlist', count($favList['dirs']) + count($favList['files']));
     $GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
     $GLOBALS['xoopsTpl']->assign('wgfilemanager_icon_bi_url', \WGFILEMANAGER_ICONS_URL . '/bootstrap/');
     return $block;

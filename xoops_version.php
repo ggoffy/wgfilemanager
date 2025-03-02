@@ -97,7 +97,9 @@ $modversion['templates'] = [
     ['file' => 'wgfilemanager_index_actions_file.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_card.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_dirlist_default.tpl', 'description' => ''],
+    ['file' => 'wgfilemanager_index_dirlist_collapsable.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_favlist_default.tpl', 'description' => ''],
+    ['file' => 'wgfilemanager_index_favlist_collapsable.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_index_filepanel_header.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_directory.tpl', 'description' => ''],
     ['file' => 'wgfilemanager_directory_default_table.tpl', 'description' => ''],
@@ -143,7 +145,16 @@ $modversion['blocks'][] = [
     'show_func'   => 'b_wgfilemanager_dirlist_show',
     'edit_func'   => '',
     'template'    => 'wgfilemanager_block_dirlist.tpl',
-    'options'     => 'dirlist',
+    'options'     => 'default',
+];
+$modversion['blocks'][] = [
+    'file'        => 'directory.php',
+    'name'        => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_COLLAPSABLE,
+    'description' => \_MI_WGFILEMANAGER_DIRECTORY_BLOCK_DIRLIST_COLLAPSABLE_DESC,
+    'show_func'   => 'b_wgfilemanager_dirlist_show',
+    'edit_func'   => '',
+    'template'    => 'wgfilemanager_block_dirlist.tpl',
+    'options'     => 'collapsable',
 ];
 // Directory last
 $modversion['blocks'][] = [

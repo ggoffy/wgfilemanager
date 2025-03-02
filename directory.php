@@ -183,6 +183,7 @@ switch ($op) {
                         }
                     }
                 }
+                $directoryHandler->setDirWeight($dirParentId);
                 \redirect_header('directory.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_AM_WGFILEMANAGER_FORM_OK);
             }
             $GLOBALS['xoopsTpl']->assign('error', $directoryObj->getHtmlErrors());
