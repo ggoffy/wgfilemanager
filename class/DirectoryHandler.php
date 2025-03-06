@@ -352,8 +352,12 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
             $result[0]['subdirs'] = [];
         }*/
         //create list of parents
-        $parents = [];
-        $parentId = $this->get($dirCurrent)->getVar('parent_id');
+        $parents  = [];
+        $parentId = 0;
+        $dirCurrObj = $this->get($dirCurrent);
+        if (\is_object($dirCurrObj)) {
+            $parentId = $dirCurrObj->getVar('parent_id');
+        }
         $parents[] = $parentId;
         while ($parentId > 0) {
             $parentId = $this->get($parentId)->getVar('parent_id');
@@ -379,6 +383,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
                 $result[$i]['count_files'] = $directory['count_files'];
                 $result[$i]['level'] = $levelCurrent;
                 $result[$i]['weight'] = $directory['weight'];
+                $result[$i]['favorite_id'] = $directory['favorite_id'];
                 if ($directory['count_subdirs'] > 0) {
                     $result[$i]['subdirs'] = $this->getDirList($i, $dirCurrent, $levelCurrent);
                 }
@@ -432,10 +437,14 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         $result = [];
         do {
             $dirObj = $this->get($dirId);
-            if ($dirId > 1) {
-                $result[$dirId] = $dirObj->getVar('name');
+            if (\is_object($dirObj)) {
+                if ($dirId > 1) {
+                    $result[$dirId] = $dirObj->getVar('name');
+                }
+                $dirId = $dirObj->getVar('parent_id');
+            } else {
+                $dirId = 0;
             }
-            $dirId = $dirObj->getVar('parent_id');
         } while ($dirId > 0);
 
         return $result;
@@ -459,18 +468,7 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
         if ($this->getCount($crSubDir) > 0) {
             $directoryAll = $this->getAll($crSubDir);
             foreach (\array_keys($directoryAll) as $i) {
-                $directory = $directoryAll[$i]->getValuesDir();
-                $result[$i]['id'] = $directory['id'];
-                $result[$i]['parent_id'] = $directory['parent_id'];
-                $result[$i]['name'] = $directory['name'];
-                $result[$i]['description_text']  = $directory['description_text'];
-                $result[$i]['date_created_text']  = $directory['date_created_text'];
-                $result[$i]['submitter_text']  = $directory['submitter_text'];
-                $result[$i]['count_subdirs'] = $directory['count_subdirs'];
-                $result[$i]['count_files'] = $directory['count_files'];
-                $result[$i]['ctime_text'] = \formatTimestamp($directory['date_created'], 's');
-                $result[$i]['favorite'] = $directory['favorite'];
-                $result[$i]['weight'] = $directory['weight'];
+                $result[$i] = $directoryAll[$i]->getValuesDir();
             }
         }
 
@@ -485,18 +483,26 @@ class DirectoryHandler extends \XoopsPersistableObjectHandler
      */
     public function getFavDirList() {
         $result = [];
-        $crDirectory = new \CriteriaCompo();
-        $crDirectory->add(new \Criteria('favorite', '1'));
-        $directoryCount = $this->getCount($crDirectory);
-        if ($directoryCount > 0) {
-            $crDirectory->setSort('name');
-            $crDirectory->setOrder('asc');
-            $directoryAll = $this->getAll($crDirectory);
-            foreach (\array_keys($directoryAll) as $i) {
-                $result[] = $directoryAll[$i]->getValuesDir();
+        //get current user
+        $userUid = 0;
+        if (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) {
+            $userUid = $GLOBALS['xoopsUser']->uid();
+        }
+        if ($userUid > 0) {
+            $crDirectory = new \CriteriaCompo();
+            $directoryCount = $this->getCount($crDirectory);
+            if ($directoryCount > 0) {
+                $crDirectory->setSort('name');
+                $crDirectory->setOrder('asc');
+                $directoryAll = $this->getAll($crDirectory);
+                foreach (\array_keys($directoryAll) as $i) {
+                    $dirValues = $directoryAll[$i]->getValuesDir();
+                    if ((int)$dirValues['favorite_id'] > 0) {
+                        $result[] = $dirValues;
+                    }
+                }
             }
         }
-
         return $result;
     }
 

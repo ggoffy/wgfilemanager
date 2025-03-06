@@ -244,6 +244,13 @@ switch ($op) {
             $pagenav = new \XoopsPageNav($fileCount, $limit, $start, 'start', 'op=list&amp;limit=' . $limit . '&amp;dir_id=' . $dirId);
             $GLOBALS['xoopsTpl']->assign('pagenavFile', $pagenav->renderNav());
         }
+
+        //get current user
+        $userUid = 0;
+        if (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) {
+            $userUid = $GLOBALS['xoopsUser']->uid();
+        }
+        $GLOBALS['xoopsTpl']->assign('userUid', $userUid);
         break;
 
     case 'setstyle':

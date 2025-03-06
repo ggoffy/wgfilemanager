@@ -1,4 +1,4 @@
-<{if $dir_list|default:false}>
+<{if count($dir_list|default:[]) > 0}>
     <ul style="list-style-type: none;<{if $dir.id|default:0 == 0}>padding:0 0;<{/if}>">
         <{foreach item=dir from=$dir_list name=dir}>
             <li class="wgf-dirlist <{if $dir.level|default:0 == 1}>wgf-dirlist-default-level1<{/if}>">

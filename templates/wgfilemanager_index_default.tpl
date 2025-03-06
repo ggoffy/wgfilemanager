@@ -11,9 +11,6 @@
                             <th class=''><{$smarty.const._MA_WGFILEMANAGER_FILE_SIZE}></th>
                             <th class=''><{$smarty.const._MA_WGFILEMANAGER_FILE_CTIME}></th>
                             <th class=''><{$smarty.const._MA_WGFILEMANAGER_FILE_SUBMITTER}></th>
-                            <{if $permEditDir|default:false}>
-                                <th class=''><{$smarty.const._MA_WGFILEMANAGER_DIRECTORY_WEIGHT}></th>
-                            <{/if}>
                             <th class=''><{$smarty.const._MA_WGFILEMANAGER_ACTION}></th>
                         </tr>
                         <!-- Start dir loop -->
@@ -34,9 +31,6 @@
                             </td>
                             <td class='wgf-default-list'><{$dir.ctime_text}></td>
                             <td class='wgf-default-list'><{$dir.submitter_text}></td>
-                            <{if $permEditDir|default:false}>
-                                <td class='wgf-default-list'><{$dir.weight}></td>
-                            <{/if}>
                             <td class='wgf-default-list right wgf-fileaction'>
                                 <{include file='db:wgfilemanager_index_actions_dir.tpl' }>
                             </td>
