@@ -41,8 +41,9 @@ function b_wgfilemanager_dirfavlist_show($options)
     $directoryHandler = $helper->getHandler('Directory');
     $fileHandler      = $helper->getHandler('File');
 
-    $typeBlock = $options[0];
-    $lengthName = $options[1];
+    $typeBlock  = $options[0];
+    $lengthName = (int)$options[1];
+    $typeList   = 0;
     if (isset($options[2])) {
         $typeList = (int)$options[2];
     }
@@ -81,6 +82,10 @@ function b_wgfilemanager_dirfavlist_show($options)
     }
     $GLOBALS['xoopsTpl']->assign('collapseFav', $collapseFav);
     $GLOBALS['xoopsTpl']->assign('collapseDir', $collapseDir);
+    if (0 === $lengthName) {
+        $lengthName = 1000;
+    }
+    $GLOBALS['xoopsTpl']->assign('lengthName', $lengthName);
 
     //get directory list
     $block['dir_list'] = $directoryHandler->getDirList(0, $dirId);
@@ -94,8 +99,9 @@ function b_wgfilemanager_dirfavlist_show($options)
         //get directory fav list
         $favList['files'] = $fileHandler->getFavFileList();
         $block['fav_list'] = $favList;
+        $GLOBALS['xoopsTpl']->assign('countFavlist', count($favList['dirs']) + count($favList['files']));
     }
-    $GLOBALS['xoopsTpl']->assign('countFavlist', count($favList['dirs']) + count($favList['files']));
+
     $GLOBALS['xoopsTpl']->assign('wgfilemanager_url', \WGFILEMANAGER_URL);
     $GLOBALS['xoopsTpl']->assign('wgfilemanager_icon_bi_url', \WGFILEMANAGER_ICONS_URL . '/bootstrap/');
     return $block;
