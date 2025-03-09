@@ -1,5 +1,5 @@
 <{if $countFavlist|default:0 > 0}>
-    <div class="collapse show wgf-dirlist" id="collapseLevel0Fav" aria-labelledby="headingZero" data-bs-parent="#sidenavAccordionFav">
+    <div class="wgf-dirlist" id="collapseLevel0Fav">
         <div class="sb-sidenav-menu-nested nav">
             <div class="wgf-div-link">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseLevel1Fav" data-bs-toggle="collapse" data-bs-target="#collapseLevel1Fav" aria-expanded="false" aria-controls="collapseLevel1Fav">

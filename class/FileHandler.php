@@ -82,7 +82,7 @@ class FileHandler extends \XoopsPersistableObjectHandler
      * @param string $order
      * @return int
      */
-    public function getCountFile($start = 0, $limit = 0, $sort = 'id ASC, directory_id', $order = 'ASC')
+    public function getCountFile($start = 0, $limit = 0, $sort = 'id', $order = 'DESC')
     {
         $crCountFile = new \CriteriaCompo();
         $crCountFile = $this->getFileCriteria($crCountFile, $start, $limit, $sort, $order);
@@ -97,7 +97,7 @@ class FileHandler extends \XoopsPersistableObjectHandler
      * @param string $order
      * @return array
      */
-    public function getAllFile($start = 0, $limit = 0, $sort = 'id ASC, directory_id', $order = 'ASC')
+    public function getAllFile($start = 0, $limit = 0, $sort = 'id', $order = 'DESC')
     {
         $crAllFile = new \CriteriaCompo();
         $crAllFile = $this->getFileCriteria($crAllFile, $start, $limit, $sort, $order);

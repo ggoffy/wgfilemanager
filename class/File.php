@@ -205,7 +205,7 @@ class File extends \XoopsObject
         $fileSubmitter = $this->isNew() ? $uidCurrent : $this->getVar('submitter');
         if ($isAdmin) {
             $form->addElement(new \XoopsFormSelectUser(\_MA_WGFILEMANAGER_FILE_SUBMITTER, 'submitter', false, $fileSubmitter));
-        } elseif (!$this->isNew()) {
+        } else {
             $form->addElement(new \XoopsFormLabel(\_MA_WGFILEMANAGER_FILE_SUBMITTER, \XoopsUser::getUnameFromId($fileSubmitter)));
             $form->addElement(new \XoopsFormHidden('submitter', $fileSubmitter));
         }
