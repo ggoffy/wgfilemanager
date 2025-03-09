@@ -1,4 +1,4 @@
-<div class="collapse show" id="collapseLevel0FM" aria-labelledby="headingZero" data-bs-parent="#sidenavAccordionFm">
+<div class="" id="collapseLevel0FM">
     <nav class="sb-sidenav-menu-nested nav">
         <{foreach item=dir1 from=$dir_list name=dir key=key1}>
             <{if $dir1.count_subdirs|default:0 > 0}>
