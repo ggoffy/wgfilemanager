@@ -148,11 +148,11 @@ class Directory extends \XoopsObject
         }
         // Form Text dirWeight
         $dirWeight = $this->isNew() ? $directoryHandler->getCount() + 1 : $this->getVar('weight');
-        if ($isAdmin) {
-            $form->addElement(new \XoopsFormText(\_MA_WGFILEMANAGER_DIRECTORY_WEIGHT, 'weight', 50, 255, $dirWeight), true);
-        } else {
+        //if ($isAdmin) {
+            //$form->addElement(new \XoopsFormText(\_MA_WGFILEMANAGER_DIRECTORY_WEIGHT, 'weight', 50, 255, $dirWeight), true);
+        //} else {
             $form->addElement(new \XoopsFormHidden('weight', $dirWeight));
-        }
+        //}
         // Form Text Date Select dirDate_created
         $dirDate_created = $this->isNew() ? \time() : $this->getVar('date_created');
         $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGFILEMANAGER_DIRECTORY_DATE_CREATED, 'date_created', '', $dirDate_created));
