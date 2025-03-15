@@ -26,7 +26,7 @@ If you like the wgFilemanager module and thanks to the long process for giving t
 
 ## Info
 
-**wgFilemanager is ready for PHP 8.0**
+**wgFilemanager is ready for PHP 8.4**
 
 ## Features
 The module currently provides:
