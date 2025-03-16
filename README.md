@@ -3,6 +3,8 @@
 ![alt XOOPS CMS](https://xoops.org/images/logoXoopsPhp8.png)
 
 # wgFilemanager
+
+![alt XOOPS CMS](./assets/images/wgfilemanager.jpg)
 A XOOPS module for file management.
 
 ## Support
