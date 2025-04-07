@@ -33,7 +33,6 @@ class Modulemenu
     {
 
         $moduleDirName = \basename(\dirname(__DIR__));
-        $subcount      = 1;
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
         $urlModule     = \XOOPS_URL . '/modules/' . $moduleDirName . '/';
 
@@ -80,7 +79,6 @@ class Modulemenu
         $helper->loadLanguage('modinfo');
 
         // start creation of link list as array
-        $permissionsHandler = $helper->getHandler('Permissions');
 
         $requestUri = $_SERVER['REQUEST_URI'];
         /*read navbar items related to perms of current user*/
