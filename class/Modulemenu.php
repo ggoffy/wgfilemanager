@@ -34,7 +34,6 @@ class Modulemenu
 
         $moduleDirName = \basename(\dirname(__DIR__));
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
-        $urlModule     = \XOOPS_URL . '/modules/' . $moduleDirName . '/';
 
         require_once $pathname . 'include/common.php';
         $helper = \XoopsModules\Wgfilemanager\Helper::getInstance();
@@ -45,15 +44,15 @@ class Modulemenu
         $items = [];
         $items[] = [
             'name' => \_MI_WGFILEMANAGER_SMNAME1,
-            'url'  =>  $urlModule . 'index.php',
+            'url'  =>  'index.php',
         ];
         $items[] = [
             'name' => \_MI_WGFILEMANAGER_SMNAME2,
-            'url'  =>  $urlModule . 'directory.php',
+            'url'  =>  'directory.php',
         ];
         $items[] = [
             'name' => \_MI_WGFILEMANAGER_SMNAME3,
-            'url'  =>  $urlModule . 'file.php?op=new',
+            'url'  =>  'file.php?op=new',
         ];
 
         return $items;
