@@ -2,7 +2,7 @@
 <{include file='db:wgfilemanager_admin_header.tpl' }>
 
 <{if $mimetype_list|default:''}>
-    <table class='table table-bordered'>
+    <table class='outer'>
         <thead>
             <tr class='head'>
                 <th class="center"><{$smarty.const._AM_WGFILEMANAGER_MIMETYPE_ID}></th>
